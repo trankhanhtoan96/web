@@ -10,8 +10,9 @@ class Home extends CI_Controller
 
     public function index()
     {
-        echo password_hash('admin',1).'<br/>';
-        echo createId().'<br/>';
-        echo date("Y-m-d H:i:s");
+//        echo password_hash('admin',1).'<br/>';
+//        echo createId().'<br/>';
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+        echo date("Y-m-d H:i:s",time()).'<br/>';
     }
 }
