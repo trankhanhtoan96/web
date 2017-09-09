@@ -47,10 +47,10 @@ class Login extends CI_Controller
                 $this->session->set_userdata('userLogined', $data);
                 redirect('/home', 'refresh');
             } else {
-                $data['alert'] = $this->load->view('alert/error', null, true);
+                $data['alert'] = $this->load->view('alert/error', array('message'=>'Sai tên đăng nhập hoặc mật khẩu!'), true);
             }
         }
-        $this->load->view('login', $data);
+        $this->load->view('login/index', $data);
     }
 
     public function logout()
