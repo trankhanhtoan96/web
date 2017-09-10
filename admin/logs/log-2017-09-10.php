@@ -143,3 +143,4 @@ ERROR - 2017-09-10 17:06:15 --> Severity: Warning --> html_entity_decode() expec
 ERROR - 2017-09-10 17:07:11 --> Severity: Warning --> html_entity_decode() expects parameter 1 to be string, array given C:\xampp\htdocs\web\application\views\header.php 11
 ERROR - 2017-09-10 18:05:26 --> Could not find the language line "title_menu"
 ERROR - 2017-09-10 18:05:26 --> Could not find the language line "LBL_SHOW"
+ERROR - 2017-09-10 20:50:09 --> Severity: Error --> Call to undefined method Home::userdata() C:\xampp\htdocs\web\system\core\Controller.php 87
