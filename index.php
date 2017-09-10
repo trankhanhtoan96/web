@@ -106,11 +106,11 @@ $system_path = 'system';
  * use an absolute (full) server path.
  * For more info please see the user guide:
  *
- * https://codeigniter.com/user_guide/general/managing_apps.html
+     * https://codeigniter.com/user_guide/general/managing_apps.html
  *
  * NO TRAILING SLASH!
  */
-$application_folder = 'application';
+$application_folder = 'admin';
 
 /*
  *---------------------------------------------------------------

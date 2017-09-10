@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-define('APP','application/');
+$temp=explode('\\',APPPATH);
+define('APP',$temp[count($temp)-2].'/');
 /*
 |--------------------------------------------------------------------------
 | Display Debug backtrace
