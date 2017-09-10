@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 //dataTables
-$lang['LBL_SHOW'] = 'Hiển thị';
+$lang['LBL_SHOW'] = 'Show';
 $lang['LBL_TO'] = 'đến';
 $lang['LBL_IN'] = 'trong';
 $lang['LBL_ENTRY'] = 'dòng';
