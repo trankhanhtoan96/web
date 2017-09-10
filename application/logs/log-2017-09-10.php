@@ -141,3 +141,5 @@ ERROR - 2017-09-10 17:00:20 --> Language file contains no data: language/vn/vn_l
 ERROR - 2017-09-10 17:00:24 --> Language file contains no data: language/vn/vn_lang.php
 ERROR - 2017-09-10 17:06:15 --> Severity: Warning --> html_entity_decode() expects parameter 1 to be string, array given C:\xampp\htdocs\web\application\views\header.php 11
 ERROR - 2017-09-10 17:07:11 --> Severity: Warning --> html_entity_decode() expects parameter 1 to be string, array given C:\xampp\htdocs\web\application\views\header.php 11
+ERROR - 2017-09-10 18:05:26 --> Could not find the language line "title_menu"
+ERROR - 2017-09-10 18:05:26 --> Could not find the language line "LBL_SHOW"
