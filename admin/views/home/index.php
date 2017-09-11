@@ -1,3 +1,3 @@
 <?php $this->load->view('header'); ?>
-<?= lang('LBL_SHOW') ?>
+Home
 <?php $this->load->view('footer'); ?>

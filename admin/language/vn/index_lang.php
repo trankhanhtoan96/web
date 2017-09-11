@@ -1,21 +1,24 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-
-$lang['LBL_SHOW'] = 'Hiển thị';
-$lang['LBL_TO'] = 'đến';
-$lang['LBL_IN'] = 'trong';
-$lang['LBL_ENTRY'] = 'dòng';
-$lang['LBL_NO_DATA'] = 'Không có dữ liệu';
-$lang['LBL_SEARCH'] = 'Tìm kiếm';
-$lang['LBL_PREVIOUS'] = 'Trước';
-$lang['LBL_NEXT'] = 'Tiếp';
-$lang['LBL_FIRST'] = 'Đầu';
-$lang['LBL_LAST'] = 'Cuối';
-$lang['LBL_NO_DATA_IN_TABLE'] = 'Không có dữ liệu trong bảng';
-$lang['LBL_FILTERED'] = 'Lọc';
-$lang['LBL_FROM'] = 'Từ';
-$lang['LBL_TOTAL'] = 'Tổng';
-$lang['LBL_LOADING'] = 'Đang tải';
-$lang['LBL_PROCESSING'] = 'Đang tải';
-$lang['LBL_NO_RECORD_FOUND'] = 'Không tìm thấy';
-
-$lang['title_menu'] = 'Dashboard menu';
+$lang = array(
+    'LBL_SHOW' => 'Hiển thị',
+    'LBL_TO' => 'đến',
+    'LBL_IN' => 'trong',
+    'LBL_ENTRY' => 'dòng',
+    'LBL_NO_DATA' => 'Không có dữ liệu',
+    'LBL_SEARCH' => 'Tìm kiếm',
+    'LBL_PREVIOUS' => 'Trước',
+    'LBL_NEXT' => 'Tiếp',
+    'LBL_FIRST' => 'Đầu',
+    'LBL_LAST' => 'Cuối',
+    'LBL_NO_DATA_IN_TABLE' => 'Không có dữ liệu trong bảng',
+    'LBL_FILTERED' => 'Lọc',
+    'LBL_FROM' => 'Từ',
+    'LBL_TOTAL' => 'Tổng',
+    'LBL_LOADING' => 'Đang tải',
+    'LBL_PROCESSING' => 'Đang tải',
+    'LBL_NO_RECORD_FOUND' => 'Không tìm thấy',
+    'title_menu' => 'Dashboard menu',
+    'logout' => 'Đăng xuất',
+    'user' => 'Người dùng',
+    'setting' => 'Cài đặt'
+);
