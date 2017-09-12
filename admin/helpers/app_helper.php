@@ -13,3 +13,9 @@ function createId()
     }
     return $id;
 }
+
+function checkLogin()
+{
+    $CI = &get_instance();
+
+}
