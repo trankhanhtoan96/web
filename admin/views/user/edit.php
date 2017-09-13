@@ -12,7 +12,7 @@ $dataTemplates = array(
                 ),
                 1 => array(
                     'label' => 'Ngay sinh',
-                    'code' => '<input type="text" class="form-control" />'
+                    'code' => '<input type="date" class="form-control" />'
                 )
             ),
             1 => array(
@@ -42,7 +42,8 @@ $dataTemplates = array(
                 0 => array(
                     'label' => 'Ngay sinh',
                     'name' => 'first_name',
-                    'type'=>'textarea'
+                    'type'=>'textarea',
+                    'value'=>'def'
                 ),
                 1 => array(
                     'label' => 'Ngay sinh',
@@ -65,7 +66,8 @@ $dataTemplates = array(
                 0 => array(
                     'label' => 'Ngay sinh',
                     'name' => 'first_name',
-                    'type'=>'textarea'
+                    'type'=>'textarea',
+                    'value'=>'abc'
                 )
             )
         )
@@ -78,7 +80,6 @@ $this->load->view('footer');
  * nếu có code sẽ ưu tiên hiển thị code
  * sau đó sẽ hiển thị field theo type nếu không có code
  * nếu không có type sẽ không hiển thị field lên
- * nếu required=true sẽ hiển thị dấu * trong label và thêm thuộc tính reuired trong field
  * nếu dòng đó chỉ có 1 field sẽ hiển field tràn qua field còn lại,
  * nếu dòng đó chỉ có 2 field, thì sẽ hiển thị đúng form dành cho 2 field
  */

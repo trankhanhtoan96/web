@@ -16,36 +16,34 @@
                 foreach ($dataPanel['data_panel'] as $dataItem) {
                     echo "<div class='row'>";
                     foreach ($dataItem as $item) {
-                        if(isset($dataItem[1])) {
+                        if (isset($dataItem[1])) {
                             echo "<div class='col-sm-6'>";
-                        }else{
+                        } else {
                             echo "<div class='col-sm-12'>";
                         }
-                        if(!empty($item['label'])) {
-                            if(isset($dataItem[1])) {
+                        if (!empty($item['label'])) {
+                            if (isset($dataItem[1])) {
                                 echo "<div style='background-color: #f5f5f5;' class='col-xs-4 text-right'><label>{$item['label']}:";
-                            }else{
+                            } else {
                                 echo "<div style='background-color: #f5f5f5;' class='col-xs-2 text-right'><label>{$item['label']}:";
                             }
                         }
                         if (!empty($item['required']) && $item['required'] == true) {
                             echo "<span style='color:red'>*</span>";
                         }
-                        if(!empty($item['label'])) {
-                            if(isset($dataItem[1])) {
-                                echo "</label></div>
-                                    <div class='col-xs-8 text-left'>";
-                            }else{
-                                echo "</label></div>
-                                    <div class='col-xs-10 text-left'>";
+                        if (!empty($item['label'])) {
+                            if (isset($dataItem[1])) {
+                                echo "</label></div><div class='col-xs-8 text-left'>";
+                            } else {
+                                echo "</label></div><div class='col-xs-10 text-left'>";
                             }
-                        }else{
+                        } else {
                             echo "<div class='col-xs-12 text-left'>";
                         }
                         if (!empty($item['code'])) echo $item['code'];
                         elseif (!empty($item['type']) && !empty($item['name'])) {
-                            if($item['type']=='textarea') echo "<textarea rows='3' id='{$item['name']}' class='form-control' name='{$item['name']}'></textarea>";
-                            else echo "<input id='{$item['name']}' class='form-control' type='{$item['type']}' name='{$item['name']}' " . (!empty($item['required']) && $item['required'] == true ? 'required' : '') . " />";
+                            if ($item['type'] == 'textarea') echo "<textarea rows='3' id='{$item['name']}' class='form-control' name='{$item['name']}'>" . (!empty($item['value']) ? $item['value'] : '') . "</textarea>";
+                            else echo "<input id='{$item['name']}' class='form-control' type='{$item['type']}' name='{$item['name']}' value='" . (!empty($item['value']) ? $item['value'] : '') . "' " . (!empty($item['required']) && $item['required'] == true ? 'required' : '') . " />";
                         }
                         echo "</div></div>";
                     }
