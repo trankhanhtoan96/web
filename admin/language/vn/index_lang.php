@@ -20,5 +20,8 @@ $lang = array(
     'title_menu' => 'Dashboard menu',
     'logout' => 'Đăng xuất',
     'user' => 'Người dùng',
-    'setting' => 'Cài đặt'
+    'setting' => 'Cài đặt',
+    'cancel' => 'Hủy',
+    'save' => 'Lưu',
+    'confirm_cancel'=>'Có chắc chắn hủy?'
 );

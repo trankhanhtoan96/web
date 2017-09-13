@@ -1,13 +1,14 @@
-<?php $this->load->view('header'); ?>
-<?php
+<?php $this->load->view('header');
+$dataHeader = "Tạo mới người dùng";
 $dataTemplates = array(
     0=>array(
         'panel_name'=>'Thông tin chung',
         'data_panel'=>array(
             0 => array(
                 0 => array(
-                    'label' => 'Ngay sinh',
-                    'code' => '<input type="number" class="form-control" />'
+                    'label' => 'Ngay sinh Ngay sinh Ngay sinh Ngay sinh',
+                    'code' => '<input type="number" class="form-control" />',
+                    'required'=>true
                 ),
                 1 => array(
                     'label' => 'Ngay sinh',
@@ -31,54 +32,53 @@ $dataTemplates = array(
         'data_panel'=>array(
             0 => array(
                 0 => array(
-                    'label' => 'Ngay sinh',
                     'code' => '<input type="number" class="form-control" />'
                 ),
                 1 => array(
-                    'label' => 'Ngay sinh',
-                    'code' => '<input type="text" class="form-control" />'
+                    'label' => 'Ngay sinh'
                 )
             ),
             1 => array(
                 0 => array(
                     'label' => 'Ngay sinh',
-                    'code' => '<input type="text" class="form-control" />'
+                    'name' => 'first_name',
+                    'type'=>'textarea'
                 ),
                 1 => array(
                     'label' => 'Ngay sinh',
-                    'code' => '<input type="text" class="form-control" />'
+                    'name'=>'birthdate'
+                )
+            )
+        )
+    ),
+    2=>array(
+        'panel_name'=>'Thông tin khác',
+        'data_panel'=>array(
+            0 => array(
+                0 => array(
+                    'label' => 'Ngay sinh',
+                    'code' => '<input type="number" class="form-control" />'
+                ),
+                1=>''
+            ),
+            1 => array(
+                0 => array(
+                    'label' => 'Ngay sinh',
+                    'name' => 'first_name',
+                    'type'=>'textarea'
                 )
             )
         )
     )
 );
-?>
-    <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
-            <h1 class="text-center">Header</h1>
-            <?php $this->load->view('user/menu'); ?>
-            <?php
-            foreach($dataTemplates as $dataPanel){
-                echo "<div class='x_panel'>
-                        <div class='x_title'>
-                            <label>{$dataPanel['panel_name']}</label>
-                        </div>
-                        <div class='x_content'>";
-                foreach ($dataPanel['data_panel'] as $dataItem) {
-                    echo "<div class='row'>";
-                    foreach($dataItem as $item){
-                        echo "<div class='col-sm-6'>
-                                 <div class='col-xs-4 text-right'><label>{$item['label']}</label></div>
-                                 <div class='col-xs-8 text-left'>{$item['code']}</div>
-                              </div>";
-                    }
-                    echo "</div><br/>";
-                }
-                echo "</div></div>";
-            }
-            ?>
-            <?php $this->load->view($this->router->class.'/menu'); ?>
-        </div>
-    </div>
-    <script src="<?= base_url(APP . 'views/'.$this->router->class.'/edit.js') ?>"></script>
-<?php $this->load->view('footer'); ?>
+include 'admin/views/templates/edit.php';
+$this->load->view('footer');
+/**
+ * nếu có label sẽ hiển thị label, còn không có thì hiển thị field lên phần của label
+ * nếu có code sẽ ưu tiên hiển thị code
+ * sau đó sẽ hiển thị field theo type nếu không có code
+ * nếu không có type sẽ không hiển thị field lên
+ * nếu required=true sẽ hiển thị dấu * trong label và thêm thuộc tính reuired trong field
+ * nếu dòng đó chỉ có 1 field sẽ hiển field tràn qua field còn lại,
+ * nếu dòng đó chỉ có 2 field, thì sẽ hiển thị đúng form dành cho 2 field
+ */
