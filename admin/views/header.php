@@ -5,7 +5,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login</title>
+    <title><?= !empty($meta_header['title'])?$meta_header['title']:lang('admin_page') ?></title>
+    <meta name="description" content="<?= !empty($meta_header['description'])?$meta_header['description']:lang('admin_page') ?>" />
 
     <!--define language-->
     <script> var CI_language = <?= json_encode($this->lang->language) ?>; </script>

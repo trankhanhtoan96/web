@@ -29,6 +29,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property CI_Xmlrpcs $xmlrpcs
  * @property CI_Zip $zip
  * @property CI_DB $db
+ * @property User_model user_model
+ * @property CI_Router router
  */
 class User extends CI_Controller
 {
@@ -43,8 +45,37 @@ class User extends CI_Controller
 
     }
 
-    function edit()
+    function edit($id = '')
     {
-        $this->load->view('user/edit');
+        if ($this->input->post('username')) {
+            if ($id) {
+                $dataEdit = $this->input->post();
+                $dataEdit['id'] = $id;
+                $this->user_model->update($dataEdit);
+                redirect('/'.$this->router->class.'/detail/'.$id);
+            }
+        }
+        $data = array(
+            'meta_header' => array(
+                'title' => lang($this->router->class),
+                'description' => ''
+            ),
+            'data_header' => $id ? lang('update_' . $this->router->class) : lang('create_' . $this->router->class),
+            'data_id' => $id,
+            'data' => $id ? $this->{$this->router->class . '_model'}->get($id) : ''
+        );
+        $this->load->view('user/edit', $data);
+    }
+
+    function detail($id)
+    {
+        $this->load->view('home/index');
     }
 }
+/**
+ * Khi tạo 1 controller
+ * copy model từ file model mẫu ra và đổi tên bảng cho model
+ * thêm model vào trong config autoload
+ * tạo các lang: tên model, create_tên model, update_tên model
+ * tạo các lang: trùng tên field
+ */

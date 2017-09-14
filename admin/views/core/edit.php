@@ -1,11 +1,9 @@
-<script type="text/javascript">
-    var dataTemplate = <?= json_encode($dataTemplates) ?>;
-</script>
-<form action="" method="post" name="editview">
+<form action="" method="post" name="editview" enctype="multipart/form-data">
+    <input type="hidden" name="id" value="<?= !empty($data_id)?$data_id:'' ?>"/>
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
-            <h1 class="text-center"><?= $dataHeader ?></h1>
-            <?php $this->load->view('user/menu'); ?>
+            <h1 class="text-center"><?= $data_header ?></h1>
+            <?php $this->load->view('user/menu_edit'); ?>
             <?php
             foreach ($dataTemplates as $dataPanel) {
                 echo "<div class='x_panel'>
@@ -52,7 +50,7 @@
                 echo "</div></div>";
             }
             ?>
-            <?php $this->load->view($this->router->class . '/menu'); ?>
+            <?php $this->load->view($this->router->class . '/menu_edit'); ?>
         </div>
     </div>
 </form>
@@ -62,6 +60,7 @@
         return confirm(CI_language.confirm_cancel);
     }
     function checkForm() {
+        var dataTemplate = <?= json_encode($dataTemplates) ?>;
         return true;
     }
 </script>

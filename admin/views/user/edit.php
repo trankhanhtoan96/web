@@ -1,80 +1,74 @@
-<?php $this->load->view('header');
-$dataHeader = "Tạo mới người dùng";
+<?php
+include APP . '/views/header.php';
 $dataTemplates = array(
-    0=>array(
-        'panel_name'=>'Thông tin chung',
-        'data_panel'=>array(
+    0 => array(
+        'panel_name' => lang('general_information'),
+        'data_panel' => array(
             0 => array(
                 0 => array(
-                    'label' => 'Ngay sinh Ngay sinh Ngay sinh Ngay sinh',
-                    'code' => '<input type="number" class="form-control" />',
-                    'required'=>true
+                    'label' => lang('username'),
+                    'type' => 'text',
+                    'required' => true,
+                    'value' => !empty($data['username']) ? $data['username'] : '',
+                    'name' => 'username'
                 ),
                 1 => array(
-                    'label' => 'Ngay sinh',
-                    'code' => '<input type="date" class="form-control" />'
+                    'label' => lang('password'),
+                    'type' => 'password',
+                    'name' => 'password'
                 )
             ),
             1 => array(
                 0 => array(
-                    'label' => 'Ngay sinh',
-                    'code' => '<input type="text" class="form-control" />'
+                    'label' => lang('first_name'),
+                    'type' => 'text',
+                    'value' => !empty($data['first_name']) ? $data['first_name'] : '',
+                    'name' => 'first_name'
                 ),
                 1 => array(
-                    'label' => 'Ngay sinh',
-                    'code' => '<input type="text" class="form-control" />'
-                )
-            )
-        )
-    ),
-    1=>array(
-        'panel_name'=>'Thông tin cá nhân',
-        'data_panel'=>array(
-            0 => array(
-                0 => array(
-                    'code' => '<input type="number" class="form-control" />'
-                ),
-                1 => array(
-                    'label' => 'Ngay sinh'
+                    'label' => lang('last_name'),
+                    'type' => 'text',
+                    'value' => !empty($data['last_name']) ? $data['last_name'] : '',
+                    'name' => 'last_name'
                 )
             ),
-            1 => array(
+            2 => array(
                 0 => array(
-                    'label' => 'Ngay sinh',
-                    'name' => 'first_name',
-                    'type'=>'textarea',
-                    'value'=>'def'
+                    'label' => lang('email'),
+                    'type' => 'email',
+                    'value' => !empty($data['email']) ? $data['email'] : '',
+                    'name' => 'email'
                 ),
                 1 => array(
-                    'label' => 'Ngay sinh',
-                    'name'=>'birthdate'
+                    'label' => lang('phone'),
+                    'type' => 'text',
+                    'value' => !empty($data['phone']) ? $data['phone'] : '',
+                    'name' => 'phone'
                 )
-            )
-        )
-    ),
-    2=>array(
-        'panel_name'=>'Thông tin khác',
-        'data_panel'=>array(
-            0 => array(
-                0 => array(
-                    'label' => 'Ngay sinh',
-                    'code' => '<input type="number" class="form-control" />'
-                ),
-                1=>''
             ),
-            1 => array(
+            3 => array(
                 0 => array(
-                    'label' => 'Ngay sinh',
-                    'name' => 'first_name',
-                    'type'=>'textarea',
-                    'value'=>'abc'
+                    'label' => lang('description'),
+                    'type' => 'textarea',
+                    'value' => !empty($data['description']) ? $data['description'] : '',
+                    'name' => 'description'
+                )
+            ),
+            4 => array(
+                0 => array(
+                    'label' => lang('avatar'),
+                    'type' => 'file',
+                    'name' => 'avatar'
+                ),
+                1 => array(
+                    'code' => "<img src='" . (!empty($data['avatar']) ? $data['avatar'] : '') . "' style='width:150px' />"
                 )
             )
         )
     )
 );
-include 'admin/views/templates/edit.php';
-$this->load->view('footer');
+include APP . '/views/core/edit.php';
+include APP . '/views/footer.php';
 /**
  * nếu có label sẽ hiển thị label, còn không có thì hiển thị field lên phần của label
  * nếu có code sẽ ưu tiên hiển thị code
