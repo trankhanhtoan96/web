@@ -85,13 +85,13 @@ class CI_Controller
         if($ci_change_language_to){
             define('CI_LANGUAGE_DISPLAY',$ci_change_language_to);
             set_cookie('language',$ci_change_language_to,2592000);
-            $this->lang->load('index',$ci_change_language_to);
+            $this->lang->load('language',$ci_change_language_to);
         }elseif(!get_cookie('language', true)){
             set_cookie('language','vn',2592000);
-            $this->lang->load('index', 'vn');
+            $this->lang->load('language', 'vn');
             define('CI_LANGUAGE_DISPLAY','vn');
         }else{
-            $this->lang->load('index',get_cookie('language',true));
+            $this->lang->load('language',get_cookie('language',true));
             define('CI_LANGUAGE_DISPLAY',get_cookie('language',true));
         }
         //end load language to display

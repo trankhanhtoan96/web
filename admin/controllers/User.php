@@ -42,7 +42,15 @@ class User extends CI_Controller
 
     function index()
     {
-
+        $data = array(
+            'meta_header' => array(
+                'title' => lang($this->router->class),
+                'description' => ''
+            ),
+            'data_header' => lang($this->router->class),
+            'data' => $this->{$this->router->class . '_model'}->get_list()
+        );
+        $this->load->view($this->router->class . '/list', $data);
     }
 
     function edit($id = '')
@@ -51,25 +59,130 @@ class User extends CI_Controller
             if ($id) {
                 $dataEdit = $this->input->post();
                 $dataEdit['id'] = $id;
+
+                //upload file
+                $config['upload_path'] = 'uploads/images/';
+                $config['allowed_types'] = 'jpg|png';
+                $this->load->library('upload', $config);
+                if ($this->upload->do_upload('avatar')) {
+                    $dataEdit['avatar'] = base_url($config['upload_path'] . $this->upload->data('file_name'));
+                }
+
+                //send data to update
                 $this->user_model->update($dataEdit);
-                redirect('/'.$this->router->class.'/detail/'.$id);
+
+                //update userLogined
+                $temp = $this->user_model->getByUsername($this->session->userdata('userLogined')['username']);
+                $this->session->set_userdata('userLogined', $temp);
+
+                redirect('/' . $this->router->class . '/detail/' . $id);
+            } else {
+                $dataEdit = $this->input->post();
+                unset($dataEdit['id']);
+
+                //upload file
+                $config['upload_path'] = 'uploads/images/';
+                $config['allowed_types'] = 'jpg|png';
+                $this->load->library('upload', $config);
+                if ($this->upload->do_upload('avatar')) {
+                    $dataEdit['avatar'] = base_url($config['upload_path'] . $this->upload->data('file_name'));
+                }
+
+                //send data
+                $this->user_model->insert($dataEdit, $dataId);
+
+                redirect('/' . $this->router->class . '/detail/' . $dataId);
             }
         }
+        $tempData = $id ? $this->{$this->router->class . '_model'}->get($id) : '';
         $data = array(
             'meta_header' => array(
                 'title' => lang($this->router->class),
                 'description' => ''
             ),
-            'data_header' => $id ? lang('update_' . $this->router->class) : lang('create_' . $this->router->class),
+            'data_header' => $id ? $tempData['first_name'] . ' ' . $tempData['last_name'] : lang('create_' . $this->router->class),
             'data_id' => $id,
-            'data' => $id ? $this->{$this->router->class . '_model'}->get($id) : ''
+            'data' => $tempData
         );
-        $this->load->view('user/edit', $data);
+        $this->load->view($this->router->class . '/'.$this->router->method, $data);
     }
 
-    function detail($id)
+    function detail($id = '')
     {
-        $this->load->view('home/index');
+        if ($id == '') redirect('/' . $this->router->class . '/index');
+        $detail = $this->{$this->router->class . '_model'}->get($id);
+        unset($detail['id']);
+        $data = array(
+            'meta_header' => array(
+                'title' => $detail['first_name'] . ' ' . $detail['last_name'],
+                'description' => $detail['description']
+            ),
+            'data_header' => $detail['first_name'] . ' ' . $detail['last_name'],
+            'data_id' => $id,
+            'data' => $detail
+        );
+        $this->load->view($this->router->class . '/'.$this->router->method, $data);
+    }
+
+    function delete($id = '')
+    {
+        if ($id) {
+            $this->{$this->router->class . '_model'}->delete($id);
+        }
+        redirect('/' . $this->router->class . '/index');
+    }
+
+    function deleteList()
+    {
+        if ($this->input->post('record_selected')) {
+            foreach ($this->input->post('record_selected') as $id) {
+                $this->{$this->router->class . '_model'}->delete($id);
+            }
+        }
+        redirect('/' . $this->router->class . '/index');
+    }
+
+    function change_password()
+    {
+        $data = array(
+            'meta_header' => array(
+                'title' => lang('change_password'),
+                'description' => ''
+            ),
+            'data_header' => lang('change_password'),
+            'data_id' => '',
+            'data' => '',
+            'alert'=>''
+        );
+        $oldPassword = $this->input->post('old_password',true);
+        $newPassword = $this->input->post('new_password',true);
+        if ($oldPassword && $newPassword) {
+            $userLogined = $this->session->userdata('userLogined');
+            if ($this->user_model->verify($userLogined['username'], $oldPassword)) {
+                $dataUpdate = array(
+                    'id' => $userLogined['id'],
+                    'password' => $newPassword
+                );
+                if($this->user_model->update($dataUpdate)){
+                    $data['alert'] = array(
+                        'type'=>'success',
+                        'message'=>lang('password_changed')
+                    );
+
+                }else{
+                    $data['alert'] = array(
+                        'type'=>'error',
+                        'message'=>lang('occur_error')
+                    );
+                }
+            }else{
+                $data['alert'] = array(
+                    'type'=>'error',
+                    'message'=>lang('old_password_invalid')
+                );
+            }
+        }
+        $this->load->view($this->router->class . '/'.$this->router->method, $data);
     }
 }
 /**

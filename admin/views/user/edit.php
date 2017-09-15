@@ -12,11 +12,7 @@ $dataTemplates = array(
                     'value' => !empty($data['username']) ? $data['username'] : '',
                     'name' => 'username'
                 ),
-                1 => array(
-                    'label' => lang('password'),
-                    'type' => 'password',
-                    'name' => 'password'
-                )
+                1 => ''
             ),
             1 => array(
                 0 => array(
@@ -48,14 +44,6 @@ $dataTemplates = array(
             ),
             3 => array(
                 0 => array(
-                    'label' => lang('description'),
-                    'type' => 'textarea',
-                    'value' => !empty($data['description']) ? $data['description'] : '',
-                    'name' => 'description'
-                )
-            ),
-            4 => array(
-                0 => array(
                     'label' => lang('avatar'),
                     'type' => 'file',
                     'name' => 'avatar'
@@ -63,10 +51,25 @@ $dataTemplates = array(
                 1 => array(
                     'code' => "<img src='" . (!empty($data['avatar']) ? $data['avatar'] : '') . "' style='width:150px' />"
                 )
+            ),
+            4 => array(
+                0 => array(
+                    'label' => lang('description'),
+                    'type' => 'textarea',
+                    'value' => !empty($data['description']) ? $data['description'] : '',
+                    'name' => 'description'
+                )
             )
         )
     )
 );
+if ($data_id=='') {
+    $dataTemplates[0]['data_panel'][0][1] = array(
+        'label'=>lang('password'),
+        'type'=>'password',
+        'name'=>'password'
+    );
+}
 include APP . '/views/core/edit.php';
 include APP . '/views/footer.php';
 /**

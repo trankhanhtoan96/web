@@ -55,13 +55,14 @@
             <div class="left_col scroll-view">
                 <div class="clearfix"></div>
                 <!-- menu profile quick info -->
+                <?php $userLogined = $this->session->userdata('userLogined'); ?>
                 <div class="profile">
                     <div class="profile_pic">
-                        <img src="<?= base_url('uploads/images/user.jpg') ?>" class="img-circle profile_img">
+                        <img src="<?= $userLogined['avatar'] ?>" class="img-circle profile_img">
                     </div>
                     <div class="profile_info">
-                        <span>admin</span>
-                        <h2>Trần Khánh Toàn</h2>
+                        <span><?= $userLogined['username'] ?></span>
+                        <h2><?= $userLogined['first_name'].' '.$userLogined['last_name'] ?></h2>
                     </div>
                 </div>
                 <!-- /menu profile quick info -->
@@ -95,6 +96,4 @@
         <!-- page content -->
         <div class="right_col" role="main">
             <div class="">
-                <div class="clearfix"></div>
-                <?php if (!empty($alert)) echo $alert; ?>
                 <div class="clearfix"></div>

@@ -1,6 +1,7 @@
+<?php $userLogined = $this->session->userdata('userLogined'); ?>
 <li>
     <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-        <img src="<?= base_url('uploads/images/user.jpg') ?>">Trần Khánh Toàn
+        <img src="<?= $userLogined['avatar'] ?>"><?= $userLogined['last_name'] ?>
         <span class=" fa fa-angle-down"></span>
     </a>
     <ul class="dropdown-menu dropdown-usermenu pull-right">
