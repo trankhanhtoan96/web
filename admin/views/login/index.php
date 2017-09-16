@@ -31,7 +31,7 @@
     <div class="animate form login_form">
         <section class="login_content">
             <form action="" method="post">
-                <img style="width: 250px" src="<?= base_url('uploads/images/logo.png') ?>"/>
+                <img style="width: 250px" src="<?= $this->setting_model->get('logo') ?>"/><br/><br/>
                 <div>
                     <input type="text" class="form-control" placeholder="Username" required="" name="username"/>
                 </div>

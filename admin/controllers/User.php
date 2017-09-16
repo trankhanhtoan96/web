@@ -86,6 +86,8 @@ class User extends CI_Controller
                 $this->load->library('upload', $config);
                 if ($this->upload->do_upload('avatar')) {
                     $dataEdit['avatar'] = base_url($config['upload_path'] . $this->upload->data('file_name'));
+                }else{
+                    $dataEdit['avatar'] = base_url('uploads/images/user.jpg');
                 }
 
                 //send data

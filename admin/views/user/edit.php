@@ -67,7 +67,8 @@ if ($data_id=='') {
     $dataTemplates[0]['data_panel'][0][1] = array(
         'label'=>lang('password'),
         'type'=>'password',
-        'name'=>'password'
+        'name'=>'password',
+        'required'=>true
     );
 }
 include APP . '/views/core/edit.php';

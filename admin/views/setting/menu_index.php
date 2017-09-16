@@ -1,0 +1,1 @@
+<button type="submit" class="btn btn-primary" onclick="return checkForm()"><?= lang('save') ?></button>
