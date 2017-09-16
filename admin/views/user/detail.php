@@ -34,7 +34,7 @@ $dataTemplates = array(
             3 => array(
                 0 => array(
                     'label'=>lang('avatar'),
-                    'code' => "<img src='" . (!empty($data['avatar']) ? $data['avatar'] : '') . "' style='width:150px' />"
+                    'value' => "<img src='" . (!empty($data['avatar']) ? $data['avatar'] : '') . "' style='width:150px' />"
                 )
             ),
             4 => array(

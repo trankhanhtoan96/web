@@ -29,10 +29,8 @@
                     } else {
                         echo "<div class='col-xs-12 text-left'>";
                     }
-                    if (!empty($item['code'])) {
-                        echo $item['code'];
-                    } else {
-                        echo(!empty($item['value']) ? $item['value'] : '');
+                    if (!empty($item['value'])) {
+                        echo $item['value'];
                     }
                     echo "</div></div>";
                 }

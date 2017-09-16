@@ -1,0 +1,1 @@
+<button type="submit" class="btn btn-default" onclick="return confirm(CI_language.confirm_delete)"><?= lang('delete') ?></button>

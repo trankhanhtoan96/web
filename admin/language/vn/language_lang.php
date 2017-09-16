@@ -1,5 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 $lang = array(
+    //dataTable
     'LBL_SHOW' => 'Hiển thị',
     'LBL_TO' => 'đến',
     'LBL_IN' => 'trong',
@@ -17,6 +18,7 @@ $lang = array(
     'LBL_LOADING' => 'Đang tải',
     'LBL_PROCESSING' => 'Đang tải',
     'LBL_NO_RECORD_FOUND' => 'Không tìm thấy',
+
     'title_menu' => 'Dashboard menu',
     'logout' => 'Đăng xuất',
     'user' => 'Người dùng',
@@ -55,5 +57,27 @@ $lang = array(
     'page_title' => 'Tiêu đề trang web',
     'page_description' => 'Mô tả trang web',
     'logo' => 'Logo',
-    'icon' => 'Icon'
+    'icon' => 'Icon',
+    'create_blog' => 'Tạo bài viết mới',
+    'update_blog' => 'Cập nhật bài viết',
+    'blog' => 'Bài viết',
+    'meta_header' => 'Thẻ meta',
+    'meta_title' => 'Thẻ tiêu đề',
+    'meta_description' => 'Thẻ mô tả',
+    'name' => 'Tên',
+    'content' => 'Nội dung',
+    'image' => 'Hình ảnh',
+    'user_created' => 'Người tạo',
+    'user_modifiled' => 'Người sửa',
+    'views' => 'Lượt xem',
+    'blog_category' => 'Danh mục bài viết',
+    'create_blog_category' => 'Tạo danh mục bài viết',
+    'file_browser' => 'Quản lý tệp tin',
+
+    //multipleselect
+    'select_all' => 'Chọn tất cả',
+    'select_of_all' => 'Chọn # trong %',
+
+    'parent_category' => 'danh mục cha',
+    '[none]'=>'[Rỗng]'
 );
