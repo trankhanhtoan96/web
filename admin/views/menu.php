@@ -1,4 +1,10 @@
 <li><a href="<?= base_url('home') ?>"><i class="fa fa-dashboard"></i> <?= lang('home') ?></a></li>
+<li><a><i class="fa fa-file"></i><?= lang('blog') ?><span class="fa fa-chevron-down"></span></a>
+    <ul class="nav child_menu">
+        <li><a href="<?= base_url('blog/edit') ?>"><?= lang('create') ?></a></li>
+        <li><a href="<?= base_url('blog/index') ?>"><?= lang('list') ?></a></li>
+    </ul>
+</li>
 <li><a><i class="fa fa-user"></i><?= lang('user') ?><span class="fa fa-chevron-down"></span></a>
     <ul class="nav child_menu">
         <li><a href="<?= base_url('user/edit') ?>"><?= lang('create') ?></a></li>
