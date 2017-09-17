@@ -1,4 +1,4 @@
-<?php if (!empty($alert)) $this->load->view('alert/'.$alert['type'],$alert); ?>
+<?php if (!empty($alert)) $this->load->view('alert/' . $alert['type'], $alert); ?>
 <link rel="stylesheet" type="text/css" href="<?= base_url(APP . 'views/' . $this->router->class . '/list.css') ?>"/>
 <form action="<?= base_url($this->router->class . '/deleteList') ?>" name="ListView" method="post">
     <div class="row">
@@ -22,8 +22,8 @@
                         foreach ($dataTbody as $key => $item) {
                             echo "<tr><td><input type='checkbox' data-check='table_records' class='flat' name='record_selected[]' value='{$dataIds[$key]}'/></td>
                                       <td>
-                                        <a href='".base_url($this->router->class.'/detail/'.$dataIds[$key])."'>Xem</a> |
-                                        <a href='".base_url($this->router->class.'/edit/'.$dataIds[$key])."'>Sửa</a>
+                                        <a data-toggle='tooltip' style='font-size:16px' title='" . lang('view') . "' href='" . base_url($this->router->class . '/detail/' . $dataIds[$key]) . "'><i class='fa fa-search'></i></a> <b style='font-size:16px'>|</b>
+                                        <a data-toggle='tooltip' style='font-size:16px' title='" . lang('edit') . "' href='" . base_url($this->router->class . '/edit/' . $dataIds[$key]) . "'><i class='fa fa-edit'></i></a>
                                       </td>";
                             foreach ($item as $item2) {
                                 echo "<td>{$item2}</td>";

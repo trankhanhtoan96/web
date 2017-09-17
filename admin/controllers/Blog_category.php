@@ -50,10 +50,7 @@ class Blog_category extends CI_Controller
             $dataTemp[$key]['user_modifiled'] = $this->user_model->get($dataTemp[$key]['user_modifiled']);
         }
         $data = array(
-            'meta_header' => array(
-                'title' => lang($this->router->class),
-                'description' => ''
-            ),
+            'meta_title' => lang($this->router->class),
             'data_header' => lang($this->router->class),
             'data' => $dataTemp
         );
@@ -98,10 +95,7 @@ class Blog_category extends CI_Controller
         $dataView = $id ? $this->blog_category_model->get($id) : '';
 
         $data = array(
-            'meta_header' => array(
-                'title' => $id ? $dataView['name'] : lang('blog_category'),
-                'description' => $id ? $dataView['meta_description'] : lang('blog_category')
-            ),
+            'meta_title' => $id ? $dataView['name'] : lang('blog_category'),
             'data_header' => $id ? lang('blog_category') . ':' . $dataView['name'] : lang('create_blog_category'),
             'data_id' => $id,
             'data' => $dataView
@@ -118,10 +112,7 @@ class Blog_category extends CI_Controller
         $detail['user_created'] = $this->user_model->get($detail['user_created']);
         $detail['user_modifiled'] = $this->user_model->get($detail['user_modifiled']);
         $data = array(
-            'meta_header' => array(
-                'title' => $detail['name'],
-                'description' => $detail['meta_description']
-            ),
+            'title' => $detail['name'],
             'data_header' => lang('blog_category') . ':' . $detail['name'],
             'data_id' => $id,
             'data' => $detail

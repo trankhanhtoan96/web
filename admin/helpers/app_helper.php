@@ -39,17 +39,3 @@ function getHtmlSelection(array $arr, $keySelected,array $option)
     $html .= '</select>';
     return $html;
 }
-
-function LoginCookie()
-{
-    $CI = &get_instance();
-    if ($id = get_cookie('userLogined')) {
-        $user = $CI->user_model->get($id);
-        if($user){
-            $CI->session->set_userdata('userLogined', $user);
-            set_cookie('userLogined',$user['id'],2592000);
-            return true;
-        }
-    }
-    return false;
-}

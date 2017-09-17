@@ -63,10 +63,7 @@ class Setting extends CI_Controller
 
         //send data to view
         $data = array(
-            'meta_header' => array(
-                'title' => lang($this->router->class),
-                'description' => ''
-            ),
+            'meta_title' => lang($this->router->class),
             'data_header' => lang($this->router->class),
             'data_id' => '',
             'data' => $this->setting_model->get_list()

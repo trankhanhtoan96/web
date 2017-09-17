@@ -5,11 +5,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?= !empty($meta_header['title'])?$meta_header['title']:lang('admin_page') ?></title>
-    <meta name="description" content="<?= !empty($meta_header['description'])?$meta_header['description']:lang('admin_page') ?>" />
+    <title><?= !empty($meta_title) ? $meta_title : lang('admin_page') ?></title>
 
     <!--define language-->
-    <script> var CI_language = <?= json_encode($this->lang->language) ?>; </script>
+    <script>
+        var CI_language = <?= json_encode($this->lang->language) ?>;
+        CI_language.base_url = '<?= base_url() ?>';
+    </script>
 
     <!--jquery-->
     <script src="<?= base_url('vendors/jquery.min.js') ?>"></script>
@@ -62,7 +64,7 @@
                     </div>
                     <div class="profile_info">
                         <span><?= $userLogined['username'] ?></span>
-                        <h2><?= $userLogined['first_name'].' '.$userLogined['last_name'] ?></h2>
+                        <h2><?= $userLogined['first_name'] . ' ' . $userLogined['last_name'] ?></h2>
                     </div>
                 </div>
                 <!-- /menu profile quick info -->

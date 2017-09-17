@@ -43,10 +43,7 @@ class User extends CI_Controller
     function index()
     {
         $data = array(
-            'meta_header' => array(
-                'title' => lang($this->router->class),
-                'description' => ''
-            ),
+            'meta_title' => lang($this->router->class),
             'data_header' => lang($this->router->class),
             'data' => $this->{$this->router->class . '_model'}->get_list()
         );
@@ -86,7 +83,7 @@ class User extends CI_Controller
                 $this->load->library('upload', $config);
                 if ($this->upload->do_upload('avatar')) {
                     $dataEdit['avatar'] = base_url($config['upload_path'] . $this->upload->data('file_name'));
-                }else{
+                } else {
                     $dataEdit['avatar'] = base_url('uploads/images/user.jpg');
                 }
 
@@ -98,15 +95,12 @@ class User extends CI_Controller
         }
         $dataView = $id ? $this->{$this->router->class . '_model'}->get($id) : '';
         $data = array(
-            'meta_header' => array(
-                'title' => lang($this->router->class),
-                'description' => ''
-            ),
+            'meta_title' => lang($this->router->class),
             'data_header' => $id ? $dataView['first_name'] . ' ' . $dataView['last_name'] : lang('create_' . $this->router->class),
             'data_id' => $id,
             'data' => $dataView
         );
-        $this->load->view($this->router->class . '/'.$this->router->method, $data);
+        $this->load->view($this->router->class . '/' . $this->router->method, $data);
     }
 
     function detail($id = '')
@@ -115,15 +109,12 @@ class User extends CI_Controller
         $detail = $this->{$this->router->class . '_model'}->get($id);
         unset($detail['id']);
         $data = array(
-            'meta_header' => array(
-                'title' => $detail['first_name'] . ' ' . $detail['last_name'],
-                'description' => $detail['description']
-            ),
+            'meta_title' => $detail['first_name'] . ' ' . $detail['last_name'],
             'data_header' => $detail['first_name'] . ' ' . $detail['last_name'],
             'data_id' => $id,
             'data' => $detail
         );
-        $this->load->view($this->router->class . '/'.$this->router->method, $data);
+        $this->load->view($this->router->class . '/' . $this->router->method, $data);
     }
 
     function delete($id = '')
@@ -154,10 +145,10 @@ class User extends CI_Controller
             'data_header' => lang('change_password'),
             'data_id' => '',
             'data' => '',
-            'alert'=>''
+            'alert' => ''
         );
-        $oldPassword = $this->input->post('old_password',true);
-        $newPassword = $this->input->post('new_password',true);
+        $oldPassword = $this->input->post('old_password', true);
+        $newPassword = $this->input->post('new_password', true);
         if ($oldPassword && $newPassword) {
             $userLogined = $this->session->userdata('userLogined');
             if ($this->user_model->verify($userLogined['username'], $oldPassword)) {
@@ -165,26 +156,26 @@ class User extends CI_Controller
                     'id' => $userLogined['id'],
                     'password' => $newPassword
                 );
-                if($this->user_model->update($dataUpdate)){
+                if ($this->user_model->update($dataUpdate)) {
                     $data['alert'] = array(
-                        'type'=>'success',
-                        'message'=>lang('password_changed')
+                        'type' => 'success',
+                        'message' => lang('password_changed')
                     );
 
-                }else{
+                } else {
                     $data['alert'] = array(
-                        'type'=>'error',
-                        'message'=>lang('occur_error')
+                        'type' => 'error',
+                        'message' => lang('occur_error')
                     );
                 }
-            }else{
+            } else {
                 $data['alert'] = array(
-                    'type'=>'error',
-                    'message'=>lang('old_password_invalid')
+                    'type' => 'error',
+                    'message' => lang('old_password_invalid')
                 );
             }
         }
-        $this->load->view($this->router->class . '/'.$this->router->method, $data);
+        $this->load->view($this->router->class . '/' . $this->router->method, $data);
     }
 }
 /**

@@ -1,0 +1,2 @@
+<button type="submit" class="btn btn-primary" onclick="return checkForm()"><?= lang('save') ?></button>
+<a href="<?= base_url($this->router->class.'/detail/'.$data_id) ?>" onclick="return confirm(CI_language.confirm_cancel)" class="btn btn-default"><?= lang('cancel') ?></a>

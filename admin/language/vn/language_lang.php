@@ -73,12 +73,10 @@ $lang = array(
     'blog_category' => 'Danh mục bài viết',
     'create_blog_category' => 'Tạo danh mục bài viết',
     'file_browser' => 'Quản lý tệp tin',
-
-    //multipleselect
-    'select_all' => 'Chọn tất cả',
-    'select_of_all' => 'Chọn # trong %',
-
     'parent_category' => 'danh mục cha',
     '[none]'=>'[Rỗng]',
-    'category'=>'Danh mục'
+    'category'=>'Danh mục',
+    'page'=>'Trang',
+    'create_page'=>'Tạo trang mới',
+    'view'=>'Xem'
 );
