@@ -20,7 +20,7 @@ function createId()
  * @param array $option
  * @return string
  */
-function getHtmlSelection($arr = array(), $keySelected = '', $option = array())
+function getHtmlSelection(array $arr, $keySelected,array $option)
 {
     $html = '<select ';
     foreach ($option as $key => $value) {
@@ -40,8 +40,16 @@ function getHtmlSelection($arr = array(), $keySelected = '', $option = array())
     return $html;
 }
 
-function checkLogin()
+function LoginCookie()
 {
     $CI = &get_instance();
-
+    if ($id = get_cookie('userLogined')) {
+        $user = $CI->user_model->get($id);
+        if($user){
+            $CI->session->set_userdata('userLogined', $user);
+            set_cookie('userLogined',$user['id'],2592000);
+            return true;
+        }
+    }
+    return false;
 }

@@ -36,6 +36,7 @@ class Login extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        if(LoginCookie()) redirect('/home', 'refresh');
     }
 
     public function index()
@@ -50,6 +51,7 @@ class Login extends CI_Controller
             if ($this->user_model->verify($data['username'], $data['password'])) {
                 $data = $this->user_model->getByUsername($data['username']);
                 $this->session->set_userdata('userLogined', $data);
+                set_cookie('userLogined',$data['id'],2592000);
                 redirect('/home', 'refresh');
             } else {
                 $data['alert'] = $this->load->view('alert/error', array('message'=>'Sai tên đăng nhập hoặc mật khẩu!'), true);
@@ -60,7 +62,8 @@ class Login extends CI_Controller
 
     public function logout()
     {
-        if ($this->session->has_userdata('userLogined')) $this->session->unset_userdata('userLogined');
+        $this->session->unset_userdata('userLogined');
+        delete_cookie('userLogined');
         redirect('/login', 'refresh');
     }
 }
