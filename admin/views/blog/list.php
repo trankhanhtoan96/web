@@ -3,6 +3,7 @@ include APP . '/views/header.php';
 $dataThead = array(
     lang('image'),
     lang('name'),
+    lang('category'),
     lang('date_entered'),
     lang('date_modifiled'),
     lang('views'),
@@ -15,6 +16,7 @@ foreach ($data as $item) {
     $dataTbody[] = array(
         "<img src='{$item['image']}' style='width:70px' />",
         $item['name'],
+        $item['blog_category'],
         $item['date_entered'],
         $item['date_modifiled'],
         $item['views'],

@@ -12,10 +12,7 @@ $dataTemplates = array(
                     'value' => !empty($data['name']) ? $data['name'] : '',
                     'name' => 'name'
                 ),
-                1 => array(
-                    'label' => lang('parent_category'),
-                    'code' => getHtmlSelection($data['blog_category_list'],isset($data['parent_id'])?$data['parent_id']:'',array('name'=>'parent_id','id'=>'parent_id','style'=>'width:100%'))
-                )
+                1 => ''
             ),
             1 => array(
                 0 => array(

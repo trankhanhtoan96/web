@@ -42,7 +42,7 @@
                         }
                         if (!empty($item['code'])) echo $item['code'];
                         elseif (!empty($item['type']) && !empty($item['name'])) {
-                            if ($item['type'] == 'textarea') echo "<textarea rows='3' id='{$item['name']}' class='form-control' name='{$item['name']}'>" . (!empty($item['value']) ? $item['value'] : '') . "</textarea>";
+                            if ($item['type'] == 'textarea') echo "<textarea id='{$item['name']}' class='form-control' name='{$item['name']}'>" . (!empty($item['value']) ? $item['value'] : '') . "</textarea>";
                             else echo "<input id='{$item['name']}' class='form-control' type='{$item['type']}' name='{$item['name']}' value='" . (!empty($item['value']) ? $item['value'] : '') . "' " . (!empty($item['required']) && $item['required'] == true ? 'required' : '') . " />";
                         }
                         echo "</div></div>";

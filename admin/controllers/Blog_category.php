@@ -44,7 +44,7 @@ class Blog_category extends CI_Controller
 
     function index()
     {
-        $dataTemp = $this->{$this->router->class . '_model'}->get_list('*','date_modifiled','DESC');
+        $dataTemp = $this->{$this->router->class . '_model'}->get_list();
         foreach ($dataTemp as $key => $value) {
             $dataTemp[$key]['user_created'] = $this->user_model->get($dataTemp[$key]['user_created']);
             $dataTemp[$key]['user_modifiled'] = $this->user_model->get($dataTemp[$key]['user_modifiled']);
@@ -95,24 +95,16 @@ class Blog_category extends CI_Controller
                 redirect('/blog_category/detail/' . $dataId);
             }
         }
-        $tempData = $id ? $this->blog_category_model->get($id) : '';
-        $tempData['blog_category_list'] = array();
-        $temp = $this->blog_category_model->get_list('id,name');
-        $tempData['blog_category_list']['0'] = lang('[none]');
-        foreach ($temp as $temp1) {
-            if($temp1['id']!=$id) {
-                $tempData['blog_category_list'][$temp1['id']] = $temp1['name'];
-            }
-        }
+        $dataView = $id ? $this->blog_category_model->get($id) : '';
 
         $data = array(
             'meta_header' => array(
-                'title' => $id ? $tempData['name'] : lang('blog_category'),
-                'description' => $id ? $tempData['meta_description'] : lang('blog_category')
+                'title' => $id ? $dataView['name'] : lang('blog_category'),
+                'description' => $id ? $dataView['meta_description'] : lang('blog_category')
             ),
-            'data_header' => $id ? lang('blog_category') . ':' . $tempData['name'] : lang('create_blog_category'),
+            'data_header' => $id ? lang('blog_category') . ':' . $dataView['name'] : lang('create_blog_category'),
             'data_id' => $id,
-            'data' => $tempData
+            'data' => $dataView
         );
 
         $this->load->view('blog_category/edit', $data);
@@ -125,7 +117,6 @@ class Blog_category extends CI_Controller
         unset($detail['id']);
         $detail['user_created'] = $this->user_model->get($detail['user_created']);
         $detail['user_modifiled'] = $this->user_model->get($detail['user_modifiled']);
-        $detail['parent'] = $this->blog_category_model->get($detail['parent_id']);
         $data = array(
             'meta_header' => array(
                 'title' => $detail['name'],

@@ -79,5 +79,6 @@ $lang = array(
     'select_of_all' => 'Chọn # trong %',
 
     'parent_category' => 'danh mục cha',
-    '[none]'=>'[Rỗng]'
+    '[none]'=>'[Rỗng]',
+    'category'=>'Danh mục'
 );

@@ -96,15 +96,15 @@ class User extends CI_Controller
                 redirect('/' . $this->router->class . '/detail/' . $dataId);
             }
         }
-        $tempData = $id ? $this->{$this->router->class . '_model'}->get($id) : '';
+        $dataView = $id ? $this->{$this->router->class . '_model'}->get($id) : '';
         $data = array(
             'meta_header' => array(
                 'title' => lang($this->router->class),
                 'description' => ''
             ),
-            'data_header' => $id ? $tempData['first_name'] . ' ' . $tempData['last_name'] : lang('create_' . $this->router->class),
+            'data_header' => $id ? $dataView['first_name'] . ' ' . $dataView['last_name'] : lang('create_' . $this->router->class),
             'data_id' => $id,
-            'data' => $tempData
+            'data' => $dataView
         );
         $this->load->view($this->router->class . '/'.$this->router->method, $data);
     }

@@ -12,7 +12,10 @@ $dataTemplates = array(
                     'value' => !empty($data['name']) ? $data['name'] : '',
                     'name' => 'name'
                 ),
-                1 => ''
+                1 => array(
+                    'label'=>lang('blog_category'),
+                    'code'=>getHtmlSelection($data['blog_category'],$data['blog_category_id'],array('multiple'=>true,'name'=>'blog_category_id[]','id'=>'blog_category_id','style'=>'width:100%'))
+                )
             ),
             1 => array(
                 0 => array(

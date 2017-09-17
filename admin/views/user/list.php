@@ -1,6 +1,7 @@
 <?php
 include APP . '/views/header.php';
 $dataThead = array(
+    lang('avatar'),
     lang('username'),
     lang('full_name'),
     lang('email'),
@@ -10,6 +11,7 @@ $dataTbody = array();
 $dataIds = array();
 foreach ($data as $item) {
     $dataTbody[] = array(
+        "<img src='{$item['avatar']}' style='width:70px' />",
         $item['username'],
         $item['first_name'].' '.$item['last_name'],
         $item['email'],

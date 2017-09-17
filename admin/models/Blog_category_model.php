@@ -24,7 +24,7 @@ class Blog_category_model extends CI_Model
      * @param int $ofset
      * @return array
      */
-    function get_list($select = '*', $orderBy = '', $direction = '', $limit = 0, $ofset = 0)
+    function get_list($select = '*', $orderBy = 'date_entered', $direction = 'DESC', $limit = 0, $ofset = 0)
     {
         $this->db->reset_query();
         $this->db->select($select);
