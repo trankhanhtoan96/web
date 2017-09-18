@@ -43,7 +43,7 @@ class Development extends CI_Controller
 
     function index()
     {
-        $name = ucfirst('');
+        $name = ucfirst('Abc');
         if($name=='') die('please input module name!');
 
         //controller
@@ -58,7 +58,7 @@ class Development extends CI_Controller
         file_put_contents(APPPATH . 'models/' . $name . '_model.php', $data, FILE_APPEND | LOCK_EX);
 
         //autoload
-        $data = "\n\n//auto generate\n\$autoload['model'][] = '".strtolower($name).'_model\';';
+        $data = "\n\n//auto_generate_{$name}\n\$autoload['model'][] = '".strtolower($name)."_model';\n//auto_generate_{$name}";
         file_put_contents(APPPATH . 'config/autoload.php', $data, FILE_APPEND | LOCK_EX);
 
         //view
@@ -107,14 +107,50 @@ class Development extends CI_Controller
         $this->dbforge->create_table(strtolower($name),true);
 
         //update main menu
-        $data = "\n\n<!--auto generate-->\n<li><a><i class='fa fa-cube'></i><?= lang('".strtolower($name)."') ?><span class='fa fa-chevron-down'></span></a>
+        $data = "\n<!--auto_generate_{$name}-->
+<li><a><i class='fa fa-cube'></i><?= lang('".strtolower($name)."') ?><span class='fa fa-chevron-down'></span></a>
     <ul class='nav child_menu'>
         <li><a href='<?= base_url('".strtolower($name)."/edit') ?>'><?= lang('create') ?></a></li>
         <li><a href='<?= base_url('".strtolower($name)."/index') ?>'><?= lang('list') ?></a></li>
     </ul>
-</li>";
+</li>
+<!--auto_generate_{$name}-->";
         file_put_contents(APPPATH . 'views/menu.php', $data, FILE_APPEND | LOCK_EX);
 
         echo 'tạo thành công module có tên:['.$name."]\nvui lòng tạo language: [".strtolower($name)."] và [create_".strtolower($name)."]";
+    }
+
+    function delete($name)
+    {
+        $name = ucfirst($name);
+
+        $data = file_get_contents(APPPATH . 'config/autoload.php');
+        $a = "\n\n//auto_generate_{$name}\n\$autoload['model'][] = '".strtolower($name)."_model';\n//auto_generate_{$name}";
+        $data = str_replace($a, '', $data);
+        file_put_contents(APPPATH . 'config/autoload.php', $data);
+
+
+        $a = "\n<!--auto_generate_{$name}-->
+<li><a><i class='fa fa-cube'></i><?= lang('".strtolower($name)."') ?><span class='fa fa-chevron-down'></span></a>
+    <ul class='nav child_menu'>
+        <li><a href='<?= base_url('".strtolower($name)."/edit') ?>'><?= lang('create') ?></a></li>
+        <li><a href='<?= base_url('".strtolower($name)."/index') ?>'><?= lang('list') ?></a></li>
+    </ul>
+</li>
+<!--auto_generate_{$name}-->";
+        $data = file_get_contents(APPPATH . 'views/menu.php');
+        $data = str_replace($a, '', $data);
+        file_put_contents(APPPATH . 'views/menu.php', $data);
+
+        if(is_dir(APPPATH . 'views/'.strtolower($name).'/')) {
+            delete_files(APPPATH . 'views/' . strtolower($name) . '/');
+            rmdir(APPPATH . 'views/' . strtolower($name) . '/');
+        }
+        if(is_file(APPPATH . 'controllers/' . $name . '.php')) {
+            unlink(APPPATH . 'controllers/' . $name . '.php');
+        }
+        if(is_file(APPPATH . 'models/' . $name . '_model.php')) {
+            unlink(APPPATH . 'models/' . $name . '_model.php');
+        }
     }
 }
