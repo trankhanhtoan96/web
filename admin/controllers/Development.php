@@ -43,7 +43,8 @@ class Development extends CI_Controller
 
     function index()
     {
-        $name = ucfirst('Abc');
+        $name = ucfirst('');
+        if($name=='') die('please input module name!');
 
         //controller
         $data = file_get_contents(APPPATH . 'core/template/controller.php');
@@ -113,5 +114,7 @@ class Development extends CI_Controller
     </ul>
 </li>";
         file_put_contents(APPPATH . 'views/menu.php', $data, FILE_APPEND | LOCK_EX);
+
+        echo 'tạo thành công module có tên:['.$name."]\nvui lòng tạo language: [".strtolower($name)."] và [create_".strtolower($name)."]";
     }
 }
