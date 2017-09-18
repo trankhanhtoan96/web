@@ -5,7 +5,8 @@ $dataThead = array(
     lang('username'),
     lang('full_name'),
     lang('email'),
-    lang('phone')
+    lang('phone'),
+    lang('date_entered')
 );
 $dataTbody = array();
 $dataIds = array();
@@ -15,7 +16,8 @@ foreach ($data as $item) {
         $item['username'],
         $item['first_name'].' '.$item['last_name'],
         $item['email'],
-        $item['phone']
+        $item['phone'],
+        $item['date_entered']
     );
     $dataIds[] = $item['id'];
 }

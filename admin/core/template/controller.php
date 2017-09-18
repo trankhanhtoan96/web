@@ -31,14 +31,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property CI_DB $db
  * @property User_model user_model
  * @property CI_Router router
- * @property Blog_model $blog_model
- * @property Blog_category_model $blog_category_model
  */
-class Blog extends CI_Controller
+class Controller extends CI_Controller
 {
     function __construct()
     {
         parent::__construct();
+        //check login and redirect to login if not yet
         if (!$this->session->has_userdata('userLogined')) redirect('/login', 'refresh');
     }
 
@@ -48,21 +47,14 @@ class Blog extends CI_Controller
         foreach ($dataView as $key => $value) {
             $dataView[$key]['user_created'] = $this->user_model->get($dataView[$key]['user_created']);
             $dataView[$key]['user_modifiled'] = $this->user_model->get($dataView[$key]['user_modifiled']);
-
-            $dataView[$key]['blog_category'] = "";
-            if ($dataView[$key]['blog_category_id'] != 'null') {
-                $temp = json_decode(html_entity_decode($dataView[$key]['blog_category_id']), true);
-                foreach ($temp as $item) {
-                    $temp2 = $this->blog_category_model->get($item, 'id,name');
-                    $dataView[$key]['blog_category'] .= "<a href='" . base_url('blog_category/detail/' . $temp2['id']) . "'>{$temp2['name']}</a>, ";
-                }
-            }
         }
         $data = array(
             'meta_title' => lang($this->router->class),
             'data_header' => lang($this->router->class),
             'data' => $dataView
         );
+
+        //load view to display
         $this->load->view($this->router->class . '/list', $data);
     }
 
@@ -70,8 +62,9 @@ class Blog extends CI_Controller
     {
         if ($this->input->post('name')) {
             if ($id) {
+                //get data from post
                 $dataEdit = $this->input->post();
-                $dataEdit['blog_category_id'] = json_encode($dataEdit['blog_category_id']);
+
                 $dataEdit['id'] = $id;
 
                 //upload file
@@ -82,11 +75,13 @@ class Blog extends CI_Controller
                     $dataEdit['image'] = base_url($config['upload_path'] . $this->upload->data('file_name'));
                 }
 
+                //execute update data and redirect to detail
                 $this->{$this->router->class . '_model'}->update($dataEdit);
-                redirect('/blog/detail/' . $id);
+                redirect('/' . $this->router->class . '/detail/' . $id);
             } else {
+                //get data from post
                 $dataEdit = $this->input->post();
-                $dataEdit['blog_category_id'] = json_encode($dataEdit['blog_category_id']);
+
                 unset($dataEdit['id']);
 
                 //upload file
@@ -98,67 +93,49 @@ class Blog extends CI_Controller
                 } else {
                     $dataEdit['image'] = base_url('uploads/icons/none.jpg');
                 }
+
+                //execute insert data and redirect to detail
                 $dataId = '';
                 $this->{$this->router->class . '_model'}->insert($dataEdit, $dataId);
-                redirect('/blog/detail/' . $dataId);
+                redirect('/' . $this->router->class . '/detail/' . $dataId);
             }
         }
-        $dataView['blog_category_id'] = '';
-        if ($id) {
-            $dataView = $this->blog_model->get($id);
-            $dataView['blog_category_id'] = json_decode(html_entity_decode($dataView['blog_category_id']), true);
-        }
-        $temps = $this->blog_category_model->get_list('id,name');
-        $dataView['blog_category'] = array();
-        foreach ($temps as $temp) {
-            $dataView['blog_category'][$temp['id']] = $temp['name'];
-        }
+        $dataView = $this->{$this->router->class . '_model'}->get($id);
         $data = array(
-            'meta_title' => $id ? $dataView['name'] : lang('blog'),
-            'data_header' => $id ? lang('blog') . ':' . $dataView['name'] : lang('create_blog'),
+            'meta_title' => $id ? $dataView['name'] : lang($this->router->class),
+            'data_header' => $id ? lang($this->router->class) . ':' . $dataView['name'] : lang('create_' . $this->router->class),
             'data_id' => $id,
             'data' => $dataView
         );
-        $this->load->view('blog/edit', $data);
+        $this->load->view($this->router->class . '/edit', $data);
     }
 
     function detail($id = '')
     {
-        if ($id == '') redirect('/blog/index');
-        $detail = $this->blog_model->get($id);
-        unset($detail['id']);
-        $detail['user_created'] = $this->user_model->get($detail['user_created']);
-        $detail['user_modifiled'] = $this->user_model->get($detail['user_modifiled']);
-        if ($detail['blog_category_id'] != 'null') {
-            $detail['blog_category'] = "";
-            $temp = json_decode(html_entity_decode($detail['blog_category_id']), true);
-            foreach ($temp as $item) {
-                $temp2 = $this->blog_category_model->get($item, 'id,name');
-                $detail['blog_category'] .= "<li><a href='" . base_url('blog_category/detail/' . $temp2['id']) . "'>{$temp2['name']}</a></li>";
-            }
-        }
-
+        if ($id == '') redirect('/' . $this->router->class . '/index');
+        $dataView = $this->{$this->router->class . '_model'}->get($id);
+        unset($dataView['id']);
+        $dataView['user_created'] = $this->user_model->get($dataView['user_created']);
+        $dataView['user_modifiled'] = $this->user_model->get($dataView['user_modifiled']);
         $data = array(
-            'meta_title' => $detail['name'],
-            'data_header' => lang('blog') . ':' . $detail['name'],
+            'meta_title' => $dataView['name'],
+            'data_header' => lang($this->router->class) . ':' . $dataView['name'],
             'data_id' => $id,
-            'data' => $detail
+            'data' => $dataView
         );
-        $this->load->view('blog/detail', $data);
+        $this->load->view($this->router->class . '/detail', $data);
     }
 
     function delete($id = '')
     {
-        if ($id) {
-            $this->{$this->router->class . '_model'}->delete($id);
-        }
+        $this->{$this->router->class . '_model'}->delete($id);
         redirect('/' . $this->router->class . '/index');
     }
 
     function deleteList()
     {
-        if ($this->input->post('record_selected')) {
-            foreach ($this->input->post('record_selected') as $id) {
+        if ($recods = $this->input->post('record_selected')) {
+            foreach ($recods as $id) {
                 $this->{$this->router->class . '_model'}->delete($id);
             }
         }

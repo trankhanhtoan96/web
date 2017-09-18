@@ -5,9 +5,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * Class User_model
  * @property CI_DB $db
  */
-class Page_model extends CI_Model
+class Model extends CI_Model
 {
-    private $tableName = 'page';
+    private $tableName = 'table';
     private $fields = array();
 
     function __construct()
