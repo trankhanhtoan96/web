@@ -58,21 +58,6 @@ class Blog_model extends CI_Model
         return $arr;
     }
 
-    function getByUsername($userName, $select = '*')
-    {
-        $this->db->reset_query();
-        $this->db->select($select);
-        $this->db->from($this->tableName);
-        $this->db->where('username', $userName);
-        $result = $this->db->get();
-        $arr = array();
-        if ($result->num_rows() == 1) {
-            $arr = $result->result_array();
-            $arr = $arr[0];
-        }
-        return $arr;
-    }
-
     /**
      * @param array $data
      * @param string $id

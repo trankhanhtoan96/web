@@ -43,81 +43,84 @@ class Development extends CI_Controller
 
     function index()
     {
-        $name = ucfirst('Abc');
-        if($name=='') die('please input module name!');
+        echo "<form acton='' method='post'><input type='text' name='module_name' /></form>";
+        if($moduleName = $this->input->post('module_name')){
+            $name = ucfirst(trim($moduleName));
+            if($name=='') die('please input module name!');
 
         //controller
-        $data = file_get_contents(APPPATH . 'core/template/controller.php');
-        $data = str_replace('class Controller extends CI_Controller', "class {$name} extends CI_Controller", $data);
-        file_put_contents(APPPATH . 'controllers/' . $name . '.php', $data, FILE_APPEND | LOCK_EX);
+            $data = file_get_contents(APPPATH . 'core/template/controller.php');
+            $data = str_replace('class Controller extends CI_Controller', "class {$name} extends CI_Controller", $data);
+            file_put_contents(APPPATH . 'controllers/' . $name . '.php', $data, FILE_APPEND | LOCK_EX);
 
         //model
-        $data = file_get_contents(APPPATH.'core/template/model.php');
-        $data = str_replace('class Model extends CI_Model', "class {$name}_model extends CI_Model", $data);
-        $data = str_replace("private \$tableName = 'table';", "private \$tableName = '".strtolower($name)."';", $data);
-        file_put_contents(APPPATH . 'models/' . $name . '_model.php', $data, FILE_APPEND | LOCK_EX);
+            $data = file_get_contents(APPPATH.'core/template/model.php');
+            $data = str_replace('class Model extends CI_Model', "class {$name}_model extends CI_Model", $data);
+            $data = str_replace("private \$tableName = 'table';", "private \$tableName = '".strtolower($name)."';", $data);
+            file_put_contents(APPPATH . 'models/' . $name . '_model.php', $data, FILE_APPEND | LOCK_EX);
 
         //autoload
-        $data = "\n\n//auto_generate_{$name}\n\$autoload['model'][] = '".strtolower($name)."_model';\n//auto_generate_{$name}";
-        file_put_contents(APPPATH . 'config/autoload.php', $data, FILE_APPEND | LOCK_EX);
+            $data = "\n\n//auto_generate_{$name}\n\$autoload['model'][] = '".strtolower($name)."_model';\n//auto_generate_{$name}";
+            file_put_contents(APPPATH . 'config/autoload.php', $data, FILE_APPEND | LOCK_EX);
 
         //view
-        mkdir(APPPATH.'views/'.strtolower($name));
-        file_put_contents(APPPATH . 'views/'.strtolower($name).'/edit.css', '', FILE_APPEND | LOCK_EX);
-        file_put_contents(APPPATH . 'views/'.strtolower($name).'/edit.js', '', FILE_APPEND | LOCK_EX);
-        file_put_contents(APPPATH . 'views/'.strtolower($name).'/detail.css', '', FILE_APPEND | LOCK_EX);
-        file_put_contents(APPPATH . 'views/'.strtolower($name).'/detail.js', '', FILE_APPEND | LOCK_EX);
-        file_put_contents(APPPATH . 'views/'.strtolower($name).'/list.css', '', FILE_APPEND | LOCK_EX);
-        file_put_contents(APPPATH . 'views/'.strtolower($name).'/list.js', '', FILE_APPEND | LOCK_EX);
-        file_put_contents(APPPATH . 'views/'.strtolower($name).'/edit.php', file_get_contents(APPPATH . 'core/template/edit.php'), FILE_APPEND | LOCK_EX);
-        file_put_contents(APPPATH . 'views/'.strtolower($name).'/detail.php', file_get_contents(APPPATH . 'core/template/detail.php'), FILE_APPEND | LOCK_EX);
-        file_put_contents(APPPATH . 'views/'.strtolower($name).'/list.php', file_get_contents(APPPATH . 'core/template/list.php'), FILE_APPEND | LOCK_EX);
-        file_put_contents(APPPATH . 'views/'.strtolower($name).'/menu_edit.php', file_get_contents(APPPATH . 'core/template/menu_edit.php'), FILE_APPEND | LOCK_EX);
-        file_put_contents(APPPATH . 'views/'.strtolower($name).'/menu_detail.php', file_get_contents(APPPATH . 'core/template/menu_detail.php'), FILE_APPEND | LOCK_EX);
-        file_put_contents(APPPATH . 'views/'.strtolower($name).'/menu_list.php', file_get_contents(APPPATH . 'core/template/menu_list.php'), FILE_APPEND | LOCK_EX);
+            mkdir(APPPATH.'views/'.strtolower($name));
+            file_put_contents(APPPATH . 'views/'.strtolower($name).'/edit.css', '', FILE_APPEND | LOCK_EX);
+            file_put_contents(APPPATH . 'views/'.strtolower($name).'/edit.js', '', FILE_APPEND | LOCK_EX);
+            file_put_contents(APPPATH . 'views/'.strtolower($name).'/detail.css', '', FILE_APPEND | LOCK_EX);
+            file_put_contents(APPPATH . 'views/'.strtolower($name).'/detail.js', '', FILE_APPEND | LOCK_EX);
+            file_put_contents(APPPATH . 'views/'.strtolower($name).'/list.css', '', FILE_APPEND | LOCK_EX);
+            file_put_contents(APPPATH . 'views/'.strtolower($name).'/list.js', '', FILE_APPEND | LOCK_EX);
+            file_put_contents(APPPATH . 'views/'.strtolower($name).'/edit.php', file_get_contents(APPPATH . 'core/template/edit.php'), FILE_APPEND | LOCK_EX);
+            file_put_contents(APPPATH . 'views/'.strtolower($name).'/detail.php', file_get_contents(APPPATH . 'core/template/detail.php'), FILE_APPEND | LOCK_EX);
+            file_put_contents(APPPATH . 'views/'.strtolower($name).'/list.php', file_get_contents(APPPATH . 'core/template/list.php'), FILE_APPEND | LOCK_EX);
+            file_put_contents(APPPATH . 'views/'.strtolower($name).'/menu_edit.php', file_get_contents(APPPATH . 'core/template/menu_edit.php'), FILE_APPEND | LOCK_EX);
+            file_put_contents(APPPATH . 'views/'.strtolower($name).'/menu_detail.php', file_get_contents(APPPATH . 'core/template/menu_detail.php'), FILE_APPEND | LOCK_EX);
+            file_put_contents(APPPATH . 'views/'.strtolower($name).'/menu_list.php', file_get_contents(APPPATH . 'core/template/menu_list.php'), FILE_APPEND | LOCK_EX);
 
         //create database
-        $fields = array(
-            'id'=>array(
-                'type'=>'varchar',
-                'constraint'=>36
-            ),
-            'date_entered'=>array(
-                'type'=>'datetime'
-            ),
-            'date_modifiled'=>array(
-                'type'=>'datetime'
-            ),
-            'user_created'=>array(
-                'type'=>'varchar',
-                'constraint'=>36
-            ),
-            'user_modifiled'=>array(
-                'type'=>'varchar',
-                'constraint'=>36
-            ),
-            'name'=>array(
-                'type'=>'varchar',
-                'constraint'=>255
-            )
-        );
-        $this->load->dbforge();
-        $this->dbforge->add_field($fields);
-        $this->dbforge->add_key('id',true);
-        $this->dbforge->create_table(strtolower($name),true);
+            $fields = array(
+                'id'=>array(
+                    'type'=>'varchar',
+                    'constraint'=>36
+                ),
+                'date_entered'=>array(
+                    'type'=>'datetime'
+                ),
+                'date_modifiled'=>array(
+                    'type'=>'datetime'
+                ),
+                'user_created'=>array(
+                    'type'=>'varchar',
+                    'constraint'=>36
+                ),
+                'user_modifiled'=>array(
+                    'type'=>'varchar',
+                    'constraint'=>36
+                ),
+                'name'=>array(
+                    'type'=>'varchar',
+                    'constraint'=>255
+                )
+            );
+            $this->load->dbforge();
+            $this->dbforge->add_field($fields);
+            $this->dbforge->add_key('id',true);
+            $this->dbforge->create_table(strtolower($name),true);
 
         //update main menu
-        $data = "\n<!--auto_generate_{$name}-->
-<li><a><i class='fa fa-cube'></i><?= lang('".strtolower($name)."') ?><span class='fa fa-chevron-down'></span></a>
-    <ul class='nav child_menu'>
-        <li><a href='<?= base_url('".strtolower($name)."/edit') ?>'><?= lang('create') ?></a></li>
-        <li><a href='<?= base_url('".strtolower($name)."/index') ?>'><?= lang('list') ?></a></li>
-    </ul>
-</li>
-<!--auto_generate_{$name}-->";
-        file_put_contents(APPPATH . 'views/menu.php', $data, FILE_APPEND | LOCK_EX);
+            $data = "\n<!--auto_generate_{$name}-->
+            <li><a><i class='fa fa-cube'></i><?= lang('".strtolower($name)."') ?><span class='fa fa-chevron-down'></span></a>
+            <ul class='nav child_menu'>
+            <li><a href='<?= base_url('".strtolower($name)."/edit') ?>'><?= lang('create') ?></a></li>
+            <li><a href='<?= base_url('".strtolower($name)."/index') ?>'><?= lang('list') ?></a></li>
+            </ul>
+            </li>
+            <!--auto_generate_{$name}-->";
+            file_put_contents(APPPATH . 'views/menu.php', $data, FILE_APPEND | LOCK_EX);
 
-        echo 'tạo thành công module có tên:['.$name."]\nvui lòng tạo language: [".strtolower($name)."] và [create_".strtolower($name)."]";
+            echo 'tạo thành công module có tên:['.$name."]\nvui lòng tạo language: [".strtolower($name)."] và [create_".strtolower($name)."]";
+        }
     }
 
     function delete($name)
@@ -131,13 +134,13 @@ class Development extends CI_Controller
 
 
         $a = "\n<!--auto_generate_{$name}-->
-<li><a><i class='fa fa-cube'></i><?= lang('".strtolower($name)."') ?><span class='fa fa-chevron-down'></span></a>
-    <ul class='nav child_menu'>
+        <li><a><i class='fa fa-cube'></i><?= lang('".strtolower($name)."') ?><span class='fa fa-chevron-down'></span></a>
+        <ul class='nav child_menu'>
         <li><a href='<?= base_url('".strtolower($name)."/edit') ?>'><?= lang('create') ?></a></li>
         <li><a href='<?= base_url('".strtolower($name)."/index') ?>'><?= lang('list') ?></a></li>
-    </ul>
-</li>
-<!--auto_generate_{$name}-->";
+        </ul>
+        </li>
+        <!--auto_generate_{$name}-->";
         $data = file_get_contents(APPPATH . 'views/menu.php');
         $data = str_replace($a, '', $data);
         file_put_contents(APPPATH . 'views/menu.php', $data);
