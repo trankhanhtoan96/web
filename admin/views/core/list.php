@@ -1,5 +1,5 @@
 <?php if (!empty($alert)) $this->load->view('alert/' . $alert['type'], $alert); ?>
-<link rel="stylesheet" type="text/css" href="<?= base_url(APP . 'views/' . $this->router->class . '/list.css') ?>"/>
+<link rel="stylesheet" type="text/css" href="<?= base_url('admin/views/' . $this->router->class . '/list.css') ?>"/>
 <form action="<?= site_url($this->router->class . '/deleteList') ?>" name="ListView" method="post">
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
@@ -46,4 +46,4 @@
         });
     });
 </script>
-<script src="<?= base_url(APP . 'views/' . $this->router->class . '/list.js') ?>"></script>
+<script src="<?= base_url('admin/views/' . $this->router->class . '/list.js') ?>"></script>

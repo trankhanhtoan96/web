@@ -1,5 +1,5 @@
 <?php
-include APP . '/views/header.php';
+include 'admin/views/header.php';
 $dataThead = array(
     lang('name'),
     lang('date_entered'),
@@ -19,5 +19,5 @@ foreach ($data as $item) {
     );
     $dataIds[] = $item['id'];
 }
-include APP . '/views/core/list.php';
-include APP . '/views/footer.php';
+include 'admin/views/core/list.php';
+include 'admin/views/footer.php';

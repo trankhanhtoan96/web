@@ -1,5 +1,5 @@
 <?php
-include APP . '/views/header.php';
+include 'admin/views/header.php';
 $dataTemplates = array(
     0 => array(
         'panel_name' => lang('general_information'),
@@ -60,5 +60,5 @@ $dataTemplates = array(
         )
     )
 );
-include APP . '/views/core/detail.php';
-include APP . '/views/footer.php';
+include 'admin/views/core/detail.php';
+include 'admin/views/footer.php';

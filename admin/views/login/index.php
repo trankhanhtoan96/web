@@ -11,7 +11,7 @@
     <script src="<?= base_url('vendors/jquery.min.js') ?>"></script>
 
     <!--script-->
-    <script src="<?= base_url(APP . 'views/script.js') ?>"></script>
+    <script src="<?= base_url('admin/views/script.js') ?>"></script>
 
     <!--bootstrap-->
     <link rel="stylesheet" href="<?= base_url('vendors/bootstrap/css/bootstrap.min.css') ?>"/>
@@ -19,10 +19,10 @@
 
     <!--admin-->
     <link rel="stylesheet" href="<?= base_url('vendors/admin/custom.min.css') ?>"/>
-    <link rel="stylesheet" href="<?= base_url(APP . 'views/style.css') ?>"/>
+    <link rel="stylesheet" href="<?= base_url('admin/views/style.css') ?>"/>
 
     <!--login css-->
-    <link rel="stylesheet" href="<?= base_url(APP . 'views/login/index.css') ?>"/>
+    <link rel="stylesheet" href="<?= base_url('admin/views/login/index.css') ?>"/>
 
 </head>
 <body class="login">

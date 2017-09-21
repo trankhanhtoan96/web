@@ -1,5 +1,5 @@
 <?php
-include APP . '/views/header.php';
+include 'admin/views/header.php';
 $dataTemplates = array(
     0 => array(
         'panel_name' => lang('general_information'),
@@ -21,8 +21,8 @@ $dataTemplates = array(
         )
     )
 );
-include APP . '/views/core/edit.php';
-include APP . '/views/footer.php';
+include 'admin/views/core/edit.php';
+include 'admin/views/footer.php';
 /**
  * nếu có label sẽ hiển thị label, còn không có thì hiển thị field lên phần của label
  * nếu có code sẽ ưu tiên hiển thị code

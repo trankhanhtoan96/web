@@ -1,6 +1,6 @@
 <?php if (!empty($alert)) $this->load->view('alert/' . $alert['type'], $alert); ?>
 <link rel="stylesheet" type="text/css"
-      href="<?= base_url(APP . 'views/' . $this->router->class . '/' . $this->router->method . '.css') ?>"/>
+      href="<?= base_url('admin/views/' . $this->router->class . '/' . $this->router->method . '.css') ?>"/>
 <form action="" method="post" name="editview" enctype="multipart/form-data">
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
@@ -56,4 +56,4 @@
         </div>
     </div>
 </form>
-<script src="<?= base_url(APP . 'views/' . $this->router->class . '/' . $this->router->method . '.js') ?>"></script>
+<script src="<?= base_url('admin/views/' . $this->router->class . '/' . $this->router->method . '.js') ?>"></script>
