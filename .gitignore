@@ -3,3 +3,4 @@
 /.gitignore
 /admin/logs/*.log
 /admin/logs
+/site/logs
