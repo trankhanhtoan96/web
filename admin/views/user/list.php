@@ -1,12 +1,34 @@
 <?php
 include 'admin/views/header.php';
 $dataThead = array(
-    lang('avatar'),
-    lang('username'),
-    lang('full_name'),
-    lang('email'),
-    lang('phone'),
-    lang('date_entered')
+    0=>array(
+        'label'=>lang('avatar'),
+        'width'=>'10'
+    ),
+    1=>array(
+        'label'=>lang('username'),
+        'width'=>'10'
+    ),
+    2=>array(
+        'label'=>lang('full_name'),
+        'width'=>'20'
+    ),
+    3=>array(
+        'label'=>lang('email'),
+        'width'=>'20'
+    ),
+    4=>array(
+        'label'=>lang('phone'),
+        'width'=>'10'
+    ),
+    5=>array(
+        'label'=>lang('date_entered'),
+        'width'=>'10'
+    ),
+    6=>array(
+        'label'=>lang('admin'),
+        'width'=>'10'
+    )
 );
 $dataTbody = array();
 $dataIds = array();
@@ -17,7 +39,8 @@ foreach ($data as $item) {
         $item['first_name'].' '.$item['last_name'],
         $item['email'],
         $item['phone'],
-        $item['date_entered']
+        $item['date_entered'],
+        $item['admin']?"<span class='btn btn-danger'>".lang('admin')."</span>":""
     );
     $dataIds[] = $item['id'];
 }

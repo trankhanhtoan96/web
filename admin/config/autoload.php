@@ -159,8 +159,5 @@ $autoload['language'] = array('language');
 */
 $autoload['model'] = array(
     'user_model',
-    'setting_model',
-    'blog_model',
-    'blog_category_model',
-    'page_model'
+    'setting_model'
 );

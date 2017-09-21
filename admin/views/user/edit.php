@@ -58,6 +58,10 @@ $dataTemplates = array(
                     'type' => 'textarea',
                     'value' => !empty($data['description']) ? $data['description'] : '',
                     'name' => 'description'
+                ),
+                1=>array(
+                    'label'=>lang('admin'),
+                    'code'=>'<input class="flat" type="checkbox" name="admin" id="admin" '.(!empty($data['admin']) && $data['admin']==1 ? 'checked' : '').' />'
                 )
             )
         )

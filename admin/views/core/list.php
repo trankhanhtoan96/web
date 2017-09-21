@@ -9,21 +9,21 @@
                 <div class="x_content">
                     <table id="dataTable" class="table table-striped table-bordered bulk_action">
                         <thead>
-                        <th style="width:3%;"><input type="checkbox" class="flat" id="check-all"/></th>
-                        <th style="width:8%;"></th>
+                        <th style="width:3%;text-align: center"><input type="checkbox" class="flat" id="check-all"/></th>
+                        <th style="width:7%;text-align: center"></th>
                         <?php
                         foreach ($dataThead as $item) {
-                            echo "<th>{$item}</th>";
+                            echo "<th style='width: {$item['width']}%;text-align: center'>{$item['label']}</th>";
                         }
                         ?>
                         </thead>
                         <tbody>
                         <?php
                         foreach ($dataTbody as $key => $item) {
-                            echo "<tr><td><input type='checkbox' data-check='table_records' class='flat' name='record_selected[]' value='{$dataIds[$key]}'/></td>
-                                      <td>
-                                        <a data-toggle='tooltip' style='font-size:16px' title='" . lang('view') . "' href='" . base_url($this->router->class . '/detail/' . $dataIds[$key]) . "'><i class='fa fa-search'></i></a> <b style='font-size:16px'>|</b>
-                                        <a data-toggle='tooltip' style='font-size:16px' title='" . lang('edit') . "' href='" . base_url($this->router->class . '/edit/' . $dataIds[$key]) . "'><i class='fa fa-edit'></i></a>
+                            echo "<tr><td style='text-align: center'><input type='checkbox' data-check='table_records' class='flat' name='record_selected[]' value='{$dataIds[$key]}'/></td>
+                                      <td style='text-align: center'>
+                                        <a data-toggle='tooltip' style='font-size:16px' title='" . lang('view') . "' href='" . site_url($this->router->class . '/detail/' . $dataIds[$key]) . "'><i class='fa fa-search'></i></a> <b style='font-size:16px'>|</b>
+                                        <a data-toggle='tooltip' style='font-size:16px' title='" . lang('edit') . "' href='" . site_url($this->router->class . '/edit/' . $dataIds[$key]) . "'><i class='fa fa-edit'></i></a>
                                       </td>";
                             foreach ($item as $item2) {
                                 echo "<td>{$item2}</td>";
