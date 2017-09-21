@@ -160,6 +160,6 @@ class Development extends CI_Controller
         $this->load->dbforge();
         $this->dbforge->drop_table(strtolower($name),true);
 
-        echo "success!\n<a href='".base_url()."'>về trang chủ</a>";
+        echo "success!\n<a href='".site_url()."'>về trang chủ</a>";
     }
 }
