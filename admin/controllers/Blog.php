@@ -54,7 +54,7 @@ class Blog extends CI_Controller
                 $temp = json_decode(html_entity_decode($dataView[$key]['blog_category_id']), true);
                 foreach ($temp as $item) {
                     $temp2 = $this->blog_category_model->get($item, 'id,name');
-                    $dataView[$key]['blog_category'] .= "<a href='" . base_url('blog_category/detail/' . $temp2['id']) . "'>{$temp2['name']}</a>, ";
+                    $dataView[$key]['blog_category'] .= "<a href='" . site_url('blog_category/detail/' . $temp2['id']) . "'>{$temp2['name']}</a>, ";
                 }
             }
         }
@@ -134,7 +134,7 @@ class Blog extends CI_Controller
             $temp = json_decode(html_entity_decode($detail['blog_category_id']), true);
             foreach ($temp as $item) {
                 $temp2 = $this->blog_category_model->get($item, 'id,name');
-                $detail['blog_category'] .= "<li><a href='" . base_url('blog_category/detail/' . $temp2['id']) . "'>{$temp2['name']}</a></li>";
+                $detail['blog_category'] .= "<li><a href='" . site_url('blog_category/detail/' . $temp2['id']) . "'>{$temp2['name']}</a></li>";
             }
         }
 

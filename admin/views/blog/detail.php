@@ -17,11 +17,11 @@ $dataTemplates = array(
             1 => array(
                 0 => array(
                     'label' => lang('user_created'),
-                    'value' => !empty($data['user_created']) ? "<a href='" . base_url('user/detail/' . $data['user_created']['id']) . "'>" . $data['user_created']['first_name'] . ' ' . $data['user_created']['last_name'] . "</a>" : ''
+                    'value' => !empty($data['user_created']) ? "<a href='" . site_url('user/detail/' . $data['user_created']['id']) . "'>" . $data['user_created']['first_name'] . ' ' . $data['user_created']['last_name'] . "</a>" : ''
                 ),
                 1 => array(
                     'label' => lang('user_modifiled'),
-                    'value' => !empty($data['user_modifiled']) ? "<a href='" . base_url('user/detail/' . $data['user_modifiled']['id']) . "'>" . $data['user_modifiled']['first_name'] . ' ' . $data['user_modifiled']['last_name'] . "</a>" : ''
+                    'value' => !empty($data['user_modifiled']) ? "<a href='" . site_url('user/detail/' . $data['user_modifiled']['id']) . "'>" . $data['user_modifiled']['first_name'] . ' ' . $data['user_modifiled']['last_name'] . "</a>" : ''
                 )
             ),
             2 => array(
