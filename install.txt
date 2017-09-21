@@ -1,0 +1,14 @@
+[***vendors/ckfinder/config.php]
+    $baseUrl = 'http://localhost/web/uploads/';
+
+[***vendors/ckeditor/config.js]
+    var duong_dan = 'http://localhost/web/vendors/';
+
+[***admin/config/config.php]
+    $config['base_url'] = 'http://localhost/web/';
+
+[***admin/config/database.php]
+    'hostname' => 'localhost',
+	'username' => 'root',
+	'password' => '',
+	'database' => 'web'
