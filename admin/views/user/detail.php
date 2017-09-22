@@ -9,7 +9,10 @@ $dataTemplates = array(
                     'label' => lang('username'),
                     'value' => !empty($data['username']) ? $data['username'] : ''
                 ),
-                1 => ''
+                1 => array(
+                    'label'=>lang('role'),
+                    'value'=>$data['role']
+                )
             ),
             1 => array(
                 0 => array(

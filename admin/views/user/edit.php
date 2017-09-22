@@ -63,6 +63,13 @@ $dataTemplates = array(
                     'label'=>lang('admin'),
                     'code'=>'<input class="flat" type="checkbox" name="admin" id="admin" '.(!empty($data['admin']) && $data['admin']==1 ? 'checked' : '').' />'
                 )
+            ),
+            5=>array(
+                0=>'',
+                1=>array(
+                    'label'=>lang('role'),
+                    'code'=>$data['role']
+                )
             )
         )
     )

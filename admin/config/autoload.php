@@ -161,3 +161,11 @@ $autoload['model'] = array(
     'user_model',
     'setting_model'
 );
+
+//auto_generate_Role
+$autoload['model'][] = 'role_model';
+//auto_generate_Role
+
+//auto_generate_Module
+$autoload['model'][] = 'module_model';
+//auto_generate_Module

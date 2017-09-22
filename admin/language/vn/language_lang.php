@@ -68,5 +68,8 @@ $lang = array(
     'user_modifiled' => 'Người sửa',
     'file_browser' => 'Quản lý tệp tin',
     'admin'=>'Quản trị viên',
-    'view'=>'Xem'
+    'view'=>'Xem',
+    'role'=>'Phân quyền',
+    'create_role'=>'Tạo quyền người dùng',
+    'create_module'=>'Thêm module vào phân quyền'
 );

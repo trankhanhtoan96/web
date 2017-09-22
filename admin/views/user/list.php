@@ -26,7 +26,7 @@ $dataThead = array(
         'width'=>'10'
     ),
     6=>array(
-        'label'=>lang('admin'),
+        'label'=>lang('role'),
         'width'=>'10'
     )
 );
@@ -40,7 +40,7 @@ foreach ($data as $item) {
         $item['email'],
         $item['phone'],
         $item['date_entered'],
-        $item['admin']?"<span class='label label-danger'>".lang('admin')."</span>":""
+        $item['role']
     );
     $dataIds[] = $item['id'];
 }

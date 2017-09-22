@@ -31,6 +31,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property CI_DB $db
  * @property User_model user_model
  * @property CI_Router router
+ * @property Role_model role_model
  */
 class User extends CI_Controller
 {
@@ -47,6 +48,14 @@ class User extends CI_Controller
             'data_header' => lang($this->router->class),
             'data' => $this->{$this->router->class . '_model'}->get_list()
         );
+        foreach ($data['data'] as $key => $item) {
+            if ($item['admin'] == 1) {
+                $data['data'][$key]['role'] = "<label class='label label-danger'>" . lang('admin') . "</label>";
+            }else{
+                $role = $this->role_model->get($item['role_id'],'name');
+                $data['data'][$key]['role'] = "<label class='label label-primary'>{$role['name']}</label>";
+            }
+        }
         $this->load->view($this->router->class . '/list', $data);
     }
 
@@ -56,6 +65,11 @@ class User extends CI_Controller
             if ($id) {
                 $dataEdit = $this->input->post();
                 $dataEdit['id'] = $id;
+                if ($dataEdit['admin'] == "on") {
+                    $dataEdit['admin'] = 1;
+                } else {
+                    $dataEdit['admin'] = 0;
+                }
 
                 //upload file
                 $config['upload_path'] = 'uploads/images/';
@@ -76,6 +90,11 @@ class User extends CI_Controller
             } else {
                 $dataEdit = $this->input->post();
                 unset($dataEdit['id']);
+                if ($dataEdit['admin'] == "on") {
+                    $dataEdit['admin'] = 1;
+                } else {
+                    $dataEdit['admin'] = 0;
+                }
 
                 //upload file
                 $config['upload_path'] = 'uploads/images/';
@@ -94,6 +113,12 @@ class User extends CI_Controller
             }
         }
         $dataView = $id ? $this->{$this->router->class . '_model'}->get($id) : '';
+        $roles = $this->role_model->get_list();
+        $listRole = array();
+        foreach ($roles as $item) {
+            $listRole[$item['id']] = $item['name'];
+        }
+        $dataView['role'] = getHtmlSelection($listRole, $id ? $dataView['role_id'] : '', array('name' => 'role_id', 'id' => 'role_id', 'style' => 'width:100%'));
         $data = array(
             'meta_title' => lang($this->router->class),
             'data_header' => $id ? $dataView['first_name'] . ' ' . $dataView['last_name'] : lang('create_' . $this->router->class),
@@ -107,6 +132,12 @@ class User extends CI_Controller
     {
         if ($id == '') redirect('/' . $this->router->class . '/index');
         $detail = $this->{$this->router->class . '_model'}->get($id);
+        if ($detail['admin'] == 1) {
+            $detail['role'] = '';
+        } else {
+            $detail['role'] = $this->role_model->get($detail['role_id']);
+            if (isset($detail['role']['name'])) $detail['role'] = $detail['role']['name'];
+        }
         unset($detail['id']);
         $data = array(
             'meta_title' => $detail['first_name'] . ' ' . $detail['last_name'],
