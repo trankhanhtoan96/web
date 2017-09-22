@@ -24,11 +24,14 @@ class User_model extends CI_Model
      * @param int $ofset
      * @return array
      */
-    function get_list($select = '*', $orderBy = 'date_entered', $direction = 'DESC', $limit = 0, $ofset = 0)
+    function get_list($select = '*', $where = array(), $orderBy = 'date_entered', $direction = 'DESC', $limit = 0, $ofset = 0)
     {
         $this->db->reset_query();
         $this->db->select($select);
         $this->db->from($this->tableName);
+        foreach ($where as $key => $val) {
+            $this->db->where($key, $val);
+        }
         if ($orderBy != '' && $direction != '') {
             $this->db->order_by($orderBy, $direction);
         }
@@ -90,8 +93,8 @@ class User_model extends CI_Model
         $data['id'] = $id;
         $data['date_entered'] = date("Y-m-d H:i:s");
         $data['date_modifiled'] = date("Y-m-d H:i:s");
-        if(!empty($data['password'])){
-            $data['password'] = password_hash($data['password'],1);
+        if (!empty($data['password'])) {
+            $data['password'] = password_hash($data['password'], 1);
         }
         $this->db->reset_query();
         if ($this->db->insert($this->tableName, $data)) return true;
@@ -109,8 +112,8 @@ class User_model extends CI_Model
         unset($data['id']);
         unset($data['date_entered']);
         $data['date_modifiled'] = date("Y-m-d H:i:s");
-        if(!empty($data['password'])){
-            $data['password'] = password_hash($data['password'],1);
+        if (!empty($data['password'])) {
+            $data['password'] = password_hash($data['password'], 1);
         }
         //remove field not exist
         foreach ($data as $key => $value) {

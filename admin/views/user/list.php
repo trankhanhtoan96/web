@@ -40,7 +40,7 @@ foreach ($data as $item) {
         $item['email'],
         $item['phone'],
         $item['date_entered'],
-        $item['admin']?"<span class='btn btn-danger'>".lang('admin')."</span>":""
+        $item['admin']?"<span class='label label-danger'>".lang('admin')."</span>":""
     );
     $dataIds[] = $item['id'];
 }

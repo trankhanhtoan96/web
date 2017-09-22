@@ -37,7 +37,6 @@ class Controller extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        //check login and redirect to login if not yet
         if (!$this->session->has_userdata('userLogined')) redirect('/login', 'refresh');
     }
 
@@ -62,39 +61,13 @@ class Controller extends CI_Controller
     {
         if ($this->input->post('name')) {
             if ($id) {
-                //get data from post
                 $dataEdit = $this->input->post();
-
                 $dataEdit['id'] = $id;
-
-                //upload file
-                $config['upload_path'] = 'uploads/images/';
-                $config['allowed_types'] = 'jpg|png';
-                $this->load->library('upload', $config);
-                if ($this->upload->do_upload('image')) {
-                    $dataEdit['image'] = base_url($config['upload_path'] . $this->upload->data('file_name'));
-                }
-
-                //execute update data and redirect to detail
                 $this->{$this->router->class . '_model'}->update($dataEdit);
                 redirect('/' . $this->router->class . '/detail/' . $id);
             } else {
-                //get data from post
                 $dataEdit = $this->input->post();
-
                 unset($dataEdit['id']);
-
-                //upload file
-                $config['upload_path'] = 'uploads/images/';
-                $config['allowed_types'] = 'jpg|png';
-                $this->load->library('upload', $config);
-                if ($this->upload->do_upload('image')) {
-                    $dataEdit['image'] = base_url($config['upload_path'] . $this->upload->data('file_name'));
-                } else {
-                    $dataEdit['image'] = base_url('uploads/icons/none.jpg');
-                }
-
-                //execute insert data and redirect to detail
                 $dataId = '';
                 $this->{$this->router->class . '_model'}->insert($dataEdit, $dataId);
                 redirect('/' . $this->router->class . '/detail/' . $dataId);
