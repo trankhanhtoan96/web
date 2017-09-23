@@ -3,9 +3,9 @@
 <li><a target="_blank" href="<?= base_url('vendors/ckfinder/ckfinder.html?langCode=vi') ?>"><i
             class="fa fa-image"></i> <?= lang('file_browser') ?></a></li>
 
-<li><a href="<?= site_url('setting/index') ?>"><i class="fa fa-cogs"></i> <?= lang('setting') ?></a></li>
-
 <?php if ($this->session->userdata('userLogined')['admin'] == 1): ?>
+
+    <li><a href="<?= site_url('setting/index') ?>"><i class="fa fa-cogs"></i> <?= lang('setting') ?></a></li>
 
     <li><a><i class="fa fa-user"></i><?= lang('user') ?><span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">

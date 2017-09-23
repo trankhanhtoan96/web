@@ -43,6 +43,7 @@ class Development extends CI_Controller
 
     function index()
     {
+        checkRole();
         echo "<form acton='' method='post'><input type='text' name='module_name' /></form>";
         if ($moduleName = $this->input->post('module_name')) {
             $name = ucfirst(trim($moduleName));
@@ -110,12 +111,18 @@ class Development extends CI_Controller
 
             //update main menu
             $data = "\n<!--auto_generate_{$name}-->
+<?php if(checkRole(\$this->router->class.'_edit',true) || checkRole(\$this->router->class.'_view',true)): ?>
 <li><a><i class='fa fa-cube'></i><?= lang('" . strtolower($name) . "') ?><span class='fa fa-chevron-down'></span></a>
 <ul class='nav child_menu'>
+<?php if(checkRole(\$this->router->class.'_edit',true)): ?>
 <li><a href='<?= base_url('admin.php/" . strtolower($name) . "/edit') ?>'><?= lang('create') ?></a></li>
+<?php endif; ?>
+<?php if(checkRole(\$this->router->class.'_view',true)): ?>
 <li><a href='<?= base_url('admin.php/" . strtolower($name) . "/index') ?>'><?= lang('list') ?></a></li>
+<?php endif; ?>
 </ul>
 </li>
+<?php endif; ?>
 <!--auto_generate_{$name}-->";
             file_put_contents(APPPATH . 'views/menu.php', $data, FILE_APPEND | LOCK_EX);
 
@@ -125,6 +132,7 @@ class Development extends CI_Controller
 
     function delete($name)
     {
+        checkRole();
         $name = ucfirst($name);
 
         $data = file_get_contents(APPPATH . 'config/autoload.php');
@@ -134,12 +142,18 @@ class Development extends CI_Controller
 
 
         $a = "\n<!--auto_generate_{$name}-->
+<?php if(checkRole(\$this->router->class.'_edit',true) || checkRole(\$this->router->class.'_view',true)): ?>
 <li><a><i class='fa fa-cube'></i><?= lang('" . strtolower($name) . "') ?><span class='fa fa-chevron-down'></span></a>
 <ul class='nav child_menu'>
+<?php if(checkRole(\$this->router->class.'_edit',true)): ?>
 <li><a href='<?= base_url('admin.php/" . strtolower($name) . "/edit') ?>'><?= lang('create') ?></a></li>
+<?php endif; ?>
+<?php if(checkRole(\$this->router->class.'_view',true)): ?>
 <li><a href='<?= base_url('admin.php/" . strtolower($name) . "/index') ?>'><?= lang('list') ?></a></li>
+<?php endif; ?>
 </ul>
 </li>
+<?php endif; ?>
 <!--auto_generate_{$name}-->";
         $data = file_get_contents(APPPATH . 'views/menu.php');
         $data = str_replace($a, '', $data);
