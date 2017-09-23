@@ -58,28 +58,30 @@ $dataTemplates = array(
                     'type' => 'textarea',
                     'value' => !empty($data['description']) ? $data['description'] : '',
                     'name' => 'description'
-                ),
-                1=>array(
-                    'label'=>lang('admin'),
-                    'code'=>'<input class="flat" type="checkbox" name="admin" id="admin" '.(!empty($data['admin']) && $data['admin']==1 ? 'checked' : '').' />'
-                )
-            ),
-            5=>array(
-                0=>'',
-                1=>array(
-                    'label'=>lang('role'),
-                    'code'=>$data['role']
                 )
             )
         )
     )
 );
-if ($data_id=='') {
+if ($this->session->userdata('userLogined')['admin'] == 1) {
+    $dataTemplates[0]['data_panel'][5] = array(
+        0 => '',
+        1 => array(
+            'label' => lang('role'),
+            'code' => $data['role']
+        )
+    );
+    $dataTemplates[0]['data_panel'][4][1] = array(
+        'label' => lang('admin'),
+        'code' => '<input class="flat" type="checkbox" name="admin" id="admin" ' . (!empty($data['admin']) && $data['admin'] == 1 ? 'checked' : '') . ' />'
+    );
+}
+if ($data_id == '') {
     $dataTemplates[0]['data_panel'][0][1] = array(
-        'label'=>lang('password'),
-        'type'=>'password',
-        'name'=>'password',
-        'required'=>true
+        'label' => lang('password'),
+        'type' => 'password',
+        'name' => 'password',
+        'required' => true
     );
 }
 include 'admin/views/core/edit.php';

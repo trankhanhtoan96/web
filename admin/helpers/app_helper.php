@@ -20,7 +20,7 @@ function createId()
  * @param array $option
  * @return string
  */
-function getHtmlSelection(array $arr, $keySelected,array $option)
+function getHtmlSelection(array $arr, $keySelected, array $option)
 {
     $html = '<select ';
     foreach ($option as $key => $value) {
@@ -38,4 +38,25 @@ function getHtmlSelection(array $arr, $keySelected,array $option)
     }
     $html .= '</select>';
     return $html;
+}
+
+function checkRole($roleName='',$return = false)
+{
+    $CI = &get_instance();
+    if ($CI->session->userdata('userLogined')['admin'] == 1) return true;
+    $role = $CI->role_model->get($CI->session->userdata('userLogined')['role_id']);
+    $role = json_decode(html_entity_decode($role['detail']), true);
+    if($roleName=='') {
+        if ($CI->router->method == 'index' || $CI->router->method == 'detail') {
+            $roleType = $CI->router->class . '_view';
+        } elseif ($CI->router->method == 'edit' || $CI->router->method == 'delete' || $CI->router->method == 'deleteList') {
+            $roleType = $CI->router->class . '_edit';
+        }
+        if (!empty($roleType) && isset($role[$roleType]) && $role[$roleType] == "on") return true;
+        if ($return) return false;
+    }else{
+        if (!empty($roleName) && isset($role[$roleName]) && $role[$roleName] == "on") return true;
+        if ($return) return false;
+    }
+    redirect('/', 'refresh');
 }

@@ -44,14 +44,23 @@ $dataTemplates = array(
                 0 => array(
                     'label' => lang('description'),
                     'value' => !empty($data['description']) ? $data['description'] : ''
-                ),
-                1=>array(
-                    'label'=>lang('admin'),
-                    'value'=>'<input class="flat" type="checkbox" name="admin" id="admin" '.(!empty($data['admin']) && $data['admin']==1 ? 'checked' : '').' />'
                 )
             )
         )
     )
 );
+if ($this->session->userdata('userLogined')['admin'] == 1) {
+    $dataTemplates[0]['data_panel'][5] = array(
+        0 => '',
+        1 => array(
+            'label' => lang('role'),
+            'code' => $data['role']
+        )
+    );
+    $dataTemplates[0]['data_panel'][4][1] = array(
+        'label' => lang('admin'),
+        'code' => '<input class="flat" type="checkbox" name="admin" id="admin" ' . (!empty($data['admin']) && $data['admin'] == 1 ? 'checked' : '') . ' />'
+    );
+}
 include 'admin/views/core/detail.php';
 include 'admin/views/footer.php';

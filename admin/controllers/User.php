@@ -43,6 +43,7 @@ class User extends CI_Controller
 
     function index()
     {
+        checkRole();
         $data = array(
             'meta_title' => lang($this->router->class),
             'data_header' => lang($this->router->class),
@@ -51,8 +52,8 @@ class User extends CI_Controller
         foreach ($data['data'] as $key => $item) {
             if ($item['admin'] == 1) {
                 $data['data'][$key]['role'] = "<label class='label label-danger'>" . lang('admin') . "</label>";
-            }else{
-                $role = $this->role_model->get($item['role_id'],'name');
+            } else {
+                $role = $this->role_model->get($item['role_id'], 'name');
                 $data['data'][$key]['role'] = "<label class='label label-primary'>{$role['name']}</label>";
             }
         }
@@ -61,6 +62,7 @@ class User extends CI_Controller
 
     function edit($id = '')
     {
+        if($id!=$this->session->userdata('userLogined')['id']) checkRole();
         if ($this->input->post('username')) {
             if ($id) {
                 $dataEdit = $this->input->post();
@@ -130,6 +132,7 @@ class User extends CI_Controller
 
     function detail($id = '')
     {
+        if($id!=$this->session->userdata('userLogined')['id']) checkRole();
         if ($id == '') redirect('/' . $this->router->class . '/index');
         $detail = $this->{$this->router->class . '_model'}->get($id);
         if ($detail['admin'] == 1) {
@@ -150,6 +153,7 @@ class User extends CI_Controller
 
     function delete($id = '')
     {
+        checkRole();
         if ($id) {
             $this->{$this->router->class . '_model'}->delete($id);
         }
@@ -158,6 +162,7 @@ class User extends CI_Controller
 
     function deleteList()
     {
+        checkRole();
         if ($this->input->post('record_selected')) {
             foreach ($this->input->post('record_selected') as $id) {
                 $this->{$this->router->class . '_model'}->delete($id);
