@@ -111,13 +111,13 @@ class Development extends CI_Controller
 
             //update main menu
             $data = "\n<!--auto_generate_{$name}-->
-<?php if(checkRole(\$this->router->class.'_edit',true) || checkRole(\$this->router->class.'_view',true)): ?>
+<?php if(checkRole('".strtolower($name)."_edit',true) || checkRole('".strtolower($name)."_view',true)): ?>
 <li><a><i class='fa fa-cube'></i><?= lang('" . strtolower($name) . "') ?><span class='fa fa-chevron-down'></span></a>
 <ul class='nav child_menu'>
-<?php if(checkRole(\$this->router->class.'_edit',true)): ?>
+<?php if(checkRole('".strtolower($name)."_edit',true)): ?>
 <li><a href='<?= base_url('admin.php/" . strtolower($name) . "/edit') ?>'><?= lang('create') ?></a></li>
 <?php endif; ?>
-<?php if(checkRole(\$this->router->class.'_view',true)): ?>
+<?php if(checkRole('".strtolower($name)."_view',true)): ?>
 <li><a href='<?= base_url('admin.php/" . strtolower($name) . "/index') ?>'><?= lang('list') ?></a></li>
 <?php endif; ?>
 </ul>
@@ -142,13 +142,13 @@ class Development extends CI_Controller
 
 
         $a = "\n<!--auto_generate_{$name}-->
-<?php if(checkRole(\$this->router->class.'_edit',true) || checkRole(\$this->router->class.'_view',true)): ?>
+<?php if(checkRole('".strtolower($name)."_edit',true) || checkRole('".strtolower($name)."_view',true)): ?>
 <li><a><i class='fa fa-cube'></i><?= lang('" . strtolower($name) . "') ?><span class='fa fa-chevron-down'></span></a>
 <ul class='nav child_menu'>
-<?php if(checkRole(\$this->router->class.'_edit',true)): ?>
+<?php if(checkRole('".strtolower($name)."_edit',true)): ?>
 <li><a href='<?= base_url('admin.php/" . strtolower($name) . "/edit') ?>'><?= lang('create') ?></a></li>
 <?php endif; ?>
-<?php if(checkRole(\$this->router->class.'_view',true)): ?>
+<?php if(checkRole('".strtolower($name)."_view',true)): ?>
 <li><a href='<?= base_url('admin.php/" . strtolower($name) . "/index') ?>'><?= lang('list') ?></a></li>
 <?php endif; ?>
 </ul>

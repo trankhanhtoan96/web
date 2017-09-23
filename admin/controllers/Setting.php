@@ -43,7 +43,7 @@ class Setting extends CI_Controller
 
     function index()
     {
-        checkRole();
+        checkRole('setting_edit');
         if ($this->input->post('input_setting')) {
             $dataEdit = $this->input->post();
 
