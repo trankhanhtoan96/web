@@ -53,8 +53,10 @@ class User extends CI_Controller
             if ($item['admin'] == 1) {
                 $data['data'][$key]['role'] = "<label class='label label-danger'>" . lang('admin') . "</label>";
             } else {
-                $role = $this->role_model->get($item['role_id'], 'name');
-                $data['data'][$key]['role'] = "<label class='label label-primary'>{$role['name']}</label>";
+                $role = $this->role_model->get($item['role_id']);
+                if (!empty($role['name'])) $role['name'] = "<label class='label label-primary'>{$role['name']}</label>";
+                else $role['name'] = '';
+                $data['data'][$key]['role'] = $role['name'];
             }
         }
         $this->load->view($this->router->class . '/list', $data);
@@ -62,7 +64,7 @@ class User extends CI_Controller
 
     function edit($id = '')
     {
-        if($id!=$this->session->userdata('userLogined')['id']) checkRole();
+        if ($id != $this->session->userdata('userLogined')['id']) checkRole();
         if ($this->input->post('username')) {
             if ($id) {
                 $dataEdit = $this->input->post();
@@ -132,7 +134,7 @@ class User extends CI_Controller
 
     function detail($id = '')
     {
-        if($id!=$this->session->userdata('userLogined')['id']) checkRole();
+        if ($id != $this->session->userdata('userLogined')['id']) checkRole();
         if ($id == '') redirect('/' . $this->router->class . '/index');
         $detail = $this->{$this->router->class . '_model'}->get($id);
         if ($detail['admin'] == 1) {
