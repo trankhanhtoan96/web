@@ -169,3 +169,8 @@ $autoload['model'][] = 'role_model';
 //auto_generate_Module
 $autoload['model'][] = 'module_model';
 //auto_generate_Module
+
+
+//auto_generate_Page
+$autoload['model'][] = 'page_model';
+//auto_generate_Page

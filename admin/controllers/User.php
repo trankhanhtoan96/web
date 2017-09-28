@@ -75,14 +75,6 @@ class User extends CI_Controller
                     $dataEdit['admin'] = 0;
                 }
 
-                //upload file
-                $config['upload_path'] = 'uploads/images/';
-                $config['allowed_types'] = 'jpg|png';
-                $this->load->library('upload', $config);
-                if ($this->upload->do_upload('avatar')) {
-                    $dataEdit['avatar'] = base_url($config['upload_path'] . $this->upload->data('file_name'));
-                }
-
                 //send data to update
                 $this->user_model->update($dataEdit);
 

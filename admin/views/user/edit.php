@@ -45,11 +45,12 @@ $dataTemplates = array(
             3 => array(
                 0 => array(
                     'label' => lang('avatar'),
-                    'type' => 'file',
-                    'name' => 'avatar'
+                    'code'=>"<input type='hidden' name='avatar' value='".(!empty($data['avatar']) ? $data['avatar'] : '')."' />
+                             <button type='button' class='btn btn-info' id='btn_choose_avatar'>".lang('choose')."</button>
+                             <button type='button' class='btn btn-danger' id='btn_delete_avatar'>".lang('delete')."</button>"
                 ),
                 1 => array(
-                    'code' => "<img src='" . (!empty($data['avatar']) ? $data['avatar'] : '') . "' style='width:150px' />"
+                    'code' => "<img id='img_avatar' src='" . (!empty($data['avatar']) ? $data['avatar'] : '') . "' style='width:150px' />"
                 )
             ),
             4 => array(

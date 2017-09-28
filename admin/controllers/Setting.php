@@ -46,19 +46,6 @@ class Setting extends CI_Controller
         checkRole('setting_edit');
         if ($this->input->post('input_setting')) {
             $dataEdit = $this->input->post();
-
-            //upload file
-            $config['upload_path'] = 'uploads/images/';
-            $config['allowed_types'] = 'jpg|png';
-            $this->load->library('upload', $config);
-            if ($this->upload->do_upload('logo')) {
-                $dataEdit['logo'] = base_url($config['upload_path'] . $this->upload->data('file_name'));
-            }
-            if ($this->upload->do_upload('icon')) {
-                $dataEdit['icon'] = base_url($config['upload_path'] . $this->upload->data('file_name'));
-            }
-
-            //send data
             $this->setting_model->update($dataEdit);
         }
 

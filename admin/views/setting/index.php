@@ -26,21 +26,23 @@ $dataTemplates = array(
             2 => array(
                 0 => array(
                     'label' => lang('logo'),
-                    'type' => 'file',
-                    'name' => 'logo'
+                    'code'=>"<input type='hidden' name='logo' value='".(!empty($data['logo']) ? $data['logo'] : '')."' />
+                             <button type='button' class='btn btn-info' id='btn_choose_logo'>".lang('choose')."</button>
+                             <button type='button' class='btn btn-danger' id='btn_delete_logo'>".lang('delete')."</button>"
                 ),
                 1 => array(
-                    'code' => "<img src='" . (!empty($data['logo']) ? $data['logo'] : '') . "' style='width:150px' />"
+                    'code' => "<img id='img_logo' src='" . (!empty($data['logo']) ? $data['logo'] : '') . "' style='width:150px' />"
                 )
             ),
             3 => array(
                 0 => array(
-                    'label' => lang('icon'),
-                    'type' => 'file',
-                    'name' => 'icon'
+                    'label' => lang('logo'),
+                    'code'=>"<input type='hidden' name='icon' value='".(!empty($data['icon']) ? $data['icon'] : '')."' />
+                             <button type='button' class='btn btn-info' id='btn_choose_icon'>".lang('choose')."</button>
+                             <button type='button' class='btn btn-danger' id='btn_delete_icon'>".lang('delete')."</button>"
                 ),
                 1 => array(
-                    'code' => "<img src='" . (!empty($data['icon']) ? $data['icon'] : '') . "' style='width:150px' />"
+                    'code' => "<img id='img_icon' src='" . (!empty($data['icon']) ? $data['icon'] : '') . "' style='width:150px' />"
                 )
             )
         )

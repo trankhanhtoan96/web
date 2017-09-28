@@ -46,6 +46,13 @@
     <!--ckeditor-->
     <script src="<?= base_url('vendors/ckeditor/ckeditor.js') ?>"></script>
 
+    <!--ckfinder-->
+    <script src="<?= base_url('vendors/ckfinder/ckfinder.js') ?>"></script>
+
+    <!--jquery ui-->
+    <link rel="stylesheet" type="text/css" href="<?= base_url('vendors/jquery-ui/jquery-ui.min.css') ?>" />
+    <script src="<?= base_url('vendors/jquery-ui/jquery-ui.min.js') ?>"></script>
+
     <!--admin-->
     <link rel="stylesheet" href="<?= base_url('vendors/admin/custom.min.css') ?>"/>
     <link rel="stylesheet" href="<?= base_url('admin/views/style.css') ?>"/>

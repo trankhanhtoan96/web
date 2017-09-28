@@ -71,5 +71,9 @@ $lang = array(
     'view'=>'Xem',
     'role'=>'Phân quyền',
     'create_role'=>'Tạo quyền người dùng',
-    'create_module'=>'Thêm module vào phân quyền'
+    'create_module'=>'Thêm module vào phân quyền',
+    'page'=>'Trang bài viết',
+    'create_page'=>'Trang bài viết mới',
+    'choose'=>'Chọn',
+    'choose_image_please'=>'hãy chọn hình ảnh'
 );
