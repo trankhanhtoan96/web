@@ -46,6 +46,27 @@ $dataTemplates = array(
                 )
             )
         )
+    ),
+    1 => array(
+        'panel_name' => lang('script'),
+        'data_panel' => array(
+            0 => array(
+                0 => array(
+                    'label' => lang('script_header'),
+                    'type' => 'textarea',
+                    'value' => !empty($data['script_header']) ? $data['script_header'] : '',
+                    'name' => 'script_header'
+                )
+            ),
+            1 => array(
+                0 => array(
+                    'label' => lang('script_footer'),
+                    'type' => 'textarea',
+                    'value' => !empty($data['script_footer']) ? $data['script_footer'] : '',
+                    'name' => 'script_footer'
+                )
+            )
+        )
     )
 );
 include 'admin/views/core/edit.php';

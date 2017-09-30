@@ -1,3 +1,8 @@
+$(document).ready(function(){
+    autosize($('#script_header'));
+    autosize($('#script_footer'));
+});
+
 //upload logo
 $('#btn_choose_logo').on('click', function () {
     CKFinder.popup({

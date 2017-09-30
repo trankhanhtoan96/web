@@ -40,7 +40,16 @@ function getHtmlSelection(array $arr, $keySelected, array $option)
     return $html;
 }
 
-function checkRole($roleName='',$return = false)
+/**
+ * @param string $roleName
+ * @param bool $return
+ * @return bool
+ * nếu không có role name thì mặc định là đang check cho class và method hiện tại
+ * nếu không có quyền truy cập thì chuyển hướng về trang home
+ * biến return để cho biết là có return ra kết quả checkrole hay không,
+ * nếu return bằng true thì chỉ trả về kết quả mà không redirect, ngược lại sẽ redirect trang về home
+ */
+function checkRole($roleName='', $return = false)
 {
     $CI = &get_instance();
     if ($CI->session->userdata('userLogined')['admin'] == 1) return true;

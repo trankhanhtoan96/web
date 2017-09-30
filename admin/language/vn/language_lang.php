@@ -80,5 +80,12 @@ $lang = array(
     'error_username_or_password'=>'Sai tên đăng nhập hoặc mật khẩu',
     'excerpt'=>'Mô tả ngắn',
     'blog_category'=>'Danh mục bài viết',
-    'create_blog_category'=>'Tạo mới danh mục bài viết'
+    'create_blog_category'=>'Tạo mới danh mục bài viết',
+    'parent_category'=>'Danh mục cha',
+    '[none]'=>'[Rỗng]',
+    'script'=>'Mã',
+    'script_header'=>'Mã header',
+    'script_footer'=>'Mã footer',
+    'blog'=>'Bài viết',
+    'create_blog'=>'Tạo bài viết'
 );

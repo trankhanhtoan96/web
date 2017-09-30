@@ -31,9 +31,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property CI_DB $db
  * @property User_model user_model
  * @property CI_Router router
- * @property Blog_category_model blog_category_model
  */
-class Blog_category extends CI_Controller
+class Blog extends CI_Controller
 {
     function __construct()
     {
@@ -46,7 +45,8 @@ class Blog_category extends CI_Controller
         checkRole();
         $dataView = $this->{$this->router->class . '_model'}->get_list();
         foreach ($dataView as $key => $value) {
-            $dataView[$key]['parent'] = $this->blog_category_model->get($dataView[$key]['parent_id']);
+            $dataView[$key]['user_created'] = $this->user_model->get($dataView[$key]['user_created']);
+            $dataView[$key]['user_modifiled'] = $this->user_model->get($dataView[$key]['user_modifiled']);
         }
         $data = array(
             'meta_title' => lang($this->router->class),
@@ -76,12 +76,6 @@ class Blog_category extends CI_Controller
             }
         }
         $dataView = $this->{$this->router->class . '_model'}->get($id);
-        $parentCategory = $this->blog_category_model->get_list('id, name');
-        $dataView['parent_category'] = array('0' => lang('[none]'));
-        foreach ($parentCategory as $item) {
-            $dataView['parent_category'][$item['id']] = $item['name'];
-        }
-        unset($dataView['parent_category'][$id]);
         $data = array(
             'meta_title' => $id ? $dataView['name'] : lang($this->router->class),
             'data_header' => $id ? lang($this->router->class) . ':' . $dataView['name'] : lang('create_' . $this->router->class),

@@ -6,11 +6,11 @@ $dataThead = array(
         'width' => '40'
     ),
     1 => array(
-        'label' => lang('parent_category'),
-        'width' => '30'
+        'label' => lang('date_modifiled'),
+        'width' => '20'
     ),
     2 => array(
-        'label' => lang('date_modifiled'),
+        'label' => lang('user_modifiled'),
         'width' => '20'
     )
 );
@@ -19,8 +19,8 @@ $dataIds = array();
 foreach ($data as $item) {
     $dataTbody[] = array(
         $item['name'],
-        !empty($item['parent']['name']) ? $item['parent']['name'] : lang('[none]'),
-        $item['date_modifiled']
+        $item['date_modifiled'],
+        $item['user_modifiled']['first_name'] . ' ' . $item['user_modifiled']['last_name']
     );
     $dataIds[] = $item['id'];
 }

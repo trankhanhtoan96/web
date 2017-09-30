@@ -178,3 +178,7 @@ $autoload['model'][] = 'page_model';
 //auto_generate_Blog_category
 $autoload['model'][] = 'blog_category_model';
 //auto_generate_Blog_category
+
+//auto_generate_Blog
+$autoload['model'][] = 'blog_model';
+//auto_generate_Blog

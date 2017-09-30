@@ -1,5 +1,18 @@
 <li><a href="<?= site_url('home') ?>"><i class="fa fa-dashboard"></i> <?= lang('home') ?></a></li>
 
+<?php if(checkRole('blog_edit',true) || checkRole('blog_view',true)): ?>
+    <li><a><i class='fa fa-newspaper-o'></i><?= lang('blog') ?><span class='fa fa-chevron-down'></span></a>
+        <ul class='nav child_menu'>
+            <?php if(checkRole('blog_edit',true)): ?>
+                <li><a href='<?= base_url('admin.php/blog/edit') ?>'><?= lang('create') ?></a></li>
+            <?php endif; ?>
+            <?php if(checkRole('blog_view',true)): ?>
+                <li><a href='<?= base_url('admin.php/blog/index') ?>'><?= lang('list') ?></a></li>
+            <?php endif; ?>
+        </ul>
+    </li>
+<?php endif; ?>
+
 <?php if(checkRole('page_edit',true) || checkRole('page_view',true)): ?>
     <li><a><i class='fa fa-newspaper-o'></i><?= lang('page') ?><span class='fa fa-chevron-down'></span></a>
         <ul class='nav child_menu'>
