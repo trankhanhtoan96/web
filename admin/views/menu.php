@@ -13,9 +13,22 @@
     </li>
 <?php endif; ?>
 
+<?php if(checkRole('blog_category_edit',true) || checkRole('blog_category_view',true)): ?>
+    <li><a><i class='fa fa-database'></i><?= lang('blog_category') ?><span class='fa fa-chevron-down'></span></a>
+        <ul class='nav child_menu'>
+            <?php if(checkRole('blog_category_edit',true)): ?>
+                <li><a href='<?= base_url('admin.php/blog_category/edit') ?>'><?= lang('create') ?></a></li>
+            <?php endif; ?>
+            <?php if(checkRole('blog_category_view',true)): ?>
+                <li><a href='<?= base_url('admin.php/blog_category/index') ?>'><?= lang('list') ?></a></li>
+            <?php endif; ?>
+        </ul>
+    </li>
+<?php endif; ?>
+
 <?php if (checkRole('setting_edit', true)): ?>
 
-    <li><a target="_blank" href="<?= base_url('vendors/ckfinder/ckfinder.html?langCode=vi') ?>"><i
+    <li><a target="_blank" href="<?= base_url('vendors/ckfinder/ckfinder.html?langCode=').(CI_LANGUAGE_DISPLAY=='vn'?'vi':'') ?>"><i
                 class="fa fa-image"></i> <?= lang('file_browser') ?></a></li>
 
     <li><a href="<?= site_url('setting/index') ?>"><i class="fa fa-cogs"></i> <?= lang('setting') ?></a></li>

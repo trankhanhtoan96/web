@@ -72,8 +72,13 @@ $lang = array(
     'role'=>'Phân quyền',
     'create_role'=>'Tạo quyền người dùng',
     'create_module'=>'Thêm module vào phân quyền',
-    'page'=>'Trang bài viết',
+    'page'=>'Trang',
     'create_page'=>'Trang bài viết mới',
     'choose'=>'Chọn',
-    'choose_image_please'=>'hãy chọn hình ảnh'
+    'choose_image_please'=>'hãy chọn hình ảnh',
+    'choose_allowed_file_please'=>'Vui lòng chọn tệp tin được cho phép',
+    'error_username_or_password'=>'Sai tên đăng nhập hoặc mật khẩu',
+    'excerpt'=>'Mô tả ngắn',
+    'blog_category'=>'Danh mục bài viết',
+    'create_blog_category'=>'Tạo mới danh mục bài viết'
 );

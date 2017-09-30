@@ -30,7 +30,8 @@ function CheckAuthentication()
     // ... where $_SESSION['IsAuthorized'] is set to "true" as soon as the
     // user logs in your system. To be able to use session variables don't
     // forget to add session_start() at the top of this file.
-    return true;
+    if(!empty($_COOKIE['ciuserLogined']) && $_COOKIE['ciuserLogined']) return true;
+    return false;
 }
 
 // LicenseKey : Paste your license key here. If left blank, CKFinder will be
@@ -208,15 +209,7 @@ $config['ResourceType'][] = Array(
     'url' => $baseUrl . 'images',
     'directory' => $baseDir . 'images',
     'maxSize' => 0,
-    'allowedExtensions' => 'bmp,gif,jpeg,jpg,png',
-    'deniedExtensions' => '');
-
-$config['ResourceType'][] = Array(
-    'name' => 'Flash',
-    'url' => $baseUrl . 'flash',
-    'directory' => $baseDir . 'flash',
-    'maxSize' => 0,
-    'allowedExtensions' => 'swf,flv',
+    'allowedExtensions' => 'bmp,gif,jpeg,jpg,png,ico',
     'deniedExtensions' => '');
 
 /*

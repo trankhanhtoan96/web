@@ -45,9 +45,10 @@ class Login extends CI_Controller
             if ($this->user_model->verify($data['username'], $data['password'])) {
                 $data = $this->user_model->getByUsername($data['username']);
                 $this->session->set_userdata('userLogined', $data);
+                set_cookie('userLogined',$data['id'],86400);
                 redirect('/home', 'refresh');
             } else {
-                $data['alert'] = $this->load->view('alert/error', array('message' => 'Sai tên đăng nhập hoặc mật khẩu!'), true);
+                $data['alert'] = $this->load->view('alert/error', array('message' => lang('error_username_or_password')), true);
             }
         }
         $this->load->view('login/index', $data);
@@ -56,6 +57,7 @@ class Login extends CI_Controller
     function logout()
     {
         $this->session->unset_userdata('userLogined');
+        set_cookie('userLogined',0,86400);
         redirect('/login', 'refresh');
     }
 }

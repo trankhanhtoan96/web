@@ -29,7 +29,7 @@
                             }
                             echo "<td style='text-align: center'><a data-toggle='tooltip' style='font-size:16px' title='" . lang('view') . "' href='" . site_url($this->router->class . '/detail/' . $dataIds[$key]) . "'><i class='fa fa-search'></i></a> <b style='font-size:16px'>";
                             if (checkRole($this->router->class . '_edit', true)) {
-                                echo "|</b><a data-toggle='tooltip' style='font-size:16px' title='" . lang('edit') . "' href='" . site_url($this->router->class . '/edit/' . $dataIds[$key]) . "'><i class='fa fa-edit'></i></a></td>";
+                                echo " | </b><a data-toggle='tooltip' style='font-size:16px' title='" . lang('edit') . "' href='" . site_url($this->router->class . '/edit/' . $dataIds[$key]) . "'><i class='fa fa-edit'></i></a></td>";
                             }
                             foreach ($item as $item2) {
                                 echo "<td>{$item2}</td>";

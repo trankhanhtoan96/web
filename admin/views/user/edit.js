@@ -6,6 +6,8 @@ $(document).ready(function() {
 //upload avatar
 $('#btn_choose_avatar').on('click', function () {
     CKFinder.popup({
+        resourceType : 'Images',
+        language:CI_language.language=='vn'?'vi':'',
         selectActionFunction: function (fileUrl, data, allFiles) {
             var ext = getExt(fileUrl);
             if (ext == 'jpg' || ext == 'png') {

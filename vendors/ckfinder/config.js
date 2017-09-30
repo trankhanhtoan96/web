@@ -13,5 +13,5 @@ CKFinder.customConfig = function( config )
 	// config.uiColor = '#BDE31E';
 
 	config.removePlugins = 'help,basket,flashupload';
-	config.rememberLastFolder = false;
+	config.rememberLastFolder = true;
 };

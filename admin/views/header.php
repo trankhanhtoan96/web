@@ -11,6 +11,7 @@
     <!--define language-->
     <script>
         var CI_language = <?= json_encode($this->lang->language) ?>;
+        CI_language.language = '<?= CI_LANGUAGE_DISPLAY ?>';
         CI_language.base_url = '<?= base_url() ?>';
     </script>
 
@@ -48,10 +49,6 @@
 
     <!--ckfinder-->
     <script src="<?= base_url('vendors/ckfinder/ckfinder.js') ?>"></script>
-
-    <!--jquery ui-->
-    <link rel="stylesheet" type="text/css" href="<?= base_url('vendors/jquery-ui/jquery-ui.min.css') ?>" />
-    <script src="<?= base_url('vendors/jquery-ui/jquery-ui.min.js') ?>"></script>
 
     <!--admin-->
     <link rel="stylesheet" href="<?= base_url('vendors/admin/custom.min.css') ?>"/>

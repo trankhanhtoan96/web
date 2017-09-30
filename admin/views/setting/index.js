@@ -1,6 +1,8 @@
 //upload logo
 $('#btn_choose_logo').on('click', function () {
     CKFinder.popup({
+        resourceType : 'Images',
+        language:CI_language.language=='vn'?'vi':'',
         selectActionFunction: function (fileUrl, data, allFiles) {
             var ext = getExt(fileUrl);
             if (ext == 'jpg' || ext == 'png') {
@@ -20,6 +22,8 @@ $('#btn_delete_logo').on('click', function () {
 //upload icon
 $('#btn_choose_icon').on('click', function () {
     CKFinder.popup({
+        resourceType : 'Images',
+        language:CI_language.language=='vn'?'vi':'',
         selectActionFunction: function (fileUrl, data, allFiles) {
             var ext = getExt(fileUrl);
             if (ext == 'jpg' || ext == 'png') {
