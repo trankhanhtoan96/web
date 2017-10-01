@@ -31,6 +31,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property CI_DB $db
  * @property User_model user_model
  * @property CI_Router router
+ * @property Blog_category_model blog_category_model
+ * @property Blog_model blog_model
  */
 class Blog extends CI_Controller
 {
@@ -47,6 +49,15 @@ class Blog extends CI_Controller
         foreach ($dataView as $key => $value) {
             $dataView[$key]['user_created'] = $this->user_model->get($dataView[$key]['user_created']);
             $dataView[$key]['user_modifiled'] = $this->user_model->get($dataView[$key]['user_modifiled']);
+
+            //get blog category name and assign to html ul li
+            $blogCategory = $this->blog_model->getBlogCategory($dataView[$key]['id']);
+            $dataView[$key]['blog_category'] = "<ul>";
+            foreach ($blogCategory as $item) {
+                $category = $this->blog_category_model->get($item['blog_category_id'],'name');
+                $dataView[$key]['blog_category'] .= "<li>{$category['name']}</li>";
+            }
+            $dataView[$key]['blog_category'] .= "</ul>";
         }
         $data = array(
             'meta_title' => lang($this->router->class),
@@ -66,16 +77,42 @@ class Blog extends CI_Controller
                 $dataEdit = $this->input->post();
                 $dataEdit['id'] = $id;
                 $this->{$this->router->class . '_model'}->update($dataEdit);
+
+                //insert relationship
+                $sql = "DELETE FROM blog_category_blog WHERE blog_id='{$id}'";
+                $this->db->simple_query($sql);
+                foreach ($dataEdit['blog_category'] as $item) {
+                    $sql = "INSERT INTO blog_category_blog(id,blog_category_id,blog_id) VALUES('" . createId() . "','{$item}','{$id}')";
+                    $this->db->simple_query($sql);
+                }
+
                 redirect('/' . $this->router->class . '/detail/' . $id);
             } else {
                 $dataEdit = $this->input->post();
                 unset($dataEdit['id']);
                 $dataId = '';
                 $this->{$this->router->class . '_model'}->insert($dataEdit, $dataId);
+
+                //insert relationship
+                foreach ($dataEdit['blog_category'] as $item) {
+                    $sql = "INSERT INTO blog_category_blog(id,blog_category_id,blog_id) VALUES('" . createId() . "','{$item}','{$dataId}')";
+                    $this->db->simple_query($sql);
+                }
+
                 redirect('/' . $this->router->class . '/detail/' . $dataId);
             }
         }
         $dataView = $this->{$this->router->class . '_model'}->get($id);
+        $parent = $this->blog_category_model->get_list('id,name');
+        $dataView['parent'] = array();
+        foreach ($parent as $item) {
+            $dataView['parent'][$item['id']] = $item['name'];
+        }
+        $parentIds = $this->blog_model->getBlogCategory($id);
+        $dataView['parent_ids'] = array();
+        foreach ($parentIds as $item) {
+            $dataView['parent_ids'][] = $item['blog_category_id'];
+        }
         $data = array(
             'meta_title' => $id ? $dataView['name'] : lang($this->router->class),
             'data_header' => $id ? lang($this->router->class) . ':' . $dataView['name'] : lang('create_' . $this->router->class),
@@ -93,6 +130,16 @@ class Blog extends CI_Controller
         unset($dataView['id']);
         $dataView['user_created'] = $this->user_model->get($dataView['user_created']);
         $dataView['user_modifiled'] = $this->user_model->get($dataView['user_modifiled']);
+
+        //get blog category name and assign to html ul li
+        $blogCategory = $this->blog_model->getBlogCategory($id);
+        $dataView['blog_category'] = "<ul>";
+        foreach ($blogCategory as $item) {
+            $category = $this->blog_category_model->get($item['blog_category_id'],'name');
+            $dataView['blog_category'] .= "<li>{$category['name']}</li>";
+        }
+        $dataView['blog_category'] .= "</ul>";
+
         $data = array(
             'meta_title' => $dataView['name'],
             'data_header' => lang($this->router->class) . ':' . $dataView['name'],

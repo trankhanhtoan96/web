@@ -37,6 +37,9 @@
     <!--select 2-->
     <link href="<?= base_url('vendors/select2/css/select2.min.css') ?>" rel="stylesheet">
 
+    <!--multiple select-->
+    <link href="<?= base_url('vendors/multiple-select/multiple-select.css') ?>" rel="stylesheet">
+
     <!--datatables-->
     <link href="<?= base_url('vendors/datatables/css/dataTables.bootstrap.css') ?>" rel="stylesheet">
 

@@ -48,6 +48,9 @@
 <!--select2-->
 <script src="<?= base_url('vendors/select2/js/select2.full.min.js') ?>"></script>
 
+<!--multiple select-->
+<script src="<?= base_url('vendors/multiple-select/multiple-select.js') ?>"></script>
+
 <!--autosize-->
 <script src="<?= base_url('vendors/autosize/autosize.min.js') ?>"></script>
 

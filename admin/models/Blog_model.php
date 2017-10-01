@@ -95,4 +95,17 @@ class Blog_model extends CI_Model
         if ($this->db->delete($this->tableName)) return true;
         return false;
     }
+
+    /**
+     * @param $id
+     * return array of id blog_category
+     */
+    function getBlogCategory($blogId, $select = '*')
+    {
+        $this->db->reset_query();
+        $this->db->select($select);
+        $this->db->from('blog_category_blog');
+        $this->db->where('blog_id', $blogId);
+        return $this->db->get()->result_array();
+    }
 }

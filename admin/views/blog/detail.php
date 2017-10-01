@@ -14,6 +14,10 @@ $dataTemplates = array(
                 0 => array(
                     'label' => lang('name'),
                     'value' => !empty($data['name']) ? $data['name'] : ''
+                ),
+                1=>array(
+                    'label'=>lang('blog_category'),
+                    'value'=>!empty($data['blog_category']) ? $data['blog_category'] : ''
                 )
             ),
             2 => array(

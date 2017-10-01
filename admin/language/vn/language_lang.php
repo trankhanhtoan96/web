@@ -1,6 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 $lang = array(
-    //dataTable
     'LBL_SHOW' => 'Hiển thị',
     'LBL_TO' => 'đến',
     'LBL_IN' => 'trong',
@@ -87,5 +86,8 @@ $lang = array(
     'script_header'=>'Mã header',
     'script_footer'=>'Mã footer',
     'blog'=>'Bài viết',
-    'create_blog'=>'Tạo bài viết'
+    'create_blog'=>'Tạo bài viết',
+    'select_all'=>'Chọn tất cả',
+    'select_item_from_all'=>'# / % đã chọn',
+    'not_found'=>'Không tìm thấy'
 );

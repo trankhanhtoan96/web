@@ -2,6 +2,9 @@ $(document).ready(function(){
     CKEDITOR.replace('content');
     autosize($('#excerpt'));
     autosize($('#seo_description'));
+    $('#blog_category').multipleSelect({
+        width:'100%'
+    });
 });
 
 //upload image
