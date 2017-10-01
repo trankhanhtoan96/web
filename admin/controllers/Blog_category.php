@@ -99,6 +99,7 @@ class Blog_category extends CI_Controller
         unset($dataView['id']);
         $dataView['user_created'] = $this->user_model->get($dataView['user_created']);
         $dataView['user_modifiled'] = $this->user_model->get($dataView['user_modifiled']);
+        $dataView['parent_category'] = $this->blog_category_model->get($dataView['parent_id'],'name');
         $data = array(
             'meta_title' => $dataView['name'],
             'data_header' => lang($this->router->class) . ':' . $dataView['name'],

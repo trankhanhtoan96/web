@@ -10,7 +10,10 @@
             foreach ($dataTemplates as $dataPanel) {
                 echo "<div class='x_panel'>
                         <div class='x_title'>
-                            <label>{$dataPanel['panel_name']}</label>
+                            <a class='collapse-link'>
+                                <i class='fa fa-chevron-up'></i>
+                                <label>{$dataPanel['panel_name']}</label>
+                            </a>
                         </div>
                         <div class='x_content'>";
                 foreach ($dataPanel['data_panel'] as $dataItem) {

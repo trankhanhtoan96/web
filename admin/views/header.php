@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="<?= $this->setting_model->get('icon') ?>" />
+    <link rel="icon" href="<?= $this->setting_model->get('icon') ?>"/>
     <title><?= !empty($meta_title) ? $meta_title : lang('admin_page') ?></title>
 
     <!--define language-->
@@ -63,24 +63,32 @@
     <div class="main_container">
         <div class="col-md-3 left_col">
             <div class="left_col scroll-view">
+                <div class="navbar nav_title" style="border: 0;">
+                    <a href="<?= site_url() ?>" class="site_title">
+                        <img style="width:50px" src="<?= $this->setting_model->get('logo') ?>"/>
+                        <span>Company Name</span>
+                    </a>
+                </div>
                 <div class="clearfix"></div>
                 <!-- menu profile quick info -->
-                <?php $userLogined = $this->session->userdata('userLogined'); ?>
-                <div class="profile">
-                    <div class="profile_pic">
-                        <img src="<?= $userLogined['avatar'] ?>" class="img-circle profile_img">
-                    </div>
-                    <div class="profile_info">
-                        <span><?= $userLogined['username'] ?></span>
-                        <h2><?= $userLogined['first_name'] . ' ' . $userLogined['last_name'] ?></h2>
-                    </div>
-                </div>
+                <?php //$userLogined = $this->session->userdata('userLogined'); ?>
+                <!--                <div class="profile">
+                <!--                    <div class="profile_pic">
+                <!--                        <img src="-->
+                <? //= $userLogined['avatar'] ?><!--" class="img-circle profile_img">
+                <!--                    </div>
+                <!--                    <div class="profile_info">
+                <span><? //= $userLogined['username'] ?></span>
+                <!--                        <h2>-->
+                <? //= $userLogined['first_name'] . ' ' . $userLogined['last_name'] ?><!--</h2>-->
+                <!--                    </div>-->
+                <!--                </div>-->
                 <!-- /menu profile quick info -->
-                <br/>
+                <!--                <br/>-->
                 <!-- sidebar menu -->
                 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                     <div class="menu_section">
-                        <h3><?= lang('title_menu') ?></h3>
+                        <!--                        <h3>--><? //= lang('title_menu') ?><!--</h3>-->
                         <ul class="nav side-menu">
                             <?php $this->load->view('menu'); ?>
                         </ul>

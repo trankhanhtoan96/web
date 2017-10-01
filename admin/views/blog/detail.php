@@ -74,5 +74,8 @@ $dataTemplates = array(
         )
     )
 );
+$dataSybpanel = array(
+
+);
 include 'admin/views/core/detail.php';
 include 'admin/views/footer.php';
