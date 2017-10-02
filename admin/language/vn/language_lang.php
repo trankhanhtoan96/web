@@ -89,5 +89,6 @@ $lang = array(
     'create_blog'=>'Tạo bài viết',
     'select_all'=>'Chọn tất cả',
     'select_item_from_all'=>'# / % đã chọn',
-    'not_found'=>'Không tìm thấy'
+    'not_found'=>'Không tìm thấy',
+    'module'=>'Module'
 );

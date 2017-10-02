@@ -159,7 +159,9 @@ $autoload['language'] = array('language');
 */
 $autoload['model'] = array(
     'user_model',
-    'setting_model'
+    'setting_model',
+    'relationship_model',
+    'blog_category_blog_model'
 );
 
 //auto_generate_Role
