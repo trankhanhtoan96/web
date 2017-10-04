@@ -72,12 +72,15 @@ class Development extends CI_Controller
             file_put_contents(APPPATH . 'views/' . strtolower($name) . '/detail.js', '', FILE_APPEND | LOCK_EX);
             file_put_contents(APPPATH . 'views/' . strtolower($name) . '/list.css', '', FILE_APPEND | LOCK_EX);
             file_put_contents(APPPATH . 'views/' . strtolower($name) . '/list.js', '', FILE_APPEND | LOCK_EX);
+            file_put_contents(APPPATH . 'views/' . strtolower($name) . '/list_subpanel.js', '', FILE_APPEND | LOCK_EX);
+            file_put_contents(APPPATH . 'views/' . strtolower($name) . '/list_subpanel.css', '', FILE_APPEND | LOCK_EX);
             file_put_contents(APPPATH . 'views/' . strtolower($name) . '/edit.php', file_get_contents(APPPATH . 'core/template/edit.php'), FILE_APPEND | LOCK_EX);
             file_put_contents(APPPATH . 'views/' . strtolower($name) . '/detail.php', file_get_contents(APPPATH . 'core/template/detail.php'), FILE_APPEND | LOCK_EX);
             file_put_contents(APPPATH . 'views/' . strtolower($name) . '/list.php', file_get_contents(APPPATH . 'core/template/list.php'), FILE_APPEND | LOCK_EX);
             file_put_contents(APPPATH . 'views/' . strtolower($name) . '/menu_edit.php', file_get_contents(APPPATH . 'core/template/menu_edit.php'), FILE_APPEND | LOCK_EX);
             file_put_contents(APPPATH . 'views/' . strtolower($name) . '/menu_detail.php', file_get_contents(APPPATH . 'core/template/menu_detail.php'), FILE_APPEND | LOCK_EX);
             file_put_contents(APPPATH . 'views/' . strtolower($name) . '/menu_list.php', file_get_contents(APPPATH . 'core/template/menu_list.php'), FILE_APPEND | LOCK_EX);
+            file_put_contents(APPPATH . 'views/' . strtolower($name) . '/list_subpanel.php', file_get_contents(APPPATH . 'core/template/list_subpanel.php'), FILE_APPEND | LOCK_EX);
 
             //create database
             $fields = array(

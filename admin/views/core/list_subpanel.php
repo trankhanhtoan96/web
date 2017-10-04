@@ -1,3 +1,4 @@
+<link rel="stylesheet" type="text/css" href="<?= base_url('admin/views/' . $module . '/list_subpanel.css') ?>"/>
 <table id="dataTable_subpanel_<?= $module . $count ?>" class="table table-striped table-bordered">
     <thead>
     <th style="width:10%;text-align: center"></th>
@@ -29,3 +30,4 @@
         });
     });
 </script>
+<script src="<?= base_url('admin/views/' . $module . '/list_subpanel.js') ?>"></script>

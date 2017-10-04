@@ -1,5 +1,4 @@
 <?php
-//reveice data of which module name
 $dataThead = array(
     0 => array(
         'label' => lang('name'),

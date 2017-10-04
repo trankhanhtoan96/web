@@ -35,6 +35,21 @@ $dataTemplates = array(
                 )
             )
         )
+    ),
+    1 => array(
+        'panel_name' => lang('meta_header'),
+        'data_panel' => array(
+            0 => array(
+                0 => array(
+                    'label' => lang('meta_title'),
+                    'value' => !empty($data['seo_title']) ? $data['seo_title'] : ''
+                ),
+                1 => array(
+                    'label' => lang('meta_description'),
+                    'value' => !empty($data['seo_description']) ? $data['seo_description'] : ''
+                )
+            )
+        )
     )
 );
 include 'admin/views/core/detail.php';
