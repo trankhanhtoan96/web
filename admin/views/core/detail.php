@@ -47,7 +47,7 @@
     <script src="<?= base_url('admin/views/' . $this->router->class . '/' . $this->router->method . '.js') ?>"></script>
 
 <?php
-$moduleRelationship = $this->relationship_model->get_list('*', array('module_1' => $this->router->class));
+$moduleRelationship = $this->relationship_model->get_list('*', array('module_1' => $this->router->class),'','');
 $relationshipPanelCount = 0;
 $relationshipPanelName = '';
 $relationshipPanelHtml = '';
