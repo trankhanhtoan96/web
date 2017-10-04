@@ -29,6 +29,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property CI_Xmlrpcs $xmlrpcs
  * @property CI_Zip $zip
  * @property CI_DB $db
+ * @property Mail mail
  */
 class Home extends CI_Controller
 {

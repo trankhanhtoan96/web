@@ -90,5 +90,13 @@ $lang = array(
     'select_all'=>'Chọn tất cả',
     'select_item_from_all'=>'# / % đã chọn',
     'not_found'=>'Không tìm thấy',
-    'module'=>'Module'
+    'module'=>'Module',
+    'setting_email'=>'Cài đặt Email',
+    'mail_host'=>'Host',
+    'mail_secure'=>'Secure',
+    'mail_port'=>'Port',
+    'mail_username'=>'Tên đăng nhập',
+    'mail_password'=>'Mật khẩu',
+    'mail_from'=>'From email',
+    'mail_from_name'=>'Name from'
 );
