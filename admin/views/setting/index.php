@@ -36,7 +36,7 @@ $dataTemplates = array(
             ),
             3 => array(
                 0 => array(
-                    'label' => lang('logo'),
+                    'label' => lang('icon'),
                     'code'=>"<input type='hidden' name='icon' value='".(!empty($data['icon']) ? $data['icon'] : '')."' />
                              <button type='button' class='btn btn-info' id='btn_choose_icon'>".lang('choose')."</button>
                              <button type='button' class='btn btn-danger' id='btn_delete_icon'>".lang('delete')."</button>"
