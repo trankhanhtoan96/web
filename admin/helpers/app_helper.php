@@ -49,13 +49,13 @@ function getHtmlSelection(array $arr, $keySelected, array $option)
  * biến return để cho biết là có return ra kết quả checkrole hay không,
  * nếu return bằng true thì chỉ trả về kết quả mà không redirect, ngược lại sẽ redirect trang về home
  */
-function checkRole($roleName='', $return = false)
+function checkRole($roleName = '', $return = false)
 {
     $CI = &get_instance();
     if ($CI->session->userdata('userLogined')['admin'] == 1) return true;
     $role = $CI->role_model->get($CI->session->userdata('userLogined')['role_id']);
     $role = json_decode(html_entity_decode($role['detail']), true);
-    if($roleName=='') {
+    if ($roleName == '') {
         if ($CI->router->method == 'index' || $CI->router->method == 'detail') {
             $roleType = $CI->router->class . '_view';
         } elseif ($CI->router->method == 'edit' || $CI->router->method == 'delete' || $CI->router->method == 'deleteList') {
@@ -63,9 +63,28 @@ function checkRole($roleName='', $return = false)
         }
         if (!empty($roleType) && isset($role[$roleType]) && $role[$roleType] == "on") return true;
         if ($return) return false;
-    }else{
+    } else {
         if (!empty($roleName) && isset($role[$roleName]) && $role[$roleName] == "on") return true;
         if ($return) return false;
     }
     redirect('/', 'refresh');
+}
+
+/**
+ * @param $dataArr
+ * @param $parentId
+ * @param $result
+ * @param string $space
+ */
+function sortBlogCategory($dataArr, $parentId, &$result, $space = '')
+{
+    $data = $dataArr;
+    if ($parentId != '0') $space .= '|__';
+    foreach ($data as $key => $item) {
+        if ($item['parent_id'] == $parentId) {
+            $result[$item['id']] = $space . $item['name'];
+            unset($data[$key]);
+            sortBlogCategory($data, $item['id'], $result, $space);
+        }
+    }
 }

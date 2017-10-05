@@ -103,11 +103,9 @@ class Blog extends CI_Controller
             }
         }
         $dataView = $this->{$this->router->class . '_model'}->get($id);
-        $parent = $this->blog_category_model->get_list('id,name');
+        $parent = $this->blog_category_model->get_list('id,name,parent_id');
         $dataView['parent'] = array();
-        foreach ($parent as $item) {
-            $dataView['parent'][$item['id']] = $item['name'];
-        }
+        sortBlogCategory($parent,'0',$dataView['parent']);
         $parentIds = $this->blog_model->getBlogCategory($id);
         $dataView['parent_ids'] = array();
         foreach ($parentIds as $item) {

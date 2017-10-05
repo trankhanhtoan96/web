@@ -12,7 +12,7 @@
                         <div class='x_title'>
                             <a class='collapse-link'>
                                 <i class='fa fa-chevron-up'></i>
-                                <label>{$dataPanel['panel_name']}</label>
+                                <label style='cursor: pointer'>{$dataPanel['panel_name']}</label>
                             </a>
                         </div>
                         <div class='x_content'>";

@@ -14,7 +14,7 @@ $dataTemplates = array(
                 ),
                 1 => array(
                     'label' => lang('parent_category'),
-                    'code' => getHtmlSelection($data['parent_category'], !empty($data['parent_id']) ? $data['parent_id'] : '', array('name' => 'parent_id', 'id' => 'parent_id', 'style' => 'width:100%'))
+                    'code' => getHtmlSelection($data['parent_category'], !empty($data['parent_id']) ? $data['parent_id'] : '0', array('name' => 'parent_id', 'id' => 'parent_id', 'style' => 'width:100%'))
                 )
             ),
             1 => array(

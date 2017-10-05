@@ -76,11 +76,9 @@ class Blog_category extends CI_Controller
             }
         }
         $dataView = $this->{$this->router->class . '_model'}->get($id);
-        $parentCategory = $this->blog_category_model->get_list('id, name');
-        $dataView['parent_category'] = array('0' => lang('[none]'));
-        foreach ($parentCategory as $item) {
-            $dataView['parent_category'][$item['id']] = $item['name'];
-        }
+        $parentCategory = $this->blog_category_model->get_list('id, name,parent_id');
+        $dataView['parent_category']['0'] = lang('[none]');
+        sortBlogCategory($parentCategory, '0', $dataView['parent_category']);
         unset($dataView['parent_category'][$id]);
         $data = array(
             'meta_title' => $id ? $dataView['name'] : lang($this->router->class),
@@ -99,7 +97,7 @@ class Blog_category extends CI_Controller
         unset($dataView['id']);
         $dataView['user_created'] = $this->user_model->get($dataView['user_created']);
         $dataView['user_modifiled'] = $this->user_model->get($dataView['user_modifiled']);
-        $dataView['parent_category'] = $this->blog_category_model->get($dataView['parent_id'],'name');
+        $dataView['parent_category'] = $this->blog_category_model->get($dataView['parent_id'], 'name');
         $data = array(
             'meta_title' => $dataView['name'],
             'data_header' => lang($this->router->class) . ':' . $dataView['name'],
