@@ -48,6 +48,22 @@
 
 <?php endif; ?>
 
+<?php if(checkRole('email_edit',true) || checkRole('email_view',true)): ?>
+    <li><a><i class='fa fa-envelope'></i><?= lang('email') ?><span class='fa fa-chevron-down'></span></a>
+        <ul class='nav child_menu'>
+            <?php if(checkRole('email_edit',true)): ?>
+                <li><a href='<?= base_url('admin.php/email/edit') ?>'><?= lang('create') ?></a></li>
+            <?php endif; ?>
+            <?php if(checkRole('email_view',true)): ?>
+                <li><a href='<?= base_url('admin.php/email/index') ?>'><?= lang('list') ?></a></li>
+            <?php endif; ?>
+            <?php if (checkRole('email_edit', true)): ?>
+                <li><a href='<?= base_url('admin.php/email/send_mail') ?>'><?= lang('send_mail') ?></a></li>
+            <?php endif; ?>
+        </ul>
+    </li>
+<?php endif; ?>
+
 <?php if ($this->session->userdata('userLogined')['admin'] == 1): ?>
 
     <li><a><i class="fa fa-user"></i><?= lang('user') ?><span class="fa fa-chevron-down"></span></a>

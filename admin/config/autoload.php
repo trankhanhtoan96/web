@@ -184,3 +184,7 @@ $autoload['model'][] = 'blog_category_model';
 //auto_generate_Blog
 $autoload['model'][] = 'blog_model';
 //auto_generate_Blog
+
+//auto_generate_Email
+$autoload['model'][] = 'email_model';
+//auto_generate_Email

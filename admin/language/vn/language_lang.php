@@ -98,5 +98,13 @@ $lang = array(
     'mail_username'=>'Tên đăng nhập',
     'mail_password'=>'Mật khẩu',
     'mail_from'=>'From email',
-    'mail_from_name'=>'Name from'
+    'mail_from_name'=>'Name from',
+    'create_email'=>'Nhập Email',
+    'validation'=>'Hợp lệ',
+    'email_address'=>'Địa chỉ email',
+    'invalidation'=>'Không hợp lệ',
+    'yes'=>'Có',
+    'no'=>'Không',
+    'send_mail'=>'Gởi email',
+    'send'=>'Gửi'
 );
