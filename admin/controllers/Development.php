@@ -43,7 +43,7 @@ class Development extends CI_Controller
 
     function index()
     {
-        checkRole();
+        if (!checkRole('', true)) redirect('/', 'refresh');
         echo "<form acton='' method='post'><input type='text' name='module_name' /></form>";
         if ($moduleName = $this->input->post('module_name')) {
             $name = ucfirst(trim($moduleName));
@@ -135,7 +135,7 @@ class Development extends CI_Controller
 
     function delete($name)
     {
-        checkRole();
+        if (!checkRole('', true)) redirect('/', 'refresh');
         $name = ucfirst($name);
 
         $data = file_get_contents(APPPATH . 'config/autoload.php');
