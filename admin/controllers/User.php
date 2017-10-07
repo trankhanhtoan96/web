@@ -43,7 +43,7 @@ class User extends CI_Controller
 
     function index()
     {
-        checkRole();
+        if (checkRole($this->router->class . '_view')) redirect('/', 'refresh');
         $data = array(
             'meta_title' => lang($this->router->class),
             'data_header' => lang($this->router->class),
@@ -64,6 +64,7 @@ class User extends CI_Controller
 
     function edit($id = '')
     {
+        if (checkRole($this->router->class . '_edit')) redirect('/', 'refresh');
         if ($id != $this->session->userdata('userLogined')['id']) checkRole();
         if ($this->input->post('username')) {
             if ($id) {
@@ -126,6 +127,7 @@ class User extends CI_Controller
 
     function detail($id = '')
     {
+        if (checkRole($this->router->class . '_view')) redirect('/', 'refresh');
         if ($id != $this->session->userdata('userLogined')['id']) checkRole();
         if ($id == '') redirect('/' . $this->router->class . '/index');
         $detail = $this->{$this->router->class . '_model'}->get($id);
@@ -147,7 +149,7 @@ class User extends CI_Controller
 
     function delete($id = '')
     {
-        checkRole();
+        if (checkRole($this->router->class . '_delete')) redirect('/', 'refresh');
         if ($id) {
             $this->{$this->router->class . '_model'}->delete($id);
         }
@@ -156,7 +158,7 @@ class User extends CI_Controller
 
     function deleteList()
     {
-        checkRole();
+        if (checkRole($this->router->class . '_delete')) redirect('/', 'refresh');
         if ($this->input->post('record_selected')) {
             foreach ($this->input->post('record_selected') as $id) {
                 $this->{$this->router->class . '_model'}->delete($id);
@@ -167,6 +169,7 @@ class User extends CI_Controller
 
     function change_password()
     {
+        if (checkRole($this->router->class . '_change_password')) redirect('/', 'refresh');
         $data = array(
             'meta_header' => array(
                 'title' => lang('change_password'),
