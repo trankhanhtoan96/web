@@ -49,9 +49,10 @@ function getHtmlSelection(array $arr, $keySelected, array $option)
  * biến return để cho biết là có return ra kết quả checkrole hay không,
  * nếu return bằng true thì chỉ trả về kết quả mà không redirect, ngược lại sẽ redirect trang về home
  */
-function checkRole($roleName)
+function checkRole($roleName, $admin = false)
 {
     if (get_instance()->session->userdata('userLogined')['admin'] == 1) return true;
+    if ($admin) return false;
     if (empty($GLOBALS['role'])) {
         $temp = get_instance()->role_model->get(get_instance()->session->userdata('userLogined')['role_id']);
         $temp = json_decode(html_entity_decode($temp['detail']), true);
