@@ -42,6 +42,7 @@ class Module extends CI_Controller
 
     function index()
     {
+        if (!checkRole('', true)) redirect('/', 'refresh');
         $dataView = $this->{$this->router->class . '_model'}->get_list();
         foreach ($dataView as $key => $value) {
             $dataView[$key]['user_created'] = $this->user_model->get($dataView[$key]['user_created']);
@@ -59,6 +60,7 @@ class Module extends CI_Controller
 
     function edit($id = '')
     {
+        if (!checkRole('', true)) redirect('/', 'refresh');
         if ($this->input->post('name')) {
             if ($id) {
                 $dataEdit = $this->input->post();
@@ -85,6 +87,7 @@ class Module extends CI_Controller
 
     function detail($id = '')
     {
+        if (!checkRole('', true)) redirect('/', 'refresh');
         if ($id == '') redirect('/' . $this->router->class . '/index');
         $dataView = $this->{$this->router->class . '_model'}->get($id);
         unset($dataView['id']);
@@ -101,12 +104,14 @@ class Module extends CI_Controller
 
     function delete($id = '')
     {
+        if (!checkRole('', true)) redirect('/', 'refresh');
         $this->{$this->router->class . '_model'}->delete($id);
         redirect('/' . $this->router->class . '/index');
     }
 
     function deleteList()
     {
+        if (!checkRole('', true)) redirect('/', 'refresh');
         if ($recods = $this->input->post('record_selected')) {
             foreach ($recods as $id) {
                 $this->{$this->router->class . '_model'}->delete($id);
