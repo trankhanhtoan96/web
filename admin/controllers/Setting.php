@@ -43,7 +43,7 @@ class Setting extends CI_Controller
 
     function index()
     {
-        checkRole('setting_edit');
+        if (!checkRole($this->router->class . '_edit') || !checkRole($this->router->class . '_view') || !checkRole($this->router->class . '_delete')) redirect('/', 'refresh');
         if ($this->input->post('input_setting')) {
             $dataEdit = $this->input->post();
             $this->setting_model->update($dataEdit);
