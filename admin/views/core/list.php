@@ -9,6 +9,7 @@
                 <div class="x_content">
                     <table id="dataTable" class="table table-striped table-bordered bulk_action">
                         <thead>
+                        <tr>
                         <?php if (checkRole($this->router->class . '_edit', true)): ?>
                             <th style="width:3%;text-align: center"><input type="checkbox" class="flat" id="check-all"/>
                             </th>
@@ -19,6 +20,7 @@
                             echo "<th style='width: {$item['width']}%;text-align: center'>{$item['label']}</th>";
                         }
                         ?>
+                        </tr>
                         </thead>
                         <tbody>
                         <?php

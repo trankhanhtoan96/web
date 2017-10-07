@@ -106,5 +106,15 @@ $lang = array(
     'yes'=>'Có',
     'no'=>'Không',
     'send_mail'=>'Gởi email',
-    'send'=>'Gửi'
+    'send'=>'Gửi',
+    'subject'=>'Tiêu đề',
+    'body_email'=>'Nội dung email',
+    'receiver'=>'Người nhận',
+    'email_to'=>'TO',
+    'email_cc'=>'CC',
+    'email_bcc'=>'BCC',
+    'all'=>'Tất cả',
+    'add'=>'Thêm',
+    'other_role'=>'Phân quyền khác',
+    'orther'=>'Khác'
 );

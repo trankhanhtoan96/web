@@ -32,6 +32,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property User_model user_model
  * @property CI_Router router
  * @property Email email_model
+ * @property Role_model role_model
  */
 class Email extends CI_Controller
 {
@@ -128,11 +129,45 @@ class Email extends CI_Controller
     function send_mail()
     {
         checkRole();
+        $dataView = array();
+
+        //user_role_type_select
+        $roles = array('1'=>lang('all'));
+        foreach ($this->role_model->get_list('id, name') as $item) {
+            $roles[$item['id']] = $item['name'];
+        }
+        $dataView['user_role_type_select'] = getHtmlSelection($roles,'',array('name'=>'user_role_type_select','id'=>'user_role_type_select'));
+
+        //select_add_address
+        $selectAddAddress = array(
+            'to'=>'TO',
+            'cc'=>'CC',
+            'bcc'=>'BCC'
+        );
+        $dataView['select_add_address'] = getHtmlSelection($selectAddAddress,'',array('name'=>'select_add_address','id'=>'select_add_address'));
+
+
+        //table_user_email
+        $users = $this->user_model->get_list();
+        $dataTableUserEmail = array(
+            'dataTbody'=>array(),
+            'dataIds' =>array()
+        );
+        foreach ($users as $item) {
+            $dataTableUserEmail['dataTbody'][] = array(
+                $item['first_name'].' '.$item['last_name'],
+                $item['email']
+            );
+            $dataTableUserEmail['dataIds'][] = $item['id'];
+        }
+        $dataView['table_user_email'] = $this->load->view('email/template/table_user',$dataTableUserEmail,true);
+        //end
+
         $data = array(
             'meta_title' => lang('send_mail'),
             'data_header' => lang('send_mail'),
             'data_id' => '',
-            'data' => ''
+            'data' => $dataView
         );
         $this->load->view('email/send_mail', $data);
     }

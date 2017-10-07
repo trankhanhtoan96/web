@@ -13,6 +13,14 @@ $dataTemplates = array(
                     'name' => 'name'
                 ),
                 1 => ''
+            ),
+            1=>array(
+                0=>array(
+                    'label'=>lang('other_role'),
+                    'type'=>'textarea',
+                    'value'=>!empty($data['other_role']) ? $data['other_role'] : '',
+                    'name'=>'other_role'
+                )
             )
         )
     )

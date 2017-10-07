@@ -65,25 +65,45 @@ class Role extends CI_Controller
         checkRole();
         if ($this->input->post('name')) {
             if ($id) {
+                //update
                 $dataEdit = $this->input->post();
                 $dataEdit['id'] = $id;
                 $dataEdit['detail'] = '';
                 $modules = $this->module_model->get_list();
                 foreach ($modules as $item) {
-                    $dataEdit['detail'][$item['name'].'_edit'] = $this->input->post($item['name'].'_edit');
-                    $dataEdit['detail'][$item['name'].'_view'] = $this->input->post($item['name'].'_view');
+                    $dataEdit['detail'][$item['name'] . '_edit'] = $this->input->post($item['name'] . '_edit');
+                    $dataEdit['detail'][$item['name'] . '_view'] = $this->input->post($item['name'] . '_view');
+                    $dataEdit['detail'][$item['name'] . '_delete'] = $this->input->post($item['name'] . '_delete');
+                    $dataEdit['detail'][$item['name'] . '_other'] = explode(',', $this->input->post($item['name'] . '_other'));
+                    foreach ($dataEdit['detail'][$item['name'] . '_other'] as $key => $val) {
+                        if (!$val) {
+                            unset($dataEdit['detail'][$item['name'] . '_other'][$key]);
+                        } else {
+                            $dataEdit['detail'][$item['name'] . '_other'][$key] = trim($dataEdit['detail'][$item['name'] . '_other'][$key]);
+                        }
+                    }
                 }
                 $dataEdit['detail'] = json_encode($dataEdit['detail']);
                 $this->{$this->router->class . '_model'}->update($dataEdit);
                 redirect('/' . $this->router->class . '/detail/' . $id);
             } else {
+                //create
                 $dataEdit = $this->input->post();
                 unset($dataEdit['id']);
                 $dataEdit['detail'] = '';
                 $modules = $this->module_model->get_list();
                 foreach ($modules as $item) {
-                    $dataEdit['detail'][$item['name'].'_edit'] = $this->input->post($item['name'].'_edit');
-                    $dataEdit['detail'][$item['name'].'_view'] = $this->input->post($item['name'].'_view');
+                    $dataEdit['detail'][$item['name'] . '_edit'] = $this->input->post($item['name'] . '_edit');
+                    $dataEdit['detail'][$item['name'] . '_view'] = $this->input->post($item['name'] . '_view');
+                    $dataEdit['detail'][$item['name'] . '_delete'] = $this->input->post($item['name'] . '_delete');
+                    $dataEdit['detail'][$item['name'] . '_other'] = explode(',', $this->input->post($item['name'] . '_other'));
+                    foreach ($dataEdit['detail'][$item['name'] . '_other'] as $key => $val) {
+                        if (!$val) {
+                            unset($dataEdit['detail'][$item['name'] . '_other'][$key]);
+                        } else {
+                            $dataEdit['detail'][$item['name'] . '_other'][$key] = trim($dataEdit['detail'][$item['name'] . '_other'][$key]);
+                        }
+                    }
                 }
                 $dataEdit['detail'] = json_encode($dataEdit['detail']);
                 $dataId = '';
@@ -91,28 +111,30 @@ class Role extends CI_Controller
                 redirect('/' . $this->router->class . '/detail/' . $dataId);
             }
         }
+        //------------------------------------------------
         $dataView = $this->{$this->router->class . '_model'}->get($id);
+        if (!empty($dataView['detail'])) $dataView['detail'] = json_decode(html_entity_decode($dataView['detail']), true);
+        else $dataView['detail'] = array();
         $modules = $this->module_model->get_list();
-        $html = "<table class='table table-bordered'>
-                    <thead>
-                    <tr>
-                        <th>" . lang('name') . "</th>
-                        <th>" . lang('edit') . "</th>
-                        <th>" . lang('view') . "</th>
-                    </tr>
-                    </thead><tbody>";
-        if (!empty($dataView['detail'])) {
-            $detail = json_decode(html_entity_decode($dataView['detail']), true);
-        }
+        //-----------------------------------------------
+        $dataTable = array(
+            'dataTbody' => array(),
+            'dataIds' => array()
+        );
         foreach ($modules as $item) {
-            $html .= "<tr>
-                        <td>{$item['name']}</td>
-                        <td><input type='checkbox' name='" . $item['name'] . '_edit' . "' class='flat' " . (isset($detail[$item['name'] . '_edit']) && $detail[$item['name'] . '_edit'] == "on" ? "checked" : '') . " /></td>
-                        <td><input type='checkbox' name='" . $item['name'] . '_view' . "' class='flat' " . (isset($detail[$item['name'] . '_view']) && $detail[$item['name'] . '_view'] == "on" ? "checked" : '') . " /></td>
-                      </tr>";
+            $dataTable['dataTbody'][] = array(
+                $item['name'],
+                !empty($dataView['detail'][$item['name'] . '_edit']) && $dataView['detail'][$item['name'] . '_edit'] == 'on' ? 'checked' : '',
+                !empty($dataView['detail'][$item['name'] . '_view']) && $dataView['detail'][$item['name'] . '_view'] == 'on' ? 'checked' : '',
+                !empty($dataView['detail'][$item['name'] . '_delete']) && $dataView['detail'][$item['name'] . '_delete'] == 'on' ? 'checked' : '',
+            );
+            $dataTable['dataTbody'][count($dataTable['dataTbody']) - 1][4] = '';
+            foreach ($dataView['detail'][$item['name'] . '_other'] as $itemTemp) $dataTable['dataTbody'][count($dataTable['dataTbody']) - 1][4] .= $itemTemp . ',';
+            $dataTable['dataTbody'][count($dataTable['dataTbody']) - 1][4] = trim($dataTable['dataTbody'][count($dataTable['dataTbody']) - 1][4], ',');
+            $dataTable['dataIds'][] = $item['id'];
         }
-        $html .= "</tbody></table>";
-        $dataView['detail'] = $html;
+        $dataView['detail'] = $this->load->view('role/template/table', $dataTable, true);
+        //------------------------------------------------
         $data = array(
             'meta_title' => $id ? $dataView['name'] : lang($this->router->class),
             'data_header' => $id ? lang($this->router->class) . ':' . $dataView['name'] : lang('create_' . $this->router->class),
@@ -127,30 +149,30 @@ class Role extends CI_Controller
         checkRole();
         if ($id == '') redirect('/' . $this->router->class . '/index');
         $dataView = $this->{$this->router->class . '_model'}->get($id);
+        $dataView['detail'] = json_decode(html_entity_decode($dataView['detail']), true);
         unset($dataView['id']);
         $dataView['user_created'] = $this->user_model->get($dataView['user_created']);
         $dataView['user_modifiled'] = $this->user_model->get($dataView['user_modifiled']);
         $modules = $this->module_model->get_list();
-        $html = "<table class='table table-bordered'>
-                    <thead>
-                    <tr>
-                        <th>" . lang('name') . "</th>
-                        <th>" . lang('edit') . "</th>
-                        <th>" . lang('view') . "</th>
-                    </tr>
-                    </thead><tbody>";
-        if (!empty($dataView['detail'])) {
-            $detail = json_decode(html_entity_decode($dataView['detail']), true);
-        }
+        //------------------------------------------------------------
+        $dataTable = array(
+            'dataTbody' => array(),
+            'dataIds' => array()
+        );
         foreach ($modules as $item) {
-            $html .= "<tr>
-                        <td>{$item['name']}</td>
-                        <td><input type='checkbox' name='" . $item['name'] . '_edit' . "' class='flat' " . (isset($detail[$item['name'] . '_edit']) && $detail[$item['name'] . '_edit'] == "on" ? "checked" : '') . " /></td>
-                        <td><input type='checkbox' name='" . $item['name'] . '_view' . "' class='flat' " . (isset($detail[$item['name'] . '_view']) && $detail[$item['name'] . '_view'] == "on" ? "checked" : '') . " /></td>
-                      </tr>";
+            $dataTable['dataTbody'][] = array(
+                $item['name'],
+                !empty($dataView['detail'][$item['name'] . '_edit']) && $dataView['detail'][$item['name'] . '_edit'] == 'on' ? '<i class="fa fa-check"></i>' : '',
+                !empty($dataView['detail'][$item['name'] . '_view']) && $dataView['detail'][$item['name'] . '_view'] == 'on' ? '<i class="fa fa-check"></i>' : '',
+                !empty($dataView['detail'][$item['name'] . '_delete']) && $dataView['detail'][$item['name'] . '_delete'] == 'on' ? '<i class="fa fa-check"></i>' : '',
+            );
+            $dataTable['dataTbody'][count($dataTable['dataTbody']) - 1][4] = '';
+            foreach ($dataView['detail'][$item['name'] . '_other'] as $itemTemp) $dataTable['dataTbody'][count($dataTable['dataTbody']) - 1][4] .= $itemTemp . ',';
+            $dataTable['dataTbody'][count($dataTable['dataTbody']) - 1][4] = trim($dataTable['dataTbody'][count($dataTable['dataTbody']) - 1][4], ',');
+            $dataTable['dataIds'][] = $item['id'];
         }
-        $html .= "</tbody></table>";
-        $dataView['detail'] = $html;
+        $dataView['detail'] = $this->load->view('role/template/table_detail', $dataTable, true);
+        //-----------------------------------------------------------
         $data = array(
             'meta_title' => $dataView['name'],
             'data_header' => lang($this->router->class) . ':' . $dataView['name'],
