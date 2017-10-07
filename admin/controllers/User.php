@@ -64,8 +64,9 @@ class User extends CI_Controller
 
     function edit($id = '')
     {
-        if (checkRole($this->router->class . '_edit')) redirect('/', 'refresh');
-        if ($id != $this->session->userdata('userLogined')['id']) checkRole();
+        if ($id != $this->session->userdata('userLogined')['id']){
+            if (checkRole($this->router->class . '_edit')) redirect('/', 'refresh');
+        }
         if ($this->input->post('username')) {
             if ($id) {
                 $dataEdit = $this->input->post();
@@ -127,8 +128,9 @@ class User extends CI_Controller
 
     function detail($id = '')
     {
-        if (checkRole($this->router->class . '_view')) redirect('/', 'refresh');
-        if ($id != $this->session->userdata('userLogined')['id']) checkRole();
+        if ($id != $this->session->userdata('userLogined')['id']){
+            if (checkRole($this->router->class . '_view')) redirect('/', 'refresh');
+        }
         if ($id == '') redirect('/' . $this->router->class . '/index');
         $detail = $this->{$this->router->class . '_model'}->get($id);
         if ($detail['admin'] == 1) {
@@ -169,7 +171,6 @@ class User extends CI_Controller
 
     function change_password()
     {
-        if (checkRole($this->router->class . '_change_password')) redirect('/', 'refresh');
         $data = array(
             'meta_header' => array(
                 'title' => lang('change_password'),
