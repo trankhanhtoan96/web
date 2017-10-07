@@ -44,7 +44,7 @@ class Blog extends CI_Controller
 
     function index()
     {
-        checkRole();
+        if (!checkRole($this->router->class . '_view')) redirect('/', 'refresh');
         $dataView = $this->{$this->router->class . '_model'}->get_list();
         foreach ($dataView as $key => $value) {
             $dataView[$key]['user_created'] = $this->user_model->get($dataView[$key]['user_created']);
@@ -54,7 +54,7 @@ class Blog extends CI_Controller
             $blogCategory = $this->blog_model->getBlogCategory($dataView[$key]['id']);
             $dataView[$key]['blog_category'] = "<ul>";
             foreach ($blogCategory as $item) {
-                $category = $this->blog_category_model->get($item['blog_category_id'],'name');
+                $category = $this->blog_category_model->get($item['blog_category_id'], 'name');
                 $dataView[$key]['blog_category'] .= "<li>{$category['name']}</li>";
             }
             $dataView[$key]['blog_category'] .= "</ul>";
@@ -71,7 +71,7 @@ class Blog extends CI_Controller
 
     function edit($id = '')
     {
-        checkRole();
+        if (!checkRole($this->router->class . '_edit')) redirect('/', 'refresh');
         if ($this->input->post('name')) {
             if ($id) {
                 $dataEdit = $this->input->post();
@@ -105,7 +105,7 @@ class Blog extends CI_Controller
         $dataView = $this->{$this->router->class . '_model'}->get($id);
         $parent = $this->blog_category_model->get_list('id,name,parent_id');
         $dataView['parent'] = array();
-        sortBlogCategory($parent,'0',$dataView['parent']);
+        sortBlogCategory($parent, '0', $dataView['parent']);
         $parentIds = $this->blog_model->getBlogCategory($id);
         $dataView['parent_ids'] = array();
         foreach ($parentIds as $item) {
@@ -122,7 +122,7 @@ class Blog extends CI_Controller
 
     function detail($id = '')
     {
-        checkRole();
+        if (!checkRole($this->router->class . '_view')) redirect('/', 'refresh');
         if ($id == '') redirect('/' . $this->router->class . '/index');
         $dataView = $this->{$this->router->class . '_model'}->get($id);
         unset($dataView['id']);
@@ -133,7 +133,7 @@ class Blog extends CI_Controller
         $blogCategory = $this->blog_model->getBlogCategory($id);
         $dataView['blog_category'] = "<ul>";
         foreach ($blogCategory as $item) {
-            $category = $this->blog_category_model->get($item['blog_category_id'],'name');
+            $category = $this->blog_category_model->get($item['blog_category_id'], 'name');
             $dataView['blog_category'] .= "<li>{$category['name']}</li>";
         }
         $dataView['blog_category'] .= "</ul>";
@@ -149,14 +149,14 @@ class Blog extends CI_Controller
 
     function delete($id = '')
     {
-        checkRole();
+        if (!checkRole($this->router->class . '_delete')) redirect('/', 'refresh');
         $this->{$this->router->class . '_model'}->delete($id);
         redirect('/' . $this->router->class . '/index');
     }
 
     function deleteList()
     {
-        checkRole();
+        if (!checkRole($this->router->class . '_delete')) redirect('/', 'refresh');
         if ($recods = $this->input->post('record_selected')) {
             foreach ($recods as $id) {
                 $this->{$this->router->class . '_model'}->delete($id);
