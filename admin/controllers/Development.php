@@ -114,13 +114,13 @@ class Development extends CI_Controller
 
             //update main menu
             $data = "\n<!--auto_generate_{$name}-->
-<?php if(checkRole('".strtolower($name)."_edit',true) || checkRole('".strtolower($name)."_view',true)): ?>
+<?php if(checkRole('".strtolower($name)."_edit') || checkRole('".strtolower($name)."_view')): ?>
 <li><a><i class='fa fa-cube'></i><?= lang('" . strtolower($name) . "') ?><span class='fa fa-chevron-down'></span></a>
 <ul class='nav child_menu'>
-<?php if(checkRole('".strtolower($name)."_edit',true)): ?>
+<?php if(checkRole('".strtolower($name)."_edit')): ?>
 <li><a href='<?= base_url('admin.php/" . strtolower($name) . "/edit') ?>'><?= lang('create') ?></a></li>
 <?php endif; ?>
-<?php if(checkRole('".strtolower($name)."_view',true)): ?>
+<?php if(checkRole('".strtolower($name)."_view')): ?>
 <li><a href='<?= base_url('admin.php/" . strtolower($name) . "/index') ?>'><?= lang('list') ?></a></li>
 <?php endif; ?>
 </ul>
@@ -145,13 +145,13 @@ class Development extends CI_Controller
 
 
         $a = "\n<!--auto_generate_{$name}-->
-<?php if(checkRole('".strtolower($name)."_edit',true) || checkRole('".strtolower($name)."_view',true)): ?>
+<?php if(checkRole('".strtolower($name)."_edit') || checkRole('".strtolower($name)."_view')): ?>
 <li><a><i class='fa fa-cube'></i><?= lang('" . strtolower($name) . "') ?><span class='fa fa-chevron-down'></span></a>
 <ul class='nav child_menu'>
-<?php if(checkRole('".strtolower($name)."_edit',true)): ?>
+<?php if(checkRole('".strtolower($name)."_edit')): ?>
 <li><a href='<?= base_url('admin.php/" . strtolower($name) . "/edit') ?>'><?= lang('create') ?></a></li>
 <?php endif; ?>
-<?php if(checkRole('".strtolower($name)."_view',true)): ?>
+<?php if(checkRole('".strtolower($name)."_view')): ?>
 <li><a href='<?= base_url('admin.php/" . strtolower($name) . "/index') ?>'><?= lang('list') ?></a></li>
 <?php endif; ?>
 </ul>
@@ -177,6 +177,6 @@ class Development extends CI_Controller
         $this->load->dbforge();
         $this->dbforge->drop_table(strtolower($name),true);
 
-        echo "success!\n<a href='".site_url()."'>về trang chủ</a>";
+        echo "success!\n<a href='".site_url()."'>".lang('come_back_home')."</a>";
     }
 }

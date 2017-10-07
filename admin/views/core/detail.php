@@ -52,7 +52,7 @@ $relationshipPanelCount = 0;
 $relationshipPanelName = '';
 $relationshipPanelHtml = '';
 foreach ($moduleRelationship as $item) {
-    if ($this->session->userdata('userLogined')['admin'] == 1 || checkRole($item['module_2'] . '_view', true)) {
+    if ($this->session->userdata('userLogined')['admin'] == 1 || checkRole($item['module_2'] . '_view')) {
         $relationshipPanelCount++;
         if ($item['order_table'] == '12') {
             $tableRelationship = $item['module_1'] . '_' . $item['module_2'];

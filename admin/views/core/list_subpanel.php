@@ -12,7 +12,7 @@
     <?php
     foreach ($dataTbody as $key => $item) {
         echo "<tr><td style='text-align: center'><a data-toggle='tooltip' style='font-size:16px' title='" . lang('view') . "' href='" . site_url($module . '/detail/' . $dataIds[$key]) . "'><i class='fa fa-search'></i></a> <b style='font-size:16px'>";
-        if (checkRole($module . '_edit', true)) {
+        if (checkRole($module . '_edit')) {
             echo " | </b><a data-toggle='tooltip' style='font-size:16px' title='" . lang('edit') . "' href='" . site_url($module . '/edit/' . $dataIds[$key]) . "'><i class='fa fa-edit'></i></a></td>";
         }
         foreach ($item as $item2) {

@@ -116,5 +116,6 @@ $lang = array(
     'all'=>'Tất cả',
     'add'=>'Thêm',
     'other_role'=>'Phân quyền khác',
-    'orther'=>'Khác'
+    'orther'=>'Khác',
+    'come_back_home'=>'Về trang chủ'
 );

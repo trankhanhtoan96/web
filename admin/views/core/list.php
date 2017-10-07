@@ -10,7 +10,7 @@
                     <table id="dataTable" class="table table-striped table-bordered bulk_action">
                         <thead>
                         <tr>
-                        <?php if (checkRole($this->router->class . '_edit', true)): ?>
+                        <?php if (checkRole($this->router->class . '_edit')): ?>
                             <th style="width:3%;text-align: center"><input type="checkbox" class="flat" id="check-all"/>
                             </th>
                         <?php endif; ?>
@@ -26,11 +26,11 @@
                         <?php
                         foreach ($dataTbody as $key => $item) {
                             echo "<tr>";
-                            if (checkRole($this->router->class . '_edit', true)) {
+                            if (checkRole($this->router->class . '_edit')) {
                                 echo "<td style='text-align: center'><input type='checkbox' data-check='table_records' class='flat' name='record_selected[]' value='{$dataIds[$key]}'/></td>";
                             }
                             echo "<td style='text-align: center'><a data-toggle='tooltip' style='font-size:16px' title='" . lang('view') . "' href='" . site_url($this->router->class . '/detail/' . $dataIds[$key]) . "'><i class='fa fa-search'></i></a> <b style='font-size:16px'>";
-                            if (checkRole($this->router->class . '_edit', true)) {
+                            if (checkRole($this->router->class . '_edit')) {
                                 echo " | </b><a data-toggle='tooltip' style='font-size:16px' title='" . lang('edit') . "' href='" . site_url($this->router->class . '/edit/' . $dataIds[$key]) . "'><i class='fa fa-edit'></i></a></td>";
                             }
                             foreach ($item as $item2) {
