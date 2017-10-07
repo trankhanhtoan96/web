@@ -49,25 +49,23 @@ function getHtmlSelection(array $arr, $keySelected, array $option)
  * biến return để cho biết là có return ra kết quả checkrole hay không,
  * nếu return bằng true thì chỉ trả về kết quả mà không redirect, ngược lại sẽ redirect trang về home
  */
-function checkRole($roleName = '', $return = false)
+function checkRole($roleName)
 {
-    $CI = &get_instance();
-    if ($CI->session->userdata('userLogined')['admin'] == 1) return true;
-    $role = $CI->role_model->get($CI->session->userdata('userLogined')['role_id']);
-    $role = json_decode(html_entity_decode($role['detail']), true);
-    if ($roleName == '') {
-        if ($CI->router->method == 'index' || $CI->router->method == 'detail') {
-            $roleType = $CI->router->class . '_view';
-        } elseif ($CI->router->method == 'edit' || $CI->router->method == 'delete' || $CI->router->method == 'deleteList') {
-            $roleType = $CI->router->class . '_edit';
+    if (get_instance()->session->userdata('userLogined')['admin'] == 1) return true;
+    if (empty($GLOBALS['role'])) {
+        $temp = get_instance()->role_model->get(get_instance()->session->userdata('userLogined')['role_id']);
+        $temp = json_decode(html_entity_decode($temp['detail']), true);
+        $GLOBALS['role'] = $temp;
+        foreach ($temp as $item) {
+            if (is_array($item)) {
+                foreach ($item as $value) {
+                    $GLOBALS['role'][$value] = 'on';
+                }
+            }
         }
-        if (!empty($roleType) && isset($role[$roleType]) && $role[$roleType] == "on") return true;
-        if ($return) return false;
-    } else {
-        if (!empty($roleName) && isset($role[$roleName]) && $role[$roleName] == "on") return true;
-        if ($return) return false;
     }
-    redirect('/', 'refresh');
+    if (isset($GLOBALS['role'][$roleName]) && $GLOBALS['role'][$roleName] == 'on') return true;
+    return false;
 }
 
 /**
