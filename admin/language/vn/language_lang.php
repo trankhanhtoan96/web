@@ -124,5 +124,7 @@ $lang = array(
     'no_data'=>'Không có dữ liệu',
     'ajax_error'=>'Lỗi ajax',
     'send_mail_success'=>'Gửi email thành công!',
-    'send_mail_error'=>'Gửi email không thành công!'
+    'send_mail_error'=>'Gửi email không thành công!',
+    'create_email_template'=>'Tạo mẫu email',
+    'email_template'=>'Mẫu email'
 );

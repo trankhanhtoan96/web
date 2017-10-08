@@ -93,15 +93,17 @@
 <!--                        </li>-->
 <!--                    </ul>-->
 <!--                </li>-->
-                <li><a href="<?= base_url() ?>">Home</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="<?= base_url() ?>">Trang chủ</a></li>
+                <li><a href="#">Bảng giá</a></li>
+                <li><a href="#">Mẫu website</a></li>
+                <li><a href="#">Liên hệ</a></li>
             </ul>
         </nav>
         <div class="topSocial pull-right">
             <ul>
-                <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-                <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-                <li><a class="google" href="#"><i class="fa fa-google"></i></a></li>
+                <li><a class="facebook" href="http://fb.com/trankhanhtoan321"><i class="fa fa-facebook"></i></a></li>
+<!--                <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>-->
+<!--                <li><a class="google" href="#"><i class="fa fa-google"></i></a></li>-->
             </ul>
         </div>
         <div class="clearfix"></div>
@@ -407,129 +409,130 @@
                     <p class="subTittle wow fadeInUp" data-wow-duration="700ms" data-wow-delay="350ms" style="font-family: Tahoma">Tổng hợp các mẫu website nổi bật của chúng tôi</p>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-12 col-sm-12 col-xs-12">
-                    <ul class="folioBtn text-center wow fadeInUp" data-wow-duration="700ms" data-wow-delay="300ms">
-                        <li class="filter" data-filter="all">All</li>
-                        <li class="filter" data-filter="shop">Shop bán hàng</li>
-                        <li class="filter" data-filter="company">Web công ty</li>
-                        <li class="filter" data-filter="realestate">Bất động sản</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="row">
-                <div id="mixer">
-                    <div class="col-lg-4 col-sm-4 col-xs-12 text-center mix shop">
-                        <div class="folioImg2">
-                            <img src="<?= base_url('uploads/images/1.png')?>" alt="">
-                            <div class="folioHover2">
-                                <a href="<?= base_url('uploads/images/1.png')?>" class="prePhoto2" data-rel="prettyPhoto"><i
-                                        class="icon-search3"></i></a>
-                                <a href="<?= base_url('uploads/images/1.png')?>" class="detailsLink2"><i class="icon-location"></i></a>
-                            </div>
-                        </div>
-                        <div class="portfolioDetails">
-                            <h3><a href="<?= base_url('uploads/images/1.png')?>">Mẫu 1</a></h3>
-<!--                            <p class="potCategory"><a href="#">Web Design</a><span>,</span><a href="#">Media</a></p>-->
-<!--                            <p>-->
-<!--                                Consetetur sadipscing elitr, sed diam nonumy eirmod tempor.-->
-<!--                            </p>-->
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-4 col-xs-12 text-center mix company">
-                        <div class="folioImg2">
-                            <img src="<?= base_url('site/views/images/home3/folio2.jpg')?>" alt="">
-                            <div class="folioHover2">
-                                <a href="<?= base_url('site/views/images/home3/folio2.jpg')?>" class="prePhoto2" data-rel="prettyPhoto"><i
-                                        class="icon-search3"></i></a>
-                                <a href="folio1.html" class="detailsLink2"><i class="icon-location"></i></a>
-                            </div>
-                        </div>
-                        <div class="portfolioDetails">
-                            <h3><a href="folioSingle.html">Mẫu 2</a></h3>
-<!--                            <p class="potCategory"><a href="#">photography</a><span>,</span><a href="#">print</a></p>-->
-<!--                            <p>-->
-<!--                                At vero eos et accusam sto duo dolores et ea retet clita kasd.-->
-<!--                            </p>-->
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-4 col-xs-12 text-center mix shop">
-                        <div class="folioImg2">
-                            <img src="<?= base_url('site/views/images/home3/folio3.jpg')?>" alt="">
-                            <div class="folioHover2">
-                                <a href="<?= base_url('site/views/images/home3/folio3.jpg')?>" class="prePhoto2" data-rel="prettyPhoto"><i
-                                        class="icon-search3"></i></a>
-                                <a href="folio1.html" class="detailsLink2"><i class="icon-location"></i></a>
-                            </div>
-                        </div>
-                        <div class="portfolioDetails">
-                            <h3><a href="folioSingle.html">Mẫu 3</a></h3>
-<!--                            <p class="potCategory"><a href="#">marketing</a><span>,</span><a href="#">branding</a></p>-->
-<!--                            <p>-->
-<!--                                Sanctus est lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.-->
-<!--                            </p>-->
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-4 col-xs-12 text-center mix company">
-                        <div class="folioImg2">
-                            <img src="<?= base_url('site/views/images/home3/folio4.jpg')?>" alt="">
-                            <div class="folioHover2">
-                                <a href="<?= base_url('site/views/images/home3/folio4.jpg')?>" class="prePhoto2" data-rel="prettyPhoto"><i
-                                        class="icon-search3"></i></a>
-                                <a href="folio1.html" class="detailsLink2"><i class="icon-location"></i></a>
-                            </div>
-                        </div>
-                        <div class="portfolioDetails last">
-                            <h3><a href="folioSingle.html">Mẫu 4</a></h3>
-<!--                            <p class="potCategory"><a href="#">marketing</a><span>,</span><a href="#">branding</a></p>-->
-<!--                            <p>-->
-<!--                                Sanctus est lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.-->
-<!--                            </p>-->
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-4 col-xs-12 text-center mix realestate">
-                        <div class="folioImg2">
-                            <img src="<?= base_url('site/views/images/home3/folio5.jpg')?>" alt="">
-                            <div class="folioHover2">
-                                <a href="<?= base_url('site/views/images/home3/folio5.jpg')?>" class="prePhoto2" data-rel="prettyPhoto"><i
-                                        class="icon-search3"></i></a>
-                                <a href="folio1.html" class="detailsLink2"><i class="icon-location"></i></a>
-                            </div>
-                        </div>
-                        <div class="portfolioDetails last">
-                            <h3><a href="folioSingle.html">Mẫu 5</a></h3>
-<!--                            <p class="potCategory"><a href="#">Web Design</a><span>,</span><a href="#">Media</a></p>-->
-<!--                            <p>-->
-<!--                                Consetetur sadipscing elitr, sed diam nonumy eirmod tempor.-->
-<!--                            </p>-->
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-sm-4 col-xs-12 text-center mix realestate">
-                        <div class="folioImg2">
-                            <img src="<?= base_url('site/views/images/home3/folio6.jpg')?>" alt="">
-                            <div class="folioHover2">
-                                <a href="<?= base_url('site/views/images/home3/folio6.jpg')?>" class="prePhoto2" data-rel="prettyPhoto"><i
-                                        class="icon-search3"></i></a>
-                                <a href="folio1.html" class="detailsLink2"><i class="icon-location"></i></a>
-                            </div>
-                        </div>
-                        <div class="portfolioDetails last">
-                            <h3><a href="folioSingle.html">Mẫu 6</a></h3>
-<!--                            <p class="potCategory"><a href="#">photography</a><span>,</span><a href="#">print</a></p>-->
-<!--                            <p>-->
-<!--                                At vero eos et accusam sto duo dolores et ea retet clita kasd.-->
-<!--                            </p>-->
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-            </div>
+<!--            <div class="row">-->
+<!--                <div class="col-lg-12 col-sm-12 col-xs-12">-->
+<!--                    <ul class="folioBtn text-center wow fadeInUp" data-wow-duration="700ms" data-wow-delay="300ms">-->
+<!--                        <li class="filter" data-filter="all">All</li>-->
+<!--                        <li class="filter" data-filter="shop">Shop bán hàng</li>-->
+<!--                        <li class="filter" data-filter="company">Web công ty</li>-->
+<!--                        <li class="filter" data-filter="realestate">Bất động sản</li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="row">-->
+<!--                <div id="mixer">-->
+<!--                    <div class="col-lg-4 col-sm-4 col-xs-12 text-center mix shop">-->
+<!--                        <div class="folioImg2">-->
+<!--                            <img src="--><?//= base_url('uploads/images/1.png')?><!--" alt="">-->
+<!--                            <div class="folioHover2">-->
+<!--                                <a href="--><?//= base_url('uploads/images/1.png')?><!--" class="prePhoto2" data-rel="prettyPhoto"><i-->
+<!--                                        class="icon-search3"></i></a>-->
+<!--                                <a href="--><?//= base_url('uploads/images/1.png')?><!--" class="detailsLink2"><i class="icon-location"></i></a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="portfolioDetails">-->
+<!--                            <h3><a href="--><?//= base_url('uploads/images/1.png')?><!--">Mẫu 1</a></h3>-->
+<!--<!--                            <p class="potCategory"><a href="#">Web Design</a><span>,</span><a href="#">Media</a></p>--
+<!--<!--                            <p>-->
+<!--<!--                                Consetetur sadipscing elitr, sed diam nonumy eirmod tempor.--
+<!--<!--                            </p>-->
+<!--                            <div class="clearfix"></div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-lg-4 col-sm-4 col-xs-12 text-center mix company">-->
+<!--                        <div class="folioImg2">-->
+<!--                            <img src="--><?//= base_url('site/views/images/home3/folio2.jpg')?><!--" alt="">-->
+<!--                            <div class="folioHover2">-->
+<!--                                <a href="--><?//= base_url('site/views/images/home3/folio2.jpg')?><!--" class="prePhoto2" data-rel="prettyPhoto"><i-->
+<!--                                        class="icon-search3"></i></a>-->
+<!--                                <a href="folio1.html" class="detailsLink2"><i class="icon-location"></i></a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="portfolioDetails">-->
+<!--                            <h3><a href="folioSingle.html">Mẫu 2</a></h3>-->
+<!--<!--                            <p class="potCategory"><a href="#">photography</a><span>,</span><a href="#">print</a></p>-->
+<!--<!--                            <p>-->
+<!--<!--                                At vero eos et accusam sto duo dolores et ea retet clita kasd.-->
+<!--<!--                            </p>-->
+<!--                            <div class="clearfix"></div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-lg-4 col-sm-4 col-xs-12 text-center mix shop">-->
+<!--                        <div class="folioImg2">-->
+<!--                            <img src="--><?//= base_url('site/views/images/home3/folio3.jpg')?><!--" alt="">-->
+<!--                            <div class="folioHover2">-->
+<!--                                <a href="--><?//= base_url('site/views/images/home3/folio3.jpg')?><!--" class="prePhoto2" data-rel="prettyPhoto"><i-->
+<!--                                        class="icon-search3"></i></a>-->
+<!--                                <a href="folio1.html" class="detailsLink2"><i class="icon-location"></i></a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="portfolioDetails">-->
+<!--                            <h3><a href="folioSingle.html">Mẫu 3</a></h3>-->
+<!--<!--                            <p class="potCategory"><a href="#">marketing</a><span>,</span><a href="#">branding</a></p>-->
+<!--<!--                            <p>-->
+<!--<!--                                Sanctus est lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.-->
+<!--<!--                            </p>-->
+<!--                            <div class="clearfix"></div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-lg-4 col-sm-4 col-xs-12 text-center mix company">-->
+<!--                        <div class="folioImg2">-->
+<!--                            <img src="--><?//= base_url('site/views/images/home3/folio4.jpg')?><!--" alt="">-->
+<!--                            <div class="folioHover2">-->
+<!--                                <a href="--><?//= base_url('site/views/images/home3/folio4.jpg')?><!--" class="prePhoto2" data-rel="prettyPhoto"><i-->
+<!--                                        class="icon-search3"></i></a>-->
+<!--                                <a href="folio1.html" class="detailsLink2"><i class="icon-location"></i></a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="portfolioDetails last">-->
+<!--                            <h3><a href="folioSingle.html">Mẫu 4</a></h3>-->
+<!--<!--                            <p class="potCategory"><a href="#">marketing</a><span>,</span><a href="#">branding</a></p>-->
+<!--<!--                            <p>-->
+<!--<!--                                Sanctus est lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.-->
+<!--<!--                            </p>-->
+<!--                            <div class="clearfix"></div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-lg-4 col-sm-4 col-xs-12 text-center mix realestate">-->
+<!--                        <div class="folioImg2">-->
+<!--                            <img src="--><?//= base_url('site/views/images/home3/folio5.jpg')?><!--" alt="">-->
+<!--                            <div class="folioHover2">-->
+<!--                                <a href="--><?//= base_url('site/views/images/home3/folio5.jpg')?><!--" class="prePhoto2" data-rel="prettyPhoto"><i-->
+<!--                                        class="icon-search3"></i></a>-->
+<!--                                <a href="folio1.html" class="detailsLink2"><i class="icon-location"></i></a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="portfolioDetails last">-->
+<!--                            <h3><a href="folioSingle.html">Mẫu 5</a></h3>-->
+<!--<!--                            <p class="potCategory"><a href="#">Web Design</a><span>,</span><a href="#">Media</a></p>-->
+<!--<!--                            <p>-->
+<!--<!--                                Consetetur sadipscing elitr, sed diam nonumy eirmod tempor.-->
+<!--<!--                            </p>-->
+<!--                            <div class="clearfix"></div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="col-lg-4 col-sm-4 col-xs-12 text-center mix realestate">-->
+<!--                        <div class="folioImg2">-->
+<!--                            <img src="--><?//= base_url('site/views/images/home3/folio6.jpg')?><!--" alt="">-->
+<!--                            <div class="folioHover2">-->
+<!--                                <a href="--><?//= base_url('site/views/images/home3/folio6.jpg')?><!--" class="prePhoto2" data-rel="prettyPhoto"><i-->
+<!--                                        class="icon-search3"></i></a>-->
+<!--                                <a href="folio1.html" class="detailsLink2"><i class="icon-location"></i></a>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="portfolioDetails last">-->
+<!--                            <h3><a href="folioSingle.html">Mẫu 6</a></h3>-->
+<!--<!--                            <p class="potCategory"><a href="#">photography</a><span>,</span><a href="#">print</a></p>-->
+<!--<!--                            <p>-->
+<!--<!--                                At vero eos et accusam sto duo dolores et ea retet clita kasd.-->
+<!--<!--                            </p>-->
+<!--                            <div class="clearfix"></div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="clearfix"></div>-->
+<!--                </div>-->
+<!--            </div>-->
+                <?php $this->load->view('demo') ?>
         </div>
     </section>
 
@@ -693,7 +696,7 @@
                         <div class="footerContent">
                             <h2 class="wow fadeInUp" data-wow-duration="700ms" data-wow-delay="300ms">(+84) 163 663 4028</h2>
                             <a class="wow fadeInUp" data-wow-duration="700ms" data-wow-delay="350ms"
-                               href="mailto:quantri@bukt.info">quantri@bukt.info</a>
+                               href="mailto:quantri@bukt.info">me@bukt.info</a>
                             <p class="wow fadeInUp" data-wow-duration="700ms" data-wow-delay="400ms" style="font-family: Tahoma">
                                 56 Đường D2, Phường 25, Quận Bình Thạnh, Tp HCM
                             </p>
