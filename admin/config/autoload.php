@@ -161,30 +161,12 @@ $autoload['model'] = array(
     'user_model',
     'setting_model',
     'relationship_model',
-    'blog_category_blog_model'
+    'blog_category_blog_model',
+    'role_model',
+    'module_model',
+    'page_model',
+    'blog_category_model',
+    'blog_model',
+    'email_model',
+    'email_template_model'
 );
-
-//auto_generate_Role
-$autoload['model'][] = 'role_model';
-//auto_generate_Role
-
-//auto_generate_Module
-$autoload['model'][] = 'module_model';
-//auto_generate_Module
-
-
-//auto_generate_Page
-$autoload['model'][] = 'page_model';
-//auto_generate_Page
-
-//auto_generate_Blog_category
-$autoload['model'][] = 'blog_category_model';
-//auto_generate_Blog_category
-
-//auto_generate_Blog
-$autoload['model'][] = 'blog_model';
-//auto_generate_Blog
-
-//auto_generate_Email
-$autoload['model'][] = 'email_model';
-//auto_generate_Email

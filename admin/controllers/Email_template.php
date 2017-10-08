@@ -31,12 +31,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property CI_DB $db
  * @property User_model user_model
  * @property CI_Router router
- * @property Email_model email_model
- * @property Role_model role_model
- * @property Mail mail
- * @property Email_template_model email_template_model
  */
-class Email extends CI_Controller
+class Email_template extends CI_Controller
 {
     function __construct()
     {
@@ -65,18 +61,14 @@ class Email extends CI_Controller
     function edit($id = '')
     {
         if (!checkRole($this->router->class . '_edit')) redirect('/', 'refresh');
-        if ($this->input->post('email_address')) {
+        if ($this->input->post('name')) {
             if ($id) {
                 $dataEdit = $this->input->post();
                 $dataEdit['id'] = $id;
-                if ($dataEdit['validation'] == 'on') $dataEdit['validation'] = 1;
-                else $dataEdit['validation'] = 0;
                 $this->{$this->router->class . '_model'}->update($dataEdit);
                 redirect('/' . $this->router->class . '/detail/' . $id);
             } else {
                 $dataEdit = $this->input->post();
-                if ($dataEdit['validation'] == 'on') $dataEdit['validation'] = 1;
-                else $dataEdit['validation'] = 0;
                 unset($dataEdit['id']);
                 $dataId = '';
                 $this->{$this->router->class . '_model'}->insert($dataEdit, $dataId);
@@ -126,105 +118,5 @@ class Email extends CI_Controller
             }
         }
         redirect('/' . $this->router->class . '/index');
-    }
-
-    function send_mail($email_template_id = '')
-    {
-        if (!checkRole('email_send_mail')) redirect('/', 'refresh');
-
-        //send mail when submit
-        if ($this->input->post('subject')) {
-            $this->load->library('mail');
-            $this->mail->mailer->Subject = $this->input->post('subject');
-            $this->mail->mailer->Body = $this->input->post('body_email');
-
-            //mail to
-            $mailAddress = explode(',', $this->input->post('email_to'));
-            foreach ($mailAddress as $item)
-                if ($item) $this->mail->mailer->addAddress($item);
-
-            //mail cc
-            $mailAddress = explode(',', $this->input->post('email_cc'));
-            foreach ($mailAddress as $item)
-                if ($item) $this->mail->mailer->addCC($item);
-
-            //mail bcc
-            $mailAddress = explode(',', $this->input->post('email_bcc'));
-            foreach ($mailAddress as $item)
-                if ($item) $this->mail->mailer->addBCC($item);
-
-            if ($this->mail->mailer->send()) {
-                $alert = $this->load->view('alert/success', array('message' => lang('send_mail_success')), true);
-            } else {
-                $alert = $this->load->view('alert/error', array('message' => lang('send_mail_error')), true);
-            }
-        }
-
-        $dataView = array();
-
-        //user_role_type_select
-        $roles = array('1' => lang('all'));
-        foreach ($this->role_model->get_list('id, name') as $item) {
-            $roles[$item['id']] = $item['name'];
-        }
-        $dataView['user_role_type_select'] = getHtmlSelection($roles, '', array('name' => 'user_role_type_select', 'id' => 'user_role_type_select'));
-
-        //select_add_address
-        $selectAddAddress = array(
-            'to' => 'TO',
-            'cc' => 'CC',
-            'bcc' => 'BCC'
-        );
-        $dataView['select_add_address'] = getHtmlSelection($selectAddAddress, '', array('name' => 'select_add_address', 'class' => 'select_add_address'));
-
-
-        //table_user_email
-        $users = $this->user_model->get_list();
-        $dataTableUserEmail = array(
-            'dataTbody' => array(),
-            'dataIds' => array()
-        );
-        foreach ($users as $item) {
-            $dataTableUserEmail['dataTbody'][] = array(
-                $item['first_name'] . ' ' . $item['last_name'],
-                $item['email'],
-                $item['admin'] == 1 ? 1 : $this->role_model->get($item['role_id'], 'name')['name']
-            );
-            $dataTableUserEmail['dataIds'][] = $item['id'];
-        }
-        $dataView['table_user_email'] = $this->load->view('email/template/table_user', $dataTableUserEmail, true);
-        //end
-
-        //table_email
-        $users = $this->email_model->get_list();
-        $dataTableEmail = array(
-            'dataTbody' => array(),
-            'dataIds' => array()
-        );
-        foreach ($users as $item) {
-            $dataTableEmail['dataTbody'][] = array(
-                $item['name'],
-                $item['email_address']
-            );
-            $dataTableEmail['dataIds'][] = $item['id'];
-        }
-        $dataView['table_email'] = $this->load->view('email/template/table_email', $dataTableEmail, true);
-        //end
-
-        //email template
-        if ($email_template_id != '') {
-            $emailTemplate = $this->email_template_model->get($email_template_id);
-            $dataView['subject'] = $emailTemplate['name'];
-            $dataView['body_email'] = $emailTemplate['content'];
-        }
-
-        $data = array(
-            'meta_title' => lang('send_mail'),
-            'data_header' => lang('send_mail'),
-            'data_id' => '',
-            'alert' => !empty($alert) ? $alert : '',
-            'data' => $dataView
-        );
-        $this->load->view('email/send_mail', $data);
     }
 }
