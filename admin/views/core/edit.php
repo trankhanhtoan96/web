@@ -1,4 +1,3 @@
-<?php if (!empty($alert)) $this->load->view('alert/' . $alert['type'], $alert); ?>
 <link rel="stylesheet" type="text/css"
       href="<?= base_url('admin/views/' . $this->router->class . '/' . $this->router->method . '.css') ?>"/>
 <form action="" method="post" name="editview" enctype="multipart/form-data">

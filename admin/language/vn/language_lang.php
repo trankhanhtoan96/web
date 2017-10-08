@@ -117,5 +117,12 @@ $lang = array(
     'add'=>'Thêm',
     'other_role'=>'Phân quyền khác',
     'orther'=>'Khác',
-    'come_back_home'=>'Về trang chủ'
+    'come_back_home'=>'Về trang chủ',
+    'add_success'=>'Thêm thành công!',
+    'not_yet_choose_email'=>'Chưa chọn email!',
+    'please_wait'=>'Vui lòng chờ...',
+    'no_data'=>'Không có dữ liệu',
+    'ajax_error'=>'Lỗi ajax',
+    'send_mail_success'=>'Gửi email thành công!',
+    'send_mail_error'=>'Gửi email không thành công!'
 );

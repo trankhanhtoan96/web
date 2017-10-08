@@ -30,7 +30,7 @@ $dataTemplates = array(
             0 => array(
                 0 => array(
                     'label' => lang('email_to'),
-                    'type' => 'text',
+                    'type' => 'textarea',
                     'value' => !empty($data['email_to']) ? $data['email_to'] : '',
                     'name' => 'email_to'
                 )
@@ -38,7 +38,7 @@ $dataTemplates = array(
             1 => array(
                 0 => array(
                     'label' => lang('email_cc'),
-                    'type' => 'text',
+                    'type' => 'textarea',
                     'value' => !empty($data['email_cc']) ? $data['email_cc'] : '',
                     'name' => 'email_cc'
                 )
@@ -46,7 +46,7 @@ $dataTemplates = array(
             2 => array(
                 0 => array(
                     'label' => lang('email_bcc'),
-                    'type' => 'text',
+                    'type' => 'textarea',
                     'value' => !empty($data['email_bcc']) ? $data['email_bcc'] : '',
                     'name' => 'email_bcc'
                 )
@@ -57,16 +57,28 @@ $dataTemplates = array(
         'panel_name' => lang('user'),
         'data_panel' => array(
             0 => array(
-                0 => array(
-                    'code'=>$data['user_role_type_select']
-                ),
-                1=>array(
-                    'code'=>$data['select_add_address']."&nbsp;&nbsp;<button style='margin-top:5px' class='btn btn-primary' id='btn_add_address'>".lang('add')."</button>"
+                0=>array(
+                    'code'=>$data['select_add_address']."&nbsp;&nbsp;<button type='button' style='margin-top:5px' class='btn btn-primary btn_add_address'>".lang('add')."</button>"
                 )
             ),
             1 => array(
                 0 => array(
                     'code'=>$data['table_user_email']
+                )
+            )
+        )
+    ),
+    3 => array(
+        'panel_name' => lang('email'),
+        'data_panel' => array(
+            0 => array(
+                0=>array(
+                    'code'=>$data['select_add_address']."&nbsp;&nbsp;<button type='button' style='margin-top:5px' class='btn btn-primary btn_add_address'>".lang('add')."</button>"
+                )
+            ),
+            1 => array(
+                0 => array(
+                    'code'=>$data['table_email']
                 )
             )
         )

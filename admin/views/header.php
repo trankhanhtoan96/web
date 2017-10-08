@@ -13,6 +13,7 @@
         var CI_language = <?= json_encode($this->lang->language) ?>;
         CI_language.language = '<?= CI_LANGUAGE_DISPLAY ?>';
         CI_language.base_url = '<?= base_url() ?>';
+        CI_language.site_url = '<?= site_url() ?>';
     </script>
 
     <!--jquery-->
@@ -52,6 +53,10 @@
 
     <!--ckfinder-->
     <script src="<?= base_url('vendors/ckfinder/ckfinder.js') ?>"></script>
+
+    <!--taginput-->
+    <link rel="stylesheet" type="text/css"
+          href="<?= base_url('vendors/bootstrap-tagsinput/src/bootstrap-tagsinput.css') ?>"/>
 
     <!--admin-->
     <link rel="stylesheet" href="<?= base_url('vendors/admin/custom.min.css') ?>"/>
@@ -115,3 +120,4 @@
         <div class="right_col" role="main">
             <div class="">
                 <div class="clearfix"></div>
+<?= !empty($alert) ? '<br/>' . $alert : '' ?>

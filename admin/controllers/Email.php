@@ -31,8 +31,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property CI_DB $db
  * @property User_model user_model
  * @property CI_Router router
- * @property Email email_model
+ * @property Email_model email_model
  * @property Role_model role_model
+ * @property Mail mail
  */
 class Email extends CI_Controller
 {
@@ -63,7 +64,7 @@ class Email extends CI_Controller
     function edit($id = '')
     {
         if (!checkRole($this->router->class . '_edit')) redirect('/', 'refresh');
-        if ($this->input->post('name')) {
+        if ($this->input->post('email_address')) {
             if ($id) {
                 $dataEdit = $this->input->post();
                 $dataEdit['id'] = $id;
@@ -129,6 +130,35 @@ class Email extends CI_Controller
     function send_mail()
     {
         if (!checkRole('email_send_mail')) redirect('/', 'refresh');
+
+        //send mail when submit
+        if ($this->input->post('subject')) {
+            $this->load->library('mail');
+            $this->mail->mailer->Subject = $this->input->post('subject');
+            $this->mail->mailer->Body = $this->input->post('body_email');
+
+            //mail to
+            $mailAddress = explode(',', $this->input->post('email_to'));
+            foreach ($mailAddress as $item)
+                if ($item) $this->mail->mailer->addAddress($item);
+
+            //mail cc
+            $mailAddress = explode(',', $this->input->post('email_cc'));
+            foreach ($mailAddress as $item)
+                if ($item) $this->mail->mailer->addCC($item);
+
+            //mail bcc
+            $mailAddress = explode(',', $this->input->post('email_bcc'));
+            foreach ($mailAddress as $item)
+                if ($item) $this->mail->mailer->addBCC($item);
+
+            if ($this->mail->mailer->send()) {
+                $alert = $this->load->view('alert/success', array('message' => lang('send_mail_success')), true);
+            } else {
+                $alert = $this->load->view('alert/error', array('message' => lang('send_mail_error')), true);
+            }
+        }
+
         $dataView = array();
 
         //user_role_type_select
@@ -144,7 +174,7 @@ class Email extends CI_Controller
             'cc' => 'CC',
             'bcc' => 'BCC'
         );
-        $dataView['select_add_address'] = getHtmlSelection($selectAddAddress, '', array('name' => 'select_add_address', 'id' => 'select_add_address'));
+        $dataView['select_add_address'] = getHtmlSelection($selectAddAddress, '', array('name' => 'select_add_address', 'class' => 'select_add_address'));
 
 
         //table_user_email
@@ -156,17 +186,35 @@ class Email extends CI_Controller
         foreach ($users as $item) {
             $dataTableUserEmail['dataTbody'][] = array(
                 $item['first_name'] . ' ' . $item['last_name'],
-                $item['email']
+                $item['email'],
+                $item['admin'] == 1 ? 1 : $this->role_model->get($item['role_id'], 'name')['name']
             );
             $dataTableUserEmail['dataIds'][] = $item['id'];
         }
         $dataView['table_user_email'] = $this->load->view('email/template/table_user', $dataTableUserEmail, true);
         //end
 
+        //table_email
+        $users = $this->email_model->get_list();
+        $dataTableEmail = array(
+            'dataTbody' => array(),
+            'dataIds' => array()
+        );
+        foreach ($users as $item) {
+            $dataTableEmail['dataTbody'][] = array(
+                $item['name'],
+                $item['email_address']
+            );
+            $dataTableEmail['dataIds'][] = $item['id'];
+        }
+        $dataView['table_email'] = $this->load->view('email/template/table_email', $dataTableEmail, true);
+        //end
+
         $data = array(
             'meta_title' => lang('send_mail'),
             'data_header' => lang('send_mail'),
             'data_id' => '',
+            'alert' => !empty($alert) ? $alert : '',
             'data' => $dataView
         );
         $this->load->view('email/send_mail', $data);

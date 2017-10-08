@@ -421,15 +421,15 @@
                 <div id="mixer">
                     <div class="col-lg-4 col-sm-4 col-xs-12 text-center mix shop">
                         <div class="folioImg2">
-                            <img src="<?= base_url('site/views/images/home3/folio1.jpg')?>" alt="">
+                            <img src="<?= base_url('uploads/images/1.png')?>" alt="">
                             <div class="folioHover2">
-                                <a href="<?= base_url('site/views/images/home3/folio1.jpg')?>" class="prePhoto2" data-rel="prettyPhoto"><i
+                                <a href="<?= base_url('uploads/images/1.png')?>" class="prePhoto2" data-rel="prettyPhoto"><i
                                         class="icon-search3"></i></a>
-                                <a href="folio1.html" class="detailsLink2"><i class="icon-location"></i></a>
+                                <a href="<?= base_url('uploads/images/1.png')?>" class="detailsLink2"><i class="icon-location"></i></a>
                             </div>
                         </div>
                         <div class="portfolioDetails">
-                            <h3><a href="folioSingle.html">Mẫu 1</a></h3>
+                            <h3><a href="<?= base_url('uploads/images/1.png')?>">Mẫu 1</a></h3>
 <!--                            <p class="potCategory"><a href="#">Web Design</a><span>,</span><a href="#">Media</a></p>-->
 <!--                            <p>-->
 <!--                                Consetetur sadipscing elitr, sed diam nonumy eirmod tempor.-->
