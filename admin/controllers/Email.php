@@ -35,6 +35,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property Role_model role_model
  * @property Mail mail
  * @property Email_template_model email_template_model
+ * @property Email_sent_model email_sent_model
+ * @property Email_sent_user_model email_sent_user_model
+ * @property Email_sent_email_model email_sent_email_model
  */
 class Email extends CI_Controller
 {
@@ -84,6 +87,7 @@ class Email extends CI_Controller
             }
         }
         $dataView = $this->{$this->router->class . '_model'}->get($id);
+        if ($id == '') $dataView['validation'] = '1';
         $data = array(
             'meta_title' => $id ? $dataView['name'] : lang($this->router->class),
             'data_header' => $id ? lang($this->router->class) . ':' . $dataView['name'] : lang('create_' . $this->router->class),
@@ -138,23 +142,58 @@ class Email extends CI_Controller
             $this->mail->mailer->Subject = $this->input->post('subject');
             $this->mail->mailer->Body = $this->input->post('body_email');
 
-            //mail to
-            $mailAddress = explode(',', $this->input->post('email_to'));
-            foreach ($mailAddress as $item)
-                if ($item) $this->mail->mailer->addAddress($item);
+            $addressTO = explode(',', $this->input->post('email_to'));
+            $addressCC = explode(',', $this->input->post('email_cc'));
+            $addressBCC = explode(',', $this->input->post('email_bcc'));
 
-            //mail cc
-            $mailAddress = explode(',', $this->input->post('email_cc'));
-            foreach ($mailAddress as $item)
-                if ($item) $this->mail->mailer->addCC($item);
-
-            //mail bcc
-            $mailAddress = explode(',', $this->input->post('email_bcc'));
-            foreach ($mailAddress as $item)
-                if ($item) $this->mail->mailer->addBCC($item);
-
+            foreach ($addressTO as $item)
+                if ($item) $this->mail->mailer->addAddress(trim($item));
+            foreach ($addressCC as $item)
+                if ($item) $this->mail->mailer->addCC(trim($item));
+            foreach ($addressBCC as $item)
+                if ($item) $this->mail->mailer->addBCC(trim($item));
+            //gửi mail
             if ($this->mail->mailer->send()) {
                 $alert = $this->load->view('alert/success', array('message' => lang('send_mail_success')), true);
+
+                //lưu quan hệ và lưu lại email đã gửi
+                //lưu email đã gởi
+                $dataEmailSent = array(
+                    'name' => $this->mail->mailer->Subject,
+                    'content' => $this->mail->mailer->Body
+                );
+                $idEmailSent = '';
+                $this->email_sent_model->insert($dataEmailSent, $idEmailSent);
+
+                //tiến hành lưu quan hệ với email đã gởi
+                $address = $this->mail->mailer->getAllRecipientAddresses();
+                foreach ($address as $key=>$item) {
+                    $sql = "SELECT id FROM user WHERE email='{$key}'";
+                    $result = $this->db->query($sql)->result_array();
+                    if (count($result) >0) {
+                        foreach($result as $i) {
+                            $dataTemp = array(
+                                'user_id' => $i['id'],
+                                'email_sent_id' => $idEmailSent
+                            );
+                            $this->email_sent_user_model->insert($dataTemp);
+                        }
+                    } else {
+                        //lưu quan hệ với danh sách email
+                        $sql = "SELECT id FROM email WHERE email_address='{$key}'";
+                        $result = $this->db->query($sql)->result_array();
+                        if (count($result) >0) {
+                            foreach($result as $i) {
+                                $dataTemp = array(
+                                    'email_id' => $i['id'],
+                                    'email_sent_id' => $idEmailSent
+                                );
+                                $this->email_sent_email_model->insert($dataTemp);
+                            }
+                        }
+                    }
+                }
+
             } else {
                 $alert = $this->load->view('alert/error', array('message' => lang('send_mail_error')), true);
             }
@@ -167,9 +206,10 @@ class Email extends CI_Controller
         foreach ($this->role_model->get_list('id, name') as $item) {
             $roles[$item['id']] = $item['name'];
         }
+
         $dataView['user_role_type_select'] = getHtmlSelection($roles, '', array('name' => 'user_role_type_select', 'id' => 'user_role_type_select'));
 
-        //select_add_address
+//select_add_address
         $selectAddAddress = array(
             'to' => 'TO',
             'cc' => 'CC',
@@ -178,7 +218,7 @@ class Email extends CI_Controller
         $dataView['select_add_address'] = getHtmlSelection($selectAddAddress, '', array('name' => 'select_add_address', 'class' => 'select_add_address'));
 
 
-        //table_user_email
+//table_user_email
         $users = $this->user_model->get_list();
         $dataTableUserEmail = array(
             'dataTbody' => array(),
@@ -193,9 +233,9 @@ class Email extends CI_Controller
             $dataTableUserEmail['dataIds'][] = $item['id'];
         }
         $dataView['table_user_email'] = $this->load->view('email/template/table_user', $dataTableUserEmail, true);
-        //end
+//end
 
-        //table_email
+//table_email
         $users = $this->email_model->get_list();
         $dataTableEmail = array(
             'dataTbody' => array(),
@@ -209,9 +249,9 @@ class Email extends CI_Controller
             $dataTableEmail['dataIds'][] = $item['id'];
         }
         $dataView['table_email'] = $this->load->view('email/template/table_email', $dataTableEmail, true);
-        //end
+//end
 
-        //email template
+//email template
         if ($email_template_id != '') {
             $emailTemplate = $this->email_template_model->get($email_template_id);
             $dataView['subject'] = $emailTemplate['name'];

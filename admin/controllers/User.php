@@ -43,7 +43,7 @@ class User extends CI_Controller
 
     function index()
     {
-        if (checkRole($this->router->class . '_view')) redirect('/', 'refresh');
+        if (!checkRole($this->router->class . '_view')) redirect('/', 'refresh');
         $data = array(
             'meta_title' => lang($this->router->class),
             'data_header' => lang($this->router->class),
@@ -65,7 +65,7 @@ class User extends CI_Controller
     function edit($id = '')
     {
         if ($id != $this->session->userdata('userLogined')['id']){
-            if (checkRole($this->router->class . '_edit')) redirect('/', 'refresh');
+            if (!checkRole($this->router->class . '_edit')) redirect('/', 'refresh');
         }
         if ($this->input->post('username')) {
             if ($id) {
@@ -129,7 +129,7 @@ class User extends CI_Controller
     function detail($id = '')
     {
         if ($id != $this->session->userdata('userLogined')['id']){
-            if (checkRole($this->router->class . '_view')) redirect('/', 'refresh');
+            if (!checkRole($this->router->class . '_view')) redirect('/', 'refresh');
         }
         if ($id == '') redirect('/' . $this->router->class . '/index');
         $detail = $this->{$this->router->class . '_model'}->get($id);
@@ -151,7 +151,7 @@ class User extends CI_Controller
 
     function delete($id = '')
     {
-        if (checkRole($this->router->class . '_delete')) redirect('/', 'refresh');
+        if (!checkRole($this->router->class . '_delete')) redirect('/', 'refresh');
         if ($id) {
             $this->{$this->router->class . '_model'}->delete($id);
         }
@@ -160,7 +160,7 @@ class User extends CI_Controller
 
     function deleteList()
     {
-        if (checkRole($this->router->class . '_delete')) redirect('/', 'refresh');
+        if (!checkRole($this->router->class . '_delete')) redirect('/', 'refresh');
         if ($this->input->post('record_selected')) {
             foreach ($this->input->post('record_selected') as $id) {
                 $this->{$this->router->class . '_model'}->delete($id);

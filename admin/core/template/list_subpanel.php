@@ -15,12 +15,12 @@ $dataThead = array(
 );
 $dataTbody = array();
 $dataIds = array();
-foreach ($data as $item) {
+foreach ($data as $key => $item) {
+    $dataIds[] = $item['id'];
     $dataTbody[] = array(
         $item['name'],
         $item['date_modifiled'],
         $item['user_modifiled']['first_name'] . ' ' . $item['user_modifiled']['last_name']
     );
-    $dataIds[] = $item['id'];
 }
 include 'admin/views/core/list_subpanel.php';

@@ -61,19 +61,11 @@
             <?php if (checkRole('email_send_mail')): ?>
                 <li><a href='<?= base_url('admin.php/email/send_mail') ?>'><?= lang('send_mail') ?></a></li>
             <?php endif; ?>
-            <?php if (checkRole('email_template_edit') || checkRole('email_template_view')): ?>
-                <li><a><?= lang('email_template') ?><span
-                            class='fa fa-chevron-down'></span></a>
-                    <ul class='nav child_menu'>
-                        <?php if (checkRole('email_template_edit')): ?>
-                            <li><a href='<?= base_url('admin.php/email_template/edit') ?>'><?= lang('create') ?></a>
-                            </li>
-                        <?php endif; ?>
-                        <?php if (checkRole('email_template_view')): ?>
-                            <li><a href='<?= base_url('admin.php/email_template/index') ?>'><?= lang('list') ?></a></li>
-                        <?php endif; ?>
-                    </ul>
-                </li>
+            <?php if (checkRole('email_template_view')): ?>
+                <li><a href='<?= base_url('admin.php/email_template/index') ?>'><?= lang('email_template') ?></a></li>
+            <?php endif; ?>
+            <?php if (checkRole('email_sent_view')): ?>
+                <li><a href='<?= base_url('admin.php/email_sent/index') ?>'><?= lang('email_sent') ?></a></li>
             <?php endif; ?>
         </ul>
     </li>

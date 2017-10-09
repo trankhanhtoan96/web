@@ -15,7 +15,7 @@ $dataThead = array(
 );
 $dataTbody = array();
 $dataIds = array();
-foreach ($data as $item) {
+foreach ($data as $key => $item) {
     $dataTbody[] = array(
         $item['name'],
         $item['date_modifiled'],

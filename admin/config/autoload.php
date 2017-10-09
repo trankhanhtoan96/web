@@ -168,5 +168,8 @@ $autoload['model'] = array(
     'blog_category_model',
     'blog_model',
     'email_model',
-    'email_template_model'
+    'email_template_model',
+    'email_sent_email_model',
+    'email_sent_model',
+    'email_sent_user_model'
 );

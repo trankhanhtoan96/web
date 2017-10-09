@@ -42,8 +42,8 @@ function getHtmlSelection(array $arr, $keySelected, array $option)
 
 /**
  * @param string $roleName
- * @param bool $return
- * @return bool
+ * @param bool $admin
+ * @return bool nếu không có role name thì mặc định là đang check cho class và method hiện tại
  * nếu không có role name thì mặc định là đang check cho class và method hiện tại
  * nếu không có quyền truy cập thì chuyển hướng về trang home
  * biến return để cho biết là có return ra kết quả checkrole hay không,

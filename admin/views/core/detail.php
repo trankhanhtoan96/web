@@ -72,7 +72,7 @@ foreach ($moduleRelationship as $item) {
         $relationshipPanelName .= "<li role='presentation'><a href='#tab_content{$relationshipPanelCount}' role='tab' data-toggle='tab'>" . lang($item['module_2']) . "</a></li>";
         if ($module2) {
             $relationshipPanelHtml .= "<div role='tabpanel' class='tab-pane' id='tab_content{$relationshipPanelCount}'>";
-            $relationshipPanelHtml .= $this->load->view($item['module_2'] . '/list_subpanel', array('data' => $module2, 'module' => $item['module_2'], 'count' => $relationshipPanelCount), true);
+            $relationshipPanelHtml .= $this->load->view($item['module_2'] . '/list_subpanel', array('dataRelationship' => $dataRelationship, 'data' => $module2, 'module' => $item['module_2'], 'count' => $relationshipPanelCount), true);
             $relationshipPanelHtml .= "</div>";
         }
     }
