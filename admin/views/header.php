@@ -54,10 +54,6 @@
     <!--ckfinder-->
     <script src="<?= base_url('vendors/ckfinder/ckfinder.js') ?>"></script>
 
-    <!--taginput-->
-    <link rel="stylesheet" type="text/css"
-          href="<?= base_url('vendors/bootstrap-tagsinput/src/bootstrap-tagsinput.css') ?>"/>
-
     <!--admin-->
     <link rel="stylesheet" href="<?= base_url('vendors/admin/custom.min.css') ?>"/>
     <link rel="stylesheet" href="<?= base_url('admin/views/style.css') ?>"/>

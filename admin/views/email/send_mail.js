@@ -63,4 +63,7 @@ $(document).ready(function () {
             alertify.error('<b>' + CI_language.not_yet_choose_email + '</b>');
         }
     });
+    $('form[name="editview"]').on('submit',function(){
+        waitingDialog.show(CI_language.please_wait);
+    });
 });

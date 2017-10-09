@@ -54,9 +54,6 @@
 <!--autosize-->
 <script src="<?= base_url('vendors/autosize/autosize.min.js') ?>"></script>
 
-<!--taginput-->
-<script src="<?= base_url('vendors/bootstrap-tagsinput/src/bootstrap-tagsinput.js') ?>"></script>
-
 <!--admin-->
 <script src="<?= base_url('vendors/admin/custom.min.js') ?>"></script>
 </body>
