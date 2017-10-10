@@ -243,7 +243,7 @@ class Email extends CI_Controller
 
         $dataView['user_role_type_select'] = getHtmlSelection($roles, '', array('name' => 'user_role_type_select', 'id' => 'user_role_type_select'));
 
-//select_add_address
+        //select_add_address
         $selectAddAddress = array(
             'to' => 'TO',
             'cc' => 'CC',
@@ -252,7 +252,7 @@ class Email extends CI_Controller
         $dataView['select_add_address'] = getHtmlSelection($selectAddAddress, '', array('name' => 'select_add_address', 'class' => 'select_add_address'));
 
 
-//table_user_email
+        //table_user_email
         $users = $this->user_model->get_list();
         $dataTableUserEmail = array(
             'dataTbody' => array(),
@@ -267,9 +267,9 @@ class Email extends CI_Controller
             $dataTableUserEmail['dataIds'][] = $item['id'];
         }
         $dataView['table_user_email'] = $this->load->view('email/template/table_user', $dataTableUserEmail, true);
-//end
+        //end
 
-//table_email
+        //table_email
         $users = $this->email_model->get_list();
         $dataTableEmail = array(
             'dataTbody' => array(),
@@ -283,9 +283,9 @@ class Email extends CI_Controller
             $dataTableEmail['dataIds'][] = $item['id'];
         }
         $dataView['table_email'] = $this->load->view('email/template/table_email', $dataTableEmail, true);
-//end
+        //end
 
-//email template
+        //email template
         if ($email_template_id != '') {
             $emailTemplate = $this->email_template_model->get($email_template_id);
             $dataView['subject'] = $emailTemplate['name'];
