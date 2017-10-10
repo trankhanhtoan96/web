@@ -145,6 +145,7 @@ class Email extends CI_Controller
             $addressTO = explode(',', $this->input->post('email_to'));
             $addressCC = explode(',', $this->input->post('email_cc'));
             $addressBCC = explode(',', $this->input->post('email_bcc'));
+            $addressTotal = array();
 
             //giới hạn số email gởi 1 lần
             $limit = 25;
@@ -159,69 +160,77 @@ class Email extends CI_Controller
                 $BCC = $addressBCC;
                 foreach ($TO as $key => $item) {
                     if ($count == $limit) break;
-                    if ($this->mail->mailer->addAddress(trim($item))) $count++;
+                    $item = trim($item);
+                    if ($this->mail->mailer->addAddress($item)) {
+                        $count++;
+                        $addressTotal[] = $item;
+                    }
                     unset($addressTO[$key]);
                 }
                 foreach ($CC as $key => $item) {
                     if ($count == $limit) break;
-                    if ($this->mail->mailer->addCC(trim($item))) $count++;
+                    $item = trim($item);
+                    if ($this->mail->mailer->addCC($item)) {
+                        $count++;
+                        $addressTotal[] = $item;
+                    }
                     unset($addressCC[$key]);
                 }
                 foreach ($BCC as $key => $item) {
                     if ($count == $limit) break;
-                    if ($this->mail->mailer->addBCC(trim($item))) $count++;
+                    $item = trim($item);
+                    if ($this->mail->mailer->addBCC($item)) {
+                        $count++;
+                        $addressTotal[] = $item;
+                    }
                     unset($addressBCC[$key]);
                 }
 
                 //gửi mail
-                if ($this->mail->mailer->send()) {
-                    $sendSuccess += $count;
-
-                    //lưu quan hệ và lưu lại email đã gửi
-                    //lưu email đã gởi
-                    $dataEmailSent = array(
-                        'name' => $this->mail->mailer->Subject,
-                        'content' => $this->mail->mailer->Body
-                    );
-                    $idEmailSent = '';
-                    $this->email_sent_model->insert($dataEmailSent, $idEmailSent);
-
-                    //tiến hành lưu quan hệ với email đã gởi
-                    $address = $this->mail->mailer->getAllRecipientAddresses();
-                    foreach ($address as $key => $item) {
-                        $sql = "SELECT id FROM user WHERE email='{$key}'";
-                        $result = $this->db->query($sql)->result_array();
-                        if (count($result) > 0) {
-                            foreach ($result as $i) {
-                                $dataTemp = array(
-                                    'user_id' => $i['id'],
-                                    'email_sent_id' => $idEmailSent
-                                );
-                                $this->email_sent_user_model->insert($dataTemp);
-                            }
-                        } else {
-                            //lưu quan hệ với danh sách email
-                            $sql = "SELECT id FROM email WHERE email_address='{$key}'";
-                            $result = $this->db->query($sql)->result_array();
-                            if (count($result) > 0) {
-                                foreach ($result as $i) {
-                                    $dataTemp = array(
-                                        'email_id' => $i['id'],
-                                        'email_sent_id' => $idEmailSent
-                                    );
-                                    $this->email_sent_email_model->insert($dataTemp);
-                                }
-                            }
-                        }
-                    }
-
-                } else {
-                    $sendError += $count;
-                }
+                if ($this->mail->mailer->send()) $sendSuccess += $count;
+                else $sendError += $count;
 
                 //clear address trước khi tiến hành gởi lần tiếp theo
                 $this->mail->mailer->clearAllRecipients();
             }
+
+            //lưu email đã gởi
+            $dataEmailSent = array(
+                'name' => $this->mail->mailer->Subject,
+                'content' => $this->mail->mailer->Body
+            );
+            $idEmailSent = '';
+            $this->email_sent_model->insert($dataEmailSent, $idEmailSent);
+
+            //tiến hành lưu quan hệ với email đã gởi
+            foreach ($addressTotal as $key => $item) {
+                $sql = "SELECT id FROM user WHERE email='{$key}'";
+                $result = $this->db->query($sql)->result_array();
+                if (count($result) > 0) {
+                    foreach ($result as $i) {
+                        $dataTemp = array(
+                            'user_id' => $i['id'],
+                            'email_sent_id' => $idEmailSent
+                        );
+                        $this->email_sent_user_model->insert($dataTemp);
+                    }
+                } else {
+                    //lưu quan hệ với danh sách email
+                    $sql = "SELECT id FROM email WHERE email_address='{$key}'";
+                    $result = $this->db->query($sql)->result_array();
+                    if (count($result) > 0) {
+                        foreach ($result as $i) {
+                            $dataTemp = array(
+                                'email_id' => $i['id'],
+                                'email_sent_id' => $idEmailSent
+                            );
+                            $this->email_sent_email_model->insert($dataTemp);
+                        }
+                    }
+                }
+            }
+
+            //thông báo ra màn hình
             if ($sendSuccess > 0) {
                 $alert = $this->load->view('alert/success', array('message' => lang('send_mail_success') . ' : ' . $sendSuccess), true);
             }

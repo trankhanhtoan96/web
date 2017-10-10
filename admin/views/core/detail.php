@@ -58,7 +58,7 @@ foreach ($moduleRelationship as $item) {
         } else {
             $tableRelationship = $item['module_2'] . '_' . $item['module_1'];
         }
-        $dataRelationship = $this->{$tableRelationship . '_model'}->get_list('*', array($item['module_1'] . '_id' => $this->uri->segments[3]), '', '', 0, 0);
+        $dataRelationship = $this->{$tableRelationship . '_model'}->get_list('*', array($item['module_1'] . '_id' => $this->uri->segments[3]), 'date_entered', 'DESC', 0, 0);
         $module2 = array();
         foreach ($dataRelationship as $item2) {
             $module2[] = $this->{$item['module_2'] . '_model'}->get($item2[$item['module_2'] . '_id']);
@@ -70,11 +70,10 @@ foreach ($moduleRelationship as $item) {
             }
         }
         $relationshipPanelName .= "<li role='presentation'><a href='#tab_content{$relationshipPanelCount}' role='tab' data-toggle='tab'>" . lang($item['module_2']) . "</a></li>";
-        if ($module2) {
-            $relationshipPanelHtml .= "<div role='tabpanel' class='tab-pane' id='tab_content{$relationshipPanelCount}'>";
-            $relationshipPanelHtml .= $this->load->view($item['module_2'] . '/list_subpanel', array('dataRelationship' => $dataRelationship, 'data' => $module2, 'module' => $item['module_2'], 'count' => $relationshipPanelCount), true);
-            $relationshipPanelHtml .= "</div>";
-        }
+
+        $relationshipPanelHtml .= "<div role='tabpanel' class='tab-pane' id='tab_content{$relationshipPanelCount}'>";
+        $relationshipPanelHtml .= $this->load->view($item['module_2'] . '/list_subpanel', array('dataRelationship' => $dataRelationship, 'data' => $module2, 'module' => $item['module_2'], 'count' => $relationshipPanelCount), true);
+        $relationshipPanelHtml .= "</div>";
     }
 }
 if ($relationshipPanelName != ''): ?>

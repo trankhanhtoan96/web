@@ -51,6 +51,10 @@ function getHtmlSelection(array $arr, $keySelected, array $option)
  */
 function checkRole($roleName, $admin = false)
 {
+    //loại bỏ nhưng chức năng không sử dụng
+    //bằng cách return false khi gọi role đến chức năng đó
+    if ($roleName == 'email_sent_edit') return false;
+
     if (get_instance()->session->userdata('userLogined')['admin'] == 1) return true;
     if ($admin) return false;
     if (empty($GLOBALS['role'])) {
