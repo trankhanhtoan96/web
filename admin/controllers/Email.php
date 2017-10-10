@@ -146,9 +146,6 @@ class Email extends CI_Controller
             $addressCC = explode(',', $this->input->post('email_cc'));
             $addressBCC = explode(',', $this->input->post('email_bcc'));
 
-            //lọc email trùng trước khi gởi
-            //thứ tự ưu tiên là to,cc,bcc
-
             //giới hạn số email gởi 1 lần
             $limit = 25;
             $sendSuccess = 0;

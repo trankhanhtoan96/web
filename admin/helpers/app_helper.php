@@ -87,3 +87,18 @@ function sortBlogCategory($dataArr, $parentId, &$result, $space = '')
         }
     }
 }
+
+/**
+ * @param array $arr
+ * @param $begin
+ * @param $end
+ * @return array
+ */
+function subArray(array $arr, $begin, $end)
+{
+    $result = array();
+    for ($i = $begin; $i <= $end; $i++) {
+        $result[] = $arr[$i];
+    }
+    return $result;
+}
