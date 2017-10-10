@@ -3,7 +3,7 @@
 $dataThead = array(
     0 => array(
         'label' => lang('subject'),
-        'width' => '20'
+        'width' => '30'
     ),
     1 => array(
         'label' => lang('date_sent'),
@@ -16,10 +16,16 @@ $dataThead = array(
 );
 
 //custom in each module
-if ($this->router->class == 'user' && !empty($module)) {
+if ($this->router->class == 'user') {
     $dataThead[3] = array(
         'label' => lang('status'),
-        'width' => '30'
+        'width' => '20'
+    );
+}
+if ($this->router->class == 'email') {
+    $dataThead[3] = array(
+        'label' => lang('status'),
+        'width' => '20'
     );
 }
 
@@ -28,14 +34,17 @@ $dataIds = array();
 foreach ($data as $key => $item) {
     $dataTbody[] = array(
         $item['name'],
-        $item['date_modifiled'],
-        $item['user_modifiled']['first_name'] . ' ' . $item['user_modifiled']['last_name']
+        $item['date_entered'],
+        $item['user_created']['first_name'] . ' ' . $item['user_created']['last_name']
     );
     $dataIds[] = $item['id'];
 
     //custom in each module
-    if ($this->router->class == 'user' && !empty($module)) {
-        $dataTbody[count($dataTbody)-1][2] = $dataRelationship[$key]['status'];
+    if ($this->router->class == 'user') {
+        $dataTbody[count($dataTbody)-1][3] = $dataRelationship[$key]['status'];
+    }
+    if ($this->router->class == 'email') {
+        $dataTbody[count($dataTbody)-1][3] = $dataRelationship[$key]['status'];
     }
 }
 include 'admin/views/core/list_subpanel.php';
