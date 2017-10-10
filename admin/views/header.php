@@ -45,8 +45,10 @@
     <link href="<?= base_url('vendors/datatables/css/dataTables.bootstrap.css') ?>" rel="stylesheet">
 
     <!--alertify-->
-    <link href="<?= base_url('vendors/AlertifyJS/css/alertify.min.css') ?>" rel="stylesheet">
-    <link href="<?= base_url('vendors/AlertifyJS/css/themes/bootstrap.min.css') ?>" rel="stylesheet">
+    <link href="<?= base_url('vendors/AlertifyJS/alertify.min.css') ?>" rel="stylesheet">
+
+    <!--spinner loading-->
+    <link href="<?= base_url('vendors/Spinner/Spinner.css') ?>" rel="stylesheet">
 
     <!--ckeditor-->
     <script src="<?= base_url('vendors/ckeditor/ckeditor.js') ?>"></script>

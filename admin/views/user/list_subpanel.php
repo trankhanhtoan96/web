@@ -15,8 +15,8 @@ $dataThead = array(
 );
 
 //custom in each module
-if ($this->router->class == 'email_sent' && !empty($module) && $module == 'user') {
-    $dataThead[4] = array(
+if ($this->router->class == 'email_sent' && !empty($module)) {
+    $dataThead[3] = array(
         'label' => lang('status'),
         'width' => '30'
     );
@@ -33,8 +33,8 @@ foreach ($data as $key => $item) {
     );
 
     //custom in each module
-    if ($this->router->class == 'email_sent' && !empty($module) && $module == 'user') {
-        $dataTbody[count($dataTbody)-1][4] = $dataRelationship[$key]['status'];
+    if ($this->router->class == 'email_sent' && !empty($module)) {
+        $dataTbody[count($dataTbody)-1][3] = $dataRelationship[$key]['status'];
     }
 }
 

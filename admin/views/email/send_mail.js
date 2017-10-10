@@ -64,6 +64,6 @@ $(document).ready(function () {
         }
     });
     $('form[name="editview"]').on('submit',function(){
-        waitingDialog.show(CI_language.please_wait);
+        new Spinner().show(CI_language.please_wait);
     });
 });

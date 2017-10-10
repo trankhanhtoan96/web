@@ -26,9 +26,6 @@
 </div>
 </div>
 
-<!--waiting-->
-<script src="<?= base_url('vendors/waitingfor.js') ?>"></script>
-
 <!--nprogress-->
 <script src="<?= base_url('vendors/nprogress/nprogress.js') ?>"></script>
 
@@ -53,6 +50,9 @@
 
 <!--autosize-->
 <script src="<?= base_url('vendors/autosize/autosize.min.js') ?>"></script>
+
+<!--spinner loading-->
+<script src="<?= base_url('vendors/Spinner/Spinner.js') ?>"></script>
 
 <!--admin-->
 <script src="<?= base_url('vendors/admin/custom.min.js') ?>"></script>
