@@ -130,5 +130,9 @@ $lang = array(
     'email_sent'=>'Email đã gửi',
     'status'=>'Tình trạng',
     'user_sent'=>'Người gửi',
-    'date_sent'=>'Ngày gửi'
+    'date_sent'=>'Ngày gửi',
+    'filter_duplicate'=>'Lọc email trùng',
+    'filter_email_duplicate_success'=>'Lọc email trùng lặp thành công!',
+    'filter_valid_email'=>'Lọc email hợp lệ',
+    'filter_email_valid_success'=>'Lọc email hợp lệ thành công!'
 );

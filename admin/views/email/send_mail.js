@@ -1,6 +1,6 @@
 $(document).ready(function () {
     //autosize
-    $('#email_to, #email_cc, #email_bcc').attr('rows','5');
+    $('#email_to, #email_cc, #email_bcc').attr('rows', '5');
     //ckeditor
     CKEDITOR.replace('body_email');
     $('.select_add_address').select2({
@@ -33,27 +33,30 @@ $(document).ready(function () {
         });
         if (mail.length > 0) {
             mail = mail.join(", ");
+            var emailTO = $('#email_to'),
+                emailCC = $('#email_cc'),
+                emailBCC = $('#email_bcc');
             if (content.find('.select_add_address').val() == 'to') {
-                if($('#email_to').val()=='') {
-                    $('#email_to').val($('#email_to').val() + mail);
-                }else{
-                    $('#email_to').val($('#email_to').val() + ', ' + mail);
+                if (emailTO.val() == '') {
+                    emailTO.val(emailTO.val() + mail);
+                } else {
+                    emailTO.val(emailTO.val() + ', ' + mail);
                 }
-                $('#email_to').focus();
+                emailTO.focus();
             } else if (content.find('.select_add_address').val() == 'cc') {
-                if($('#email_cc').val()=='') {
-                    $('#email_cc').val($('#email_cc').val() + mail);
-                }else{
-                    $('#email_cc').val($('#email_cc').val() + ', ' + mail);
+                if (emailCC.val() == '') {
+                    emailCC.val(emailCC.val() + mail);
+                } else {
+                    emailCC.val(emailCC.val() + ', ' + mail);
                 }
-                $('#email_cc').focus();
+                emailCC.focus();
             } else {
-                if($('#email_bcc').val()=='') {
-                    $('#email_bcc').val($('#email_bcc').val() + mail);
-                }else{
-                    $('#email_bcc').val($('#email_bcc').val() + ', ' + mail);
+                if (emailBCC.val() == '') {
+                    emailBCC.val(emailBCC.val() + mail);
+                } else {
+                    emailBCC.val(emailBCC.val() + ', ' + mail);
                 }
-                $('#email_bcc').focus();
+                emailBCC.focus();
             }
             content.find('.flat').each(function () {
                 if ($(this).is(':checked')) $(this).parent().find('.iCheck-helper').click();
@@ -63,7 +66,7 @@ $(document).ready(function () {
             alertify.error('<b>' + CI_language.not_yet_choose_email + '</b>');
         }
     });
-    $('form[name="editview"]').on('submit',function(){
+    $('form[name="editview"]').on('submit', function () {
         new Spinner().show(CI_language.please_wait);
     });
 });

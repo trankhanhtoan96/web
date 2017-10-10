@@ -93,6 +93,14 @@ class Module extends CI_Controller
         unset($dataView['id']);
         $dataView['user_created'] = $this->user_model->get($dataView['user_created']);
         $dataView['user_modifiled'] = $this->user_model->get($dataView['user_modifiled']);
+
+        $temp = explode(',', $dataView['other_role']);
+        $dataView['other_role'] = '<ul>';
+        foreach ($temp as $item) {
+            $dataView['other_role'] .= '<li>'.trim($item).'</li>';
+        }
+        $dataView['other_role'] .= '</ul>';
+
         $data = array(
             'meta_title' => $dataView['name'],
             'data_header' => lang($this->router->class) . ':' . $dataView['name'],

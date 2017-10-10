@@ -308,12 +308,60 @@ class Email extends CI_Controller
         $this->load->view('email/send_mail', $data);
     }
 
+    //filter user on ajax so return json
     function filter_duplicate()
     {
-        if (!checkRole('email_send_mail')) redirect('/', 'refresh');
-        $emails = $this->email_model->get_list();
-        for ($i = 0; $i > count($emails); $i++) {
-            
+        if (!checkRole('email_filter_duplicate')) redirect('/', 'refresh');
+        $emails = $this->email_model->get_list('id, email_address', array(), 'date_modifiled', 'ASC');
+        $emailUser = $this->user_model->get_list('email');
+        $temp = array();
+        foreach ($emailUser as $item) {
+            $temp[] = $item['email'];
         }
+        $emailUser = $temp;
+
+        for ($i = 0; $i < count($emails) - 1; $i++) {
+            $temp = subArray($emails, $i + 1, count($emails) - 1);
+            $a = array();
+            foreach ($temp as $item) {
+                $a[] = $item['email_address'];
+            }
+            if (in_array($emails[$i]['email_address'], $a)) {
+                $this->email_model->delete($emails[$i]['id']);
+                unset($emails[$i]);
+                $i--;
+            } else {
+                //kiểm tra trùng với email của user
+                if (in_array($emails[$i]['email_address'], $emailUser)){
+                    $this->email_model->delete($emails[$i]['id']);
+                    unset($emails[$i]);
+                    $i--;
+                }
+            }
+        }
+        if (in_array($emails[$i]['email_address'], $emailUser)){
+            $this->email_model->delete($emails[$i]['id']);
+            unset($emails[$i]);
+            $i--;
+        }
+        echo json_encode(array(
+            'success' => 1
+        ));
+    }
+
+    //filter use on ajax so return json
+    function filter_valid_email()
+    {
+        if (!checkRole('email_filter_valid_email')) redirect('/', 'refresh');
+        require_once 'vendors/PHPMailer/PHPMailer.php';
+        $emails = $this->email_model->get_list('id, email_address');
+        foreach ($emails as $item) {
+            if (!\PHPMailer\PHPMailer\PHPMailer::validateAddress($item['email_address'])) {
+                $this->email_model->delete($item['id']);
+            }
+        }
+        echo json_encode(array(
+            'success' => 1
+        ));
     }
 }
