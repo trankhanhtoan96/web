@@ -307,4 +307,13 @@ class Email extends CI_Controller
         );
         $this->load->view('email/send_mail', $data);
     }
+
+    function filter_duplicate()
+    {
+        if (!checkRole('email_send_mail')) redirect('/', 'refresh');
+        $emails = $this->email_model->get_list();
+        for ($i = 0; $i > count($emails); $i++) {
+            
+        }
+    }
 }
