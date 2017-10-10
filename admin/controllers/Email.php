@@ -146,56 +146,90 @@ class Email extends CI_Controller
             $addressCC = explode(',', $this->input->post('email_cc'));
             $addressBCC = explode(',', $this->input->post('email_bcc'));
 
-            foreach ($addressTO as $item)
-                if ($item) $this->mail->mailer->addAddress(trim($item));
-            foreach ($addressCC as $item)
-                if ($item) $this->mail->mailer->addCC(trim($item));
-            foreach ($addressBCC as $item)
-                if ($item) $this->mail->mailer->addBCC(trim($item));
-            //gửi mail
-            if ($this->mail->mailer->send()) {
-                $alert = $this->load->view('alert/success', array('message' => lang('send_mail_success')), true);
+            //lọc email trùng trước khi gởi
+            //thứ tự ưu tiên là to,cc,bcc
 
-                //lưu quan hệ và lưu lại email đã gửi
-                //lưu email đã gởi
-                $dataEmailSent = array(
-                    'name' => $this->mail->mailer->Subject,
-                    'content' => $this->mail->mailer->Body
-                );
-                $idEmailSent = '';
-                $this->email_sent_model->insert($dataEmailSent, $idEmailSent);
+            //giới hạn số email gởi 1 lần
+            $limit = 25;
+            $sendSuccess = 0;
+            $sendError = 0;
+            $count = -1;
+            while ($count != 0) {
+                if ($count != -1) sleep(15);
+                $count = 0;
+                $TO = $addressTO;
+                $CC = $addressCC;
+                $BCC = $addressBCC;
+                foreach ($TO as $key => $item) {
+                    if ($count == $limit) break;
+                    if ($this->mail->mailer->addAddress(trim($item))) $count++;
+                    unset($addressTO[$key]);
+                }
+                foreach ($CC as $key => $item) {
+                    if ($count == $limit) break;
+                    if ($this->mail->mailer->addCC(trim($item))) $count++;
+                    unset($addressCC[$key]);
+                }
+                foreach ($BCC as $key => $item) {
+                    if ($count == $limit) break;
+                    if ($this->mail->mailer->addBCC(trim($item))) $count++;
+                    unset($addressBCC[$key]);
+                }
 
-                //tiến hành lưu quan hệ với email đã gởi
-                $address = $this->mail->mailer->getAllRecipientAddresses();
-                foreach ($address as $key=>$item) {
-                    $sql = "SELECT id FROM user WHERE email='{$key}'";
-                    $result = $this->db->query($sql)->result_array();
-                    if (count($result) >0) {
-                        foreach($result as $i) {
-                            $dataTemp = array(
-                                'user_id' => $i['id'],
-                                'email_sent_id' => $idEmailSent
-                            );
-                            $this->email_sent_user_model->insert($dataTemp);
-                        }
-                    } else {
-                        //lưu quan hệ với danh sách email
-                        $sql = "SELECT id FROM email WHERE email_address='{$key}'";
+                //gửi mail
+                if ($this->mail->mailer->send()) {
+                    $sendSuccess += $count;
+
+                    //lưu quan hệ và lưu lại email đã gửi
+                    //lưu email đã gởi
+                    $dataEmailSent = array(
+                        'name' => $this->mail->mailer->Subject,
+                        'content' => $this->mail->mailer->Body
+                    );
+                    $idEmailSent = '';
+                    $this->email_sent_model->insert($dataEmailSent, $idEmailSent);
+
+                    //tiến hành lưu quan hệ với email đã gởi
+                    $address = $this->mail->mailer->getAllRecipientAddresses();
+                    foreach ($address as $key => $item) {
+                        $sql = "SELECT id FROM user WHERE email='{$key}'";
                         $result = $this->db->query($sql)->result_array();
-                        if (count($result) >0) {
-                            foreach($result as $i) {
+                        if (count($result) > 0) {
+                            foreach ($result as $i) {
                                 $dataTemp = array(
-                                    'email_id' => $i['id'],
+                                    'user_id' => $i['id'],
                                     'email_sent_id' => $idEmailSent
                                 );
-                                $this->email_sent_email_model->insert($dataTemp);
+                                $this->email_sent_user_model->insert($dataTemp);
+                            }
+                        } else {
+                            //lưu quan hệ với danh sách email
+                            $sql = "SELECT id FROM email WHERE email_address='{$key}'";
+                            $result = $this->db->query($sql)->result_array();
+                            if (count($result) > 0) {
+                                foreach ($result as $i) {
+                                    $dataTemp = array(
+                                        'email_id' => $i['id'],
+                                        'email_sent_id' => $idEmailSent
+                                    );
+                                    $this->email_sent_email_model->insert($dataTemp);
+                                }
                             }
                         }
                     }
+
+                } else {
+                    $sendError += $count;
                 }
 
-            } else {
-                $alert = $this->load->view('alert/error', array('message' => lang('send_mail_error')), true);
+                //clear address trước khi tiến hành gởi lần tiếp theo
+                $this->mail->mailer->clearAllRecipients();
+            }
+            if ($sendSuccess > 0) {
+                $alert = $this->load->view('alert/success', array('message' => lang('send_mail_success') . ' : ' . $sendSuccess), true);
+            }
+            if ($sendError > 0) {
+                $alert = $this->load->view('alert/error', array('message' => lang('send_mail_error') . ':' . $sendError), true);
             }
         }
 
