@@ -33,31 +33,13 @@ $(document).ready(function () {
         });
         if (mail.length > 0) {
             mail = mail.join(", ");
-            var emailTO = $('#email_to'),
-                emailCC = $('#email_cc'),
-                emailBCC = $('#email_bcc');
-            if (content.find('.select_add_address').val() == 'to') {
-                if (emailTO.val() == '') {
-                    emailTO.val(emailTO.val() + mail);
-                } else {
-                    emailTO.val(emailTO.val() + ', ' + mail);
-                }
-                emailTO.focus();
-            } else if (content.find('.select_add_address').val() == 'cc') {
-                if (emailCC.val() == '') {
-                    emailCC.val(emailCC.val() + mail);
-                } else {
-                    emailCC.val(emailCC.val() + ', ' + mail);
-                }
-                emailCC.focus();
+            var emailTO = $('#email_to');
+            if (emailTO.val() == '') {
+                emailTO.val(mail);
             } else {
-                if (emailBCC.val() == '') {
-                    emailBCC.val(emailBCC.val() + mail);
-                } else {
-                    emailBCC.val(emailBCC.val() + ', ' + mail);
-                }
-                emailBCC.focus();
+                emailTO.val(emailTO.val() + ', ' + mail);
             }
+            emailTO.focus();
             content.find('.flat').each(function () {
                 if ($(this).is(':checked')) $(this).parent().find('.iCheck-helper').click();
             });

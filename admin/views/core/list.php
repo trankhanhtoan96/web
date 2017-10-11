@@ -33,8 +33,12 @@
                             if (checkRole($this->router->class . '_edit')) {
                                 echo " | </b><a data-toggle='tooltip' style='font-size:16px' title='" . lang('edit') . "' href='" . site_url($this->router->class . '/edit/' . $dataIds[$key]) . "'><i class='fa fa-edit'></i></a></td>";
                             }
-                            foreach ($item as $item2) {
-                                echo "<td>{$item2}</td>";
+                            foreach ($item as $key2 => $item2) {
+                                if(!empty($dataThead[$key2]['style'])) {
+                                    echo "<td style='{$dataThead[$key2]['style']}' >{$item2}</td>";
+                                }else{
+                                    echo "<td>{$item2}</td>";
+                                }
                             }
                             echo '</tr>';
                         }

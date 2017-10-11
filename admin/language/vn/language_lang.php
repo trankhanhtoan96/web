@@ -114,7 +114,7 @@ $lang = array(
     'email_cc'=>'CC',
     'email_bcc'=>'BCC',
     'all'=>'Tất cả',
-    'add'=>'Thêm',
+    'add_to'=>'Thêm vào',
     'other_role'=>'Phân quyền khác',
     'orther'=>'Khác',
     'come_back_home'=>'Về trang chủ',
@@ -135,4 +135,10 @@ $lang = array(
     'filter_email_duplicate_success'=>'Lọc email trùng lặp thành công!',
     'filter_valid_email'=>'Lọc email hợp lệ',
     'filter_email_valid_success'=>'Lọc email hợp lệ thành công!'
+);
+
+$lang['status_email'] = array(
+    'sent_error'=>'<label class="label label-danger">Không gửi được</label>',
+    'sent'=>'<label class="label label-info">Đã gửi</label>',
+    'read'=>'<label class="label label-success">Đã đọc</label>'
 );

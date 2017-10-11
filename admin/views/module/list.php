@@ -3,11 +3,11 @@ include 'admin/views/header.php';
 $dataThead = array(
     0 => array(
         'label' => lang('name'),
-        'width' => '30'
+        'width' => '20'
     ),
     1=>array(
         'label'=>lang('other_role'),
-        'width'=>'60'
+        'width'=>'70'
     )
 );
 $dataTbody = array();

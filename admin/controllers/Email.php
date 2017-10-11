@@ -138,96 +138,48 @@ class Email extends CI_Controller
 
         //send mail when submit
         if ($this->input->post('subject')) {
-            $this->load->library('mail');
-            $this->mail->mailer->Subject = $this->input->post('subject');
-            $this->mail->mailer->Body = $this->input->post('body_email');
 
-            $addressTO = explode(',', $this->input->post('email_to'));
-            $addressCC = explode(',', $this->input->post('email_cc'));
-            $addressBCC = explode(',', $this->input->post('email_bcc'));
-            $addressTotal = array();
-
-            //giới hạn số email gởi 1 lần
-            $limit = 25;
-            $sendSuccess = 0;
-            $sendError = 0;
-            $count = -1;
-            while ($count != 0) {
-                if ($count != -1) sleep(15);
-                $count = 0;
-                $TO = $addressTO;
-                $CC = $addressCC;
-                $BCC = $addressBCC;
-                foreach ($TO as $key => $item) {
-                    if ($count == $limit) break;
-                    $item = trim($item);
-                    if ($this->mail->mailer->addAddress($item)) {
-                        $count++;
-                        $addressTotal[] = $item;
-                    }
-                    unset($addressTO[$key]);
-                }
-                foreach ($CC as $key => $item) {
-                    if ($count == $limit) break;
-                    $item = trim($item);
-                    if ($this->mail->mailer->addCC($item)) {
-                        $count++;
-                        $addressTotal[] = $item;
-                    }
-                    unset($addressCC[$key]);
-                }
-                foreach ($BCC as $key => $item) {
-                    if ($count == $limit) break;
-                    $item = trim($item);
-                    if ($this->mail->mailer->addBCC($item)) {
-                        $count++;
-                        $addressTotal[] = $item;
-                    }
-                    unset($addressBCC[$key]);
-                }
-
-                //gửi mail
-                if ($this->mail->mailer->send()) $sendSuccess += $count;
-                else $sendError += $count;
-
-                //clear address trước khi tiến hành gởi lần tiếp theo
-                $this->mail->mailer->clearAllRecipients();
-            }
-
-            //lưu email đã gởi
+            //lưu email gởi
             $dataEmailSent = array(
-                'name' => $this->mail->mailer->Subject,
-                'content' => $this->mail->mailer->Body
+                'name' => $this->input->post('subject'),
+                'content' => $this->input->post('body_email')
             );
             $idEmailSent = '';
             $this->email_sent_model->insert($dataEmailSent, $idEmailSent);
 
-            //tiến hành lưu quan hệ với email đã gởi
-            foreach ($addressTotal as $key => $item) {
-                $sql = "SELECT id FROM user WHERE email='{$key}'";
-                $result = $this->db->query($sql)->result_array();
-                if (count($result) > 0) {
-                    foreach ($result as $i) {
-                        $dataTemp = array(
-                            'user_id' => $i['id'],
-                            'email_sent_id' => $idEmailSent
-                        );
-                        $this->email_sent_user_model->insert($dataTemp);
+            //tiến hành gởi mail
+            $this->load->library('mail');
+            $sendSuccess = 0;
+            $sendError = 0;
+            $addressTO = explode(',', $this->input->post('email_to'));
+            foreach ($addressTO as $address) {
+                $address = trim($address);
+                if ($this->mail->mailer->addAddress($address)) {
+                    $this->mail->mailer->Subject = $this->input->post('subject');
+                    $this->mail->mailer->Body = $this->input->post('body_email');
+                    $this->mail->mailer->Body .= "<img style='width:0;height:0' src='" . site_url('public_action/check_read_email/' . urlencode($address) . '/' . $idEmailSent) . "' />";
+                    if ($this->mail->mailer->send()) {
+                        $sendSuccess++;
+                        $this->saveEmailRelationship($idEmailSent, $address, 'sent');
+                        //lưu quan hệ
+                    } else {
+                        $sendError++;
+
+                        //lưu quan hệ
+                        $this->saveEmailRelationship($idEmailSent, $address, 'sent_error');
                     }
+
+                    //xóa email đã gởi để add email mới cho lần gởi tiếp theo
+                    $this->mail->mailer->clearAddresses();
                 } else {
-                    //lưu quan hệ với danh sách email
-                    $sql = "SELECT id FROM email WHERE email_address='{$key}'";
-                    $result = $this->db->query($sql)->result_array();
-                    if (count($result) > 0) {
-                        foreach ($result as $i) {
-                            $dataTemp = array(
-                                'email_id' => $i['id'],
-                                'email_sent_id' => $idEmailSent
-                            );
-                            $this->email_sent_email_model->insert($dataTemp);
-                        }
-                    }
+                    $sendError++;
+
+                    //lưu quan hệ
+                    $this->saveEmailRelationship($idEmailSent, $address, 'sent_error');
                 }
+
+                //dừng lại mỗi lần gởi mail để tránh spam email
+                sleep(2);
             }
 
             //thông báo ra màn hình
@@ -240,23 +192,6 @@ class Email extends CI_Controller
         }
 
         $dataView = array();
-
-        //user_role_type_select
-        $roles = array('1' => lang('all'));
-        foreach ($this->role_model->get_list('id, name') as $item) {
-            $roles[$item['id']] = $item['name'];
-        }
-
-        $dataView['user_role_type_select'] = getHtmlSelection($roles, '', array('name' => 'user_role_type_select', 'id' => 'user_role_type_select'));
-
-        //select_add_address
-        $selectAddAddress = array(
-            'to' => 'TO',
-            'cc' => 'CC',
-            'bcc' => 'BCC'
-        );
-        $dataView['select_add_address'] = getHtmlSelection($selectAddAddress, '', array('name' => 'select_add_address', 'class' => 'select_add_address'));
-
 
         //table_user_email
         $users = $this->user_model->get_list();
@@ -273,7 +208,6 @@ class Email extends CI_Controller
             $dataTableUserEmail['dataIds'][] = $item['id'];
         }
         $dataView['table_user_email'] = $this->load->view('email/template/table_user', $dataTableUserEmail, true);
-        //end
 
         //table_email
         $users = $this->email_model->get_list();
@@ -289,7 +223,6 @@ class Email extends CI_Controller
             $dataTableEmail['dataIds'][] = $item['id'];
         }
         $dataView['table_email'] = $this->load->view('email/template/table_email', $dataTableEmail, true);
-        //end
 
         //email template
         if ($email_template_id != '') {
@@ -332,14 +265,14 @@ class Email extends CI_Controller
                 $i--;
             } else {
                 //kiểm tra trùng với email của user
-                if (in_array($emails[$i]['email_address'], $emailUser)){
+                if (in_array($emails[$i]['email_address'], $emailUser)) {
                     $this->email_model->delete($emails[$i]['id']);
                     unset($emails[$i]);
                     $i--;
                 }
             }
         }
-        if (in_array($emails[$i]['email_address'], $emailUser)){
+        if (in_array($emails[$i]['email_address'], $emailUser)) {
             $this->email_model->delete($emails[$i]['id']);
             unset($emails[$i]);
             $i--;
@@ -363,5 +296,37 @@ class Email extends CI_Controller
         echo json_encode(array(
             'success' => 1
         ));
+    }
+
+    function saveEmailRelationship($idEmailSent, $email_address, $status)
+    {
+        //lưu quan hệ
+        $sql = "SELECT id FROM user WHERE email='{$email_address}'";
+        $result = $this->db->query($sql)->result_array();
+        if (count($result) > 0) {
+            foreach ($result as $userId) {
+                $dataTemp = array(
+                    'user_id' => $userId['id'],
+                    'email_sent_id' => $idEmailSent,
+                    'status' => $status
+                );
+                $this->email_sent_user_model->insert($dataTemp);
+            }
+        } else {
+
+            //lưu quan hệ với danh sách email
+            $sql = "SELECT id FROM email WHERE email_address='{$email_address}'";
+            $result = $this->db->query($sql)->result_array();
+            if (count($result) > 0) {
+                foreach ($result as $emailId) {
+                    $dataTemp = array(
+                        'email_id' => $emailId['id'],
+                        'email_sent_id' => $idEmailSent,
+                        'status' => $status
+                    );
+                    $this->email_sent_email_model->insert($dataTemp);
+                }
+            }
+        }
     }
 }
