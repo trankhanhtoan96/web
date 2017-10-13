@@ -45,16 +45,6 @@ $dataTemplates = array(
                     'label' => lang('excerpt'),
                     'value' => !empty($data['excerpt']) ? $data['excerpt'] : ''
                 )
-            ),
-            5 => array(
-                0 => array(
-                    'label' => lang('content')
-                )
-            ),
-            6 => array(
-                0 => array(
-                    'value' => !empty($data['content']) ? $data['content'] : ''
-                )
             )
         )
     ),

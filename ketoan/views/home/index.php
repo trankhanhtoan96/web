@@ -216,16 +216,32 @@
         <p>Chúng tôi sẵn sàng phục vụ, chỉ cần bạn vui lòng điền một số thông tin bên dưới đây:</p>
         <form class="form-inline">
             <label>Họ tên:&nbsp;&nbsp;</label>
-            <input type="text" style="width:200px" class="form-control">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="text" placeholder="Trần Văn A" style="width:200px" class="form-control">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <label>Email:&nbsp;&nbsp;</label>
-            <input type="email" style="width:200px" class="form-control">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="email" placeholder="abc@example.com" style="width:200px" class="form-control">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <label>Số điện thoại:&nbsp;&nbsp;</label>
-            <input type="text" style="width: 200px" class="form-control">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="text" placeholder="0123.456.789" style="width: 200px" class="form-control">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <label><input type="checkbox"> Gọi càng sớm càng tốt</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button type="submit" class="btn btn-default">Gửi yêu cầu <i class="fa fa-long-arrow-right"></i></button>
         </form>
         <br/><br/>
     </div>
     <!--blog-->
-<div c
+    <div class="container">
+        <div class="row">
+            <h2 class="text-center">Bài viết kế toán</h2>
+            <?php foreach ($data['blog_news'] as $item): ?>
+                <div class="col-sm-3">
+                    <div class="thumbnail" style="height:300px">
+                        <img class="img-responsive" src="<?= $item['image'] ?>"/>
+                        <p style="font-size:17px;"><?= getExcerpt($item['name']) ?></p>
+                        <p style="color: #898B8B"><i class="fa fa-clock-o"></i> <?= $item['date_modifiled'] ?></p>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+            <div class="col-xs-12 text-center">
+                <a href="#" class="btn btn-default">Xem tất cả</a><br/><br/>
+            </div>
+        </div>
+    </div>
 <?php include 'ketoan/views/footer.php'; ?>

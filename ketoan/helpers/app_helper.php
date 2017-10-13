@@ -106,3 +106,22 @@ function subArray(array $arr, $begin, $end)
     }
     return $result;
 }
+
+/**
+ * @param $str
+ * @param int $startPos
+ * @param int $maxLength
+ * @return string
+ */
+function getExcerpt($str, $startPos=0, $maxLength=100) {
+    if(strlen(strip_tags($str)) > $maxLength) {
+        $excerpt   = substr(strip_tags($str), $startPos, $maxLength-3);
+        $lastSpace = strrpos($excerpt, ' ');
+        $excerpt   = substr($excerpt, 0, $lastSpace);
+        $excerpt  .= '...';
+    } else {
+        $excerpt = strip_tags($str);
+    }
+
+    return $excerpt;
+}

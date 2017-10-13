@@ -30,11 +30,25 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property CI_Zip $zip
  * @property CI_DB $db
  * @property Mail mail
+ * @property Setting_model setting_model
+ * @property Blog_model blog_model
  */
 class Home extends CI_Controller
 {
     function index()
     {
-        $this->load->view('home/index');
+        $dataView = array();
+        $dataView['blog_news'] = $this->blog_model->get_list('*', array(), 'date_modifiled', 'DESC', 4);
+        $data = array(
+            'meta_title'=>$this->setting_model->get('page_title'),
+            'meta_description'=>$this->setting_model->get('page_description'),
+            'data'=>$dataView
+        );
+        $this->load->view('home/index',$data);
+    }
+
+    function blog_category($id)
+    {
+
     }
 }

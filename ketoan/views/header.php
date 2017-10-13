@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="<?= $this->setting_model->get('icon') ?>"/>
     <title><?= !empty($meta_title) ? $meta_title : '' ?></title>
+    <meta name="description" content="<?= !empty($meta_description) ? $meta_description : '' ?>">
 
     <!--define language-->
     <script>
@@ -73,10 +74,11 @@
                         <li><a href="#"><i class="fa-chevron-circle-right fa"></i> QUYẾT TOÁN THUẾ</a></li>
                         <li><a href="#"><i class="fa-chevron-circle-right fa"></i> BÁO CÁO TÀI CHÍNH</a></li>
                         <li><a href="#"><i class="fa-chevron-circle-right fa"></i> LÀM SỔ SÁCH KẾ TOÁN</a></li>
+                        <li><a href="#"><i class="fa-chevron-circle-right fa"></i> LÀM BHYT - BHXH</a></li>
                     </ul>
                 </li>
                 <li><a href="#">KINH NGHIỆM</a></li>
-                <li><a href="#">TIN TỨC</a></li>
+            <li><a href="#">TIN TỨC KẾ TOÁN</a></li>
                 <li><a href="#">LIÊN HỆ</a></li>
             </ul>
         </div>
