@@ -110,7 +110,7 @@ $system_path = 'system';
  *
  * NO TRAILING SLASH!
  */
-$application_folder = 'site';
+$application_folder = 'ketoan';
 
 /*
  *---------------------------------------------------------------

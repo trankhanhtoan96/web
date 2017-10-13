@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="<?= CI_LANGUAGE_DISPLAY ?>">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
@@ -66,10 +66,11 @@
     <div class="main_container">
         <div class="col-md-3 left_col">
             <div class="left_col scroll-view">
-                <div class="navbar nav_title" style="border: 0;">
+                <div class="navbar nav_title" style="border: 0;background-color: #FFF">
                     <a href="<?= site_url() ?>" class="site_title">
-                        <img style="width:50px" src="<?= $this->setting_model->get('logo') ?>"/>
-                        <span>Company Name</span>
+                        <img class="img-responsive" src="<?= $this->setting_model->get('logo') ?>"/>
+                        <!--<img style="width:50px" src="<?= $this->setting_model->get('logo') ?>"/>-->
+                        <!--<span>Company Name</span>-->
                     </a>
                 </div>
                 <div class="clearfix"></div>
