@@ -1,7 +1,7 @@
 <?php $userLogined = $this->session->userdata('userLogined'); ?>
 <li>
     <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-        <img src="<?= $userLogined['avatar'] ?>"><?= $userLogined['last_name'] ?>
+        <img src="<?= $userLogined['avatar'] ?>"><?= $userLogined['first_name'].' '.$userLogined['last_name'] ?>
         <span class=" fa fa-angle-down"></span>
     </a>
     <ul class="dropdown-menu dropdown-usermenu pull-right">

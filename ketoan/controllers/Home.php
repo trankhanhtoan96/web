@@ -49,6 +49,6 @@ class Home extends CI_Controller
 
     function blog_category($id)
     {
-
+        echo $this->input->get('page');
     }
 }

@@ -65,6 +65,15 @@ class Blog_category extends CI_Controller
             if ($id) {
                 $dataEdit = $this->input->post();
                 $dataEdit['id'] = $id;
+
+                //rewrite url
+                if ($this->input->post('rewrite_url')) {
+                    $sql = "UPDATE router SET name='" . rewrite($this->input->post('rewrite_url')) . "' WHERE target_id='{$id}' AND type='blog_category'";
+                } else {
+                    $sql = "UPDATE router SET name='" . rewrite($this->input->post('name')) . "' WHERE target_id='{$id}' AND type='blog_category'";
+                }
+                $this->db->query($sql);
+
                 $this->{$this->router->class . '_model'}->update($dataEdit);
                 redirect('/' . $this->router->class . '/detail/' . $id);
             } else {
@@ -72,6 +81,15 @@ class Blog_category extends CI_Controller
                 unset($dataEdit['id']);
                 $dataId = '';
                 $this->{$this->router->class . '_model'}->insert($dataEdit, $dataId);
+
+                //rewrite url
+                if ($this->input->post('rewrite_url')) {
+                    $sql = "INSERT INTO router(id,name,target_id,type) VALUE('" . createId() . "', '" . $this->input->post('rewrite_url') . "', '{$dataId}', 'blog_category')";
+                } else {
+                    $sql = "INSERT INTO router(id,name,target_id,type) VALUE('" . createId() . "', '" . $this->input->post('name') . "', '{$dataId}', 'blog_category')";
+                }
+                $this->db->query($sql);
+
                 redirect('/' . $this->router->class . '/detail/' . $dataId);
             }
         }

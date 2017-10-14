@@ -57,7 +57,7 @@ $dataTemplates = array(
                 )
             )
         )
-    ),
+    )
 );
 include 'admin/views/core/edit.php';
 include 'admin/views/footer.php';

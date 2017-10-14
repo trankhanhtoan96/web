@@ -76,6 +76,23 @@ class Blog extends CI_Controller
             if ($id) {
                 $dataEdit = $this->input->post();
                 $dataEdit['id'] = $id;
+
+//                //rewrite url
+//                if ($this->input->post('rewrite_url')) {
+//                    $sql = "UPDATE router SET name='" . rewrite($this->input->post('rewrite_url')) . "' WHERE target_id='{$id}' AND type='blog'";
+//                } else {
+//                    $sql = "UPDATE router SET name='" . rewrite($this->input->post('name')) . "' WHERE target_id='{$id}' AND type='blog'";
+//                }
+//                $this->db->query($sql);
+
+                //rewrite url
+                if ($this->input->post('rewrite_url')) {
+                    $sql = "INSERT INTO router(id,name,target_id,type) VALUE('" . createId() . "', '" . rewrite($this->input->post('rewrite_url')) . "', '{$id}', 'blog')";
+                } else {
+                    $sql = "INSERT INTO router(id,name,target_id,type) VALUE('" . createId() . "', '" . rewrite($this->input->post('name')) . "', '{$id}', 'blog')";
+                }
+                $this->db->query($sql);
+
                 $this->{$this->router->class . '_model'}->update($dataEdit);
 
                 //insert relationship
@@ -92,6 +109,14 @@ class Blog extends CI_Controller
                 unset($dataEdit['id']);
                 $dataId = '';
                 $this->{$this->router->class . '_model'}->insert($dataEdit, $dataId);
+
+                //rewrite url
+                if ($this->input->post('rewrite_url')) {
+                    $sql = "INSERT INTO router(id,name,target_id,type) VALUE('" . createId() . "', '" . $this->input->post('rewrite_url') . "', '{$dataId}', 'blog')";
+                } else {
+                    $sql = "INSERT INTO router(id,name,target_id,type) VALUE('" . createId() . "', '" . $this->input->post('name') . "', '{$dataId}', 'blog')";
+                }
+                $this->db->query($sql);
 
                 //insert relationship
                 foreach ($dataEdit['blog_category'] as $item) {
