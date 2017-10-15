@@ -50,6 +50,16 @@ $dataTemplates = array(
                 )
             )
         )
+    ),
+    2 => array(
+        'panel_name' => lang('rewrite_url'),
+        'data_panel' => array(
+            0 => array(
+                0 => array(
+                    'value' => !empty($data['rewrite_url']) ? $data['rewrite_url'] : ''
+                )
+            )
+        )
     )
 );
 include 'admin/views/core/detail.php';

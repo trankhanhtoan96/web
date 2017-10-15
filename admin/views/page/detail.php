@@ -41,16 +41,6 @@ $dataTemplates = array(
                     'label' => lang('excerpt'),
                     'value' => !empty($data['excerpt']) ? $data['excerpt'] : ''
                 )
-            ),
-            5 => array(
-                0 => array(
-                    'label' => lang('content')
-                )
-            ),
-            6 => array(
-                0 => array(
-                    'value' => !empty($data['content']) ? $data['content'] : ''
-                )
             )
         )
     ),
@@ -65,6 +55,16 @@ $dataTemplates = array(
                 1 => array(
                     'label' => lang('meta_description'),
                     'value' => !empty($data['seo_description']) ? $data['seo_description'] : ''
+                )
+            )
+        )
+    ),
+    2 => array(
+        'panel_name' => lang('rewrite_url'),
+        'data_panel' => array(
+            0 => array(
+                0 => array(
+                    'value' => !empty($data['rewrite_url']) ? $data['rewrite_url'] : ''
                 )
             )
         )

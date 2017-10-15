@@ -157,6 +157,11 @@ class Blog extends CI_Controller
         $dataView['user_created'] = $this->user_model->get($dataView['user_created']);
         $dataView['user_modifiled'] = $this->user_model->get($dataView['user_modifiled']);
 
+        //rewrite url-------------------------------------------------------------
+        $sql = "SELECT name FROM router WHERE target_id='{$id}'";
+        $result = $this->db->query($sql)->result_array();
+        $dataView['rewrite_url'] = $result[0]['name'];
+
         //get blog category name and assign to html ul li
         $blogCategory = $this->blog_model->getBlogCategory($id);
         $dataView['blog_category'] = "<ul>";
