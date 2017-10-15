@@ -65,6 +65,20 @@ class Page extends CI_Controller
             if ($id) {
                 $dataEdit = $this->input->post();
                 $dataEdit['id'] = $id;
+
+                //rewrite url---------------------------------------------
+                $routerName = rewrite($this->input->post('rewrite_url'));
+                if (!$routerName) {
+                    $routerName = rewrite($this->input->post('name'));
+                }
+                if (checkExistRouter($routerName, array($id))) {
+                    $i = 0;
+                    while (checkExistRouter($routerName . $i, array($id))) $i++;
+                    $routerName .= $i;
+                }
+                $sql = "UPDATE router SET name='{$routerName}' WHERE target_id='{$id}'";
+                $this->db->query($sql);
+
                 $this->{$this->router->class . '_model'}->update($dataEdit);
                 redirect('/' . $this->router->class . '/detail/' . $id);
             } else {
@@ -72,6 +86,21 @@ class Page extends CI_Controller
                 unset($dataEdit['id']);
                 $dataId = '';
                 $this->{$this->router->class . '_model'}->insert($dataEdit, $dataId);
+
+                //rewrite url----------------------------------------------
+                $routerName = rewrite($this->input->post('rewrite_url'));
+                if (!$routerName) {
+                    $routerName = rewrite($this->input->post('name'));
+                }
+                if (checkExistRouter($routerName)) {
+                    $i = 0;
+                    while (checkExistRouter($routerName . $i)) $i++;
+                    $routerName .= $i;
+                }
+                $routerId = createId();
+                $sql = "INSERT INTO router(id,name,target_id) VALUES('{$routerId}','{$routerName}','{$dataId}')";
+                $this->db->query($sql);
+
                 redirect('/' . $this->router->class . '/detail/' . $dataId);
             }
         }
@@ -106,6 +135,11 @@ class Page extends CI_Controller
     {
         if (!checkRole($this->router->class . '_delete')) redirect('/', 'refresh');
         $this->{$this->router->class . '_model'}->delete($id);
+
+        //delete router
+        $sql = "DELETE FROM router WHERE target_id='{$id}'";
+        $this->db->query($sql);
+
         redirect('/' . $this->router->class . '/index');
     }
 
@@ -115,6 +149,10 @@ class Page extends CI_Controller
         if ($recods = $this->input->post('record_selected')) {
             foreach ($recods as $id) {
                 $this->{$this->router->class . '_model'}->delete($id);
+
+                //delete router
+                $sql = "DELETE FROM router WHERE target_id='{$id}'";
+                $this->db->query($sql);
             }
         }
         redirect('/' . $this->router->class . '/index');

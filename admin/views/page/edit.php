@@ -62,6 +62,18 @@ $dataTemplates = array(
             )
         )
     ),
+    2 => array(
+        'panel_name' => lang('rewrite_url'),
+        'data_panel' => array(
+            0 => array(
+                0 => array(
+                    'type' => 'text',
+                    'value' => !empty($data['rewrite_url']) ? $data['rewrite_url'] : '',
+                    'name' => 'rewrite_url'
+                )
+            )
+        )
+    )
 );
 include 'admin/views/core/edit.php';
 include 'admin/views/footer.php';

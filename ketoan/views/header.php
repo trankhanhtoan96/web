@@ -55,7 +55,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="/">
+            <a href="<?= site_url() ?>">
                 <img class="img-responsive navbar-brand" style="height:70px;padding:0"
                      src="<?= $this->setting_model->get('logo') ?>"/>
             </a>
@@ -63,7 +63,7 @@
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
                 <li><a href="#">GIỚI THIỆU</a></li>
-                <li><a href="#">BẢNG GIÁ</a></li>
+                <li><a href="<?= site_url() ?>">BẢNG GIÁ</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">DỊCH
                         VỤ
