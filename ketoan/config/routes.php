@@ -52,4 +52,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-$route["(:any)\.html"] = 'home/blog_category/$1';
+
+$route["gioi-thieu.html"] = 'home/page/gioi-thieu';
+$route["dich-vu-thanh-lap-doanh-nghiep.html"] = 'home/page/dich-vu-thanh-lap-doanh-nghiep';
+$route["dich-vu-bao-cao-thue.html"] = 'home/page/dich-vu-bao-cao-thue';
+$route["dich-vu-quyet-toan-thue.html"] = 'home/page/dich-vu-quyet-toan-thue';
+$route["dich-vu-bao-cao-tai-chinh.html"] = 'home/page/dich-vu-bao-cao-tai-chinh';
+$route["dich-vu-lam-so-sach-ke-toan.html"] = 'home/page/dich-vu-lam-so-sach-ke-toan';
+$route["dich-vu-lam-bhxh-bhyt.html"] = 'home/page/dich-vu-lam-bhxh-bhyt';
+
+$route["danh-muc/(:any).html"] = 'home/blog_category/$1';

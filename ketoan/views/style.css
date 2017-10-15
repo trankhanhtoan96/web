@@ -50,3 +50,12 @@
 a:hover {
     text-decoration: none;
 }
+.dichvu:hover{
+    color:#CB2134;
+}
+.link-dich-vu:hover{
+    color:#CB2134;
+}
+.link-dich-vu{
+    color:#000;
+}

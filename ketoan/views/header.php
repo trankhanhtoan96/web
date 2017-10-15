@@ -62,23 +62,23 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li><a href="#">GIỚI THIỆU</a></li>
+                <li><a href="<?= site_url('gioi-thieu.html') ?>">GIỚI THIỆU</a></li>
                 <li><a href="<?= site_url() ?>">BẢNG GIÁ</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">DỊCH
                         VỤ
                         <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                        <li><a href="#"><i class="fa-chevron-circle-right fa"></i> THÀNH LẬP DOANH NGHIỆP</a></li>
-                        <li><a href="#"><i class="fa-chevron-circle-right fa"></i> BÁO CÁO THUẾ</a></li>
-                        <li><a href="#"><i class="fa-chevron-circle-right fa"></i> QUYẾT TOÁN THUẾ</a></li>
-                        <li><a href="#"><i class="fa-chevron-circle-right fa"></i> BÁO CÁO TÀI CHÍNH</a></li>
-                        <li><a href="#"><i class="fa-chevron-circle-right fa"></i> LÀM SỔ SÁCH KẾ TOÁN</a></li>
-                        <li><a href="#"><i class="fa-chevron-circle-right fa"></i> LÀM BHYT - BHXH</a></li>
+                        <li><a href="<?= site_url('dich-vu-thanh-lap-doanh-nghiep.html') ?>"><i class="fa-chevron-circle-right fa"></i> THÀNH LẬP DOANH NGHIỆP</a></li>
+                        <li><a href="<?= site_url('dich-vu-bao-cao-thue.html') ?>"><i class="fa-chevron-circle-right fa"></i> BÁO CÁO THUẾ</a></li>
+                        <li><a href="<?= site_url('dich-vu-quyet-toan-thue.html') ?>"><i class="fa-chevron-circle-right fa"></i> QUYẾT TOÁN THUẾ</a></li>
+                        <li><a href="<?= site_url('dich-vu-bao-cao-tai-chinh.html') ?>"><i class="fa-chevron-circle-right fa"></i> BÁO CÁO TÀI CHÍNH</a></li>
+                        <li><a href="<?= site_url('dich-vu-lam-so-sach-ke-toan.html') ?>"><i class="fa-chevron-circle-right fa"></i> LÀM SỔ SÁCH KẾ TOÁN</a></li>
+                        <li><a href="<?= site_url('dich-vu-lam-bhxh-bhyt.html') ?>"><i class="fa-chevron-circle-right fa"></i> LÀM BHYT - BHXH</a></li>
                     </ul>
                 </li>
-                <li><a href="#">KINH NGHIỆM</a></li>
-            <li><a href="#">TIN TỨC KẾ TOÁN</a></li>
+                <li><a href="<?= site_url('danh-muc/kinh-nghiem-ke-toan.html') ?>">KINH NGHIỆM</a></li>
+                <li><a href="<?= site_url('danh-muc/tin-tuc-ke-toan.html') ?>">TIN TỨC KẾ TOÁN</a></li>
                 <li><a href="#">LIÊN HỆ</a></li>
             </ul>
         </div>
