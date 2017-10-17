@@ -6,7 +6,7 @@ require_once 'vendors/PHPMailer/POP3.php';
 require_once 'vendors/PHPMailer/SMTP.php';
 use PHPMailer\PHPMailer\PHPMailer;
 
-class Mail
+class CI_Email
 {
     public $mailer;
 

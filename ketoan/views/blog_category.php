@@ -32,5 +32,6 @@
                 </div>
             </div>
         <?php endforeach; ?>
+        <?= $data['pagination'] ?>
     </div>
 <?php include 'ketoan/views/footer.php'; ?>

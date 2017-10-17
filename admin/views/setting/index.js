@@ -1,6 +1,7 @@
 $(document).ready(function(){
     autosize($('#script_header'));
     autosize($('#script_footer'));
+    CKEDITOR.replace('mail_signature');
 });
 
 //upload logo

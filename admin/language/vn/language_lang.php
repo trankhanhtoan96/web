@@ -135,7 +135,10 @@ $lang = array(
     'filter_email_duplicate_success'=>'Lọc email trùng lặp thành công!',
     'filter_valid_email'=>'Lọc email hợp lệ',
     'filter_email_valid_success'=>'Lọc email hợp lệ thành công!',
-    'rewrite_url'=>'Viết lại đường dẫn url'
+    'rewrite_url'=>'Viết lại đường dẫn url',
+    'post'=>'Bài đăng',
+    'num_posts_per_page'=>'Số bài đăng trên 1 trang',
+    'mail_signature'=>'Chữ ký Email'
 );
 
 $lang['status_email'] = array(

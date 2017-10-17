@@ -48,27 +48,6 @@ $dataTemplates = array(
         )
     ),
     1 => array(
-        'panel_name' => lang('script'),
-        'data_panel' => array(
-            0 => array(
-                0 => array(
-                    'label' => lang('script_header'),
-                    'type' => 'textarea',
-                    'value' => !empty($data['script_header']) ? $data['script_header'] : '',
-                    'name' => 'script_header'
-                )
-            ),
-            1 => array(
-                0 => array(
-                    'label' => lang('script_footer'),
-                    'type' => 'textarea',
-                    'value' => !empty($data['script_footer']) ? $data['script_footer'] : '',
-                    'name' => 'script_footer'
-                )
-            )
-        )
-    ),
-    2 => array(
         'panel_name' => lang('setting_email'),
         'data_panel' => array(
             0 => array(
@@ -121,6 +100,28 @@ $dataTemplates = array(
                     'value' => !empty($data['mail_from_name']) ? $data['mail_from_name'] : '',
                     'name' => 'mail_from_name'
                 )
+            ),
+            4=>array(
+                0=>array(
+                    'label'=>lang('mail_signature'),
+                    'type'=>'textarea',
+                    'value' => !empty($data['mail_signature']) ? $data['mail_signature'] : '',
+                    'name' => 'mail_signature'
+                )
+            )
+        )
+    ),
+    2 => array(
+        'panel_name' => lang('post'),
+        'data_panel' => array(
+            0 => array(
+                0 => array(
+                    'label' => lang('num_posts_per_page'),
+                    'type' => 'number',
+                    'value' => !empty($data['num_posts_per_page']) ? $data['num_posts_per_page'] : '',
+                    'name' => 'num_posts_per_page'
+                ),
+                1 => ''
             )
         )
     )

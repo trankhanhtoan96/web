@@ -64,14 +64,26 @@ class Home extends CI_Controller
             $dataView = array();
             $dataView['blog_category'] = $this->blog_category_model->get($id);
 
+            $page = $this->input->get('page');
+            $page = $page ? $page : 0;
+
             $sql = "SELECT r.name AS router_name,b.id, b.date_modifiled, b.name, b.excerpt, b.content, b.user_modifiled, b.image
                     FROM blog as b
                     INNER JOIN blog_category_blog AS bc ON b.id=bc.blog_id
                     INNER JOIN blog_category AS c ON c.id=bc.blog_category_id
                     INNER JOIN router AS r ON r.target_id=b.id
                     WHERE c.id='{$id}'
-                    ORDER BY b.date_modifiled DESC";
+                    ORDER BY b.date_modifiled DESC
+                    LIMIT {$page}," . $this->setting_model->get('num_posts_per_page');
             $dataView['blogs'] = $this->db->query($sql)->result_array();
+
+            $this->load->library('pagination',array());
+            $config['base_url'] = current_url() . '?page=';
+            $config['total_items'] = 200;
+            $config['per_page'] = 20;
+            $config['cur_page'] = 2;
+            $this->pagination->initialize($config);
+            $dataView['pagination'] = $this->pagination->create_links();
 
             $data = array(
                 'meta_title' => $dataView['blog_category']['seo_title'],

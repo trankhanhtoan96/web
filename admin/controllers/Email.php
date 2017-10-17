@@ -33,11 +33,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property CI_Router router
  * @property Email_model email_model
  * @property Role_model role_model
- * @property Mail mail
  * @property Email_template_model email_template_model
  * @property Email_sent_model email_sent_model
  * @property Email_sent_user_model email_sent_user_model
  * @property Email_sent_email_model email_sent_email_model
+ * @property Setting_model setting_model
  */
 class Email extends CI_Controller
 {
@@ -148,17 +148,18 @@ class Email extends CI_Controller
             $this->email_sent_model->insert($dataEmailSent, $idEmailSent);
 
             //tiến hành gởi mail
-            $this->load->library('mail');
+            $this->load->library('email');
             $sendSuccess = 0;
             $sendError = 0;
             $addressTO = explode(',', $this->input->post('email_to'));
             foreach ($addressTO as $address) {
                 $address = trim($address);
-                if ($this->mail->mailer->addAddress($address)) {
-                    $this->mail->mailer->Subject = $this->input->post('subject');
-                    $this->mail->mailer->Body = $this->input->post('body_email');
-                    $this->mail->mailer->Body .= "<img style='width:0;height:0' src='" . site_url('public_action/check_read_email/' . urlencode($address) . '/' . $idEmailSent) . "' />";
-                    if ($this->mail->mailer->send()) {
+                if ($this->email->mailer->addAddress($address)) {
+                    $this->email->mailer->Subject = $this->input->post('subject');
+                    $this->email->mailer->Body = $this->input->post('body_email');
+                    $this->email->mailer->Body .= $this->setting_model->get('mail_signature');
+                    $this->email->mailer->Body .= "<img style='width:0;height:0' src='" . site_url('public_action/check_read_email/' . urlencode($address) . '/' . $idEmailSent) . "' />";
+                    if ($this->email->mailer->send()) {
                         $sendSuccess++;
                         $this->saveEmailRelationship($idEmailSent, $address, 'sent');
                         //lưu quan hệ
@@ -170,7 +171,7 @@ class Email extends CI_Controller
                     }
 
                     //xóa email đã gởi để add email mới cho lần gởi tiếp theo
-                    $this->mail->mailer->clearAddresses();
+                    $this->email->mailer->clearAddresses();
                 } else {
                     $sendError++;
 
