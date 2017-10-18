@@ -72,14 +72,10 @@ class Email extends CI_Controller
             if ($id) {
                 $dataEdit = $this->input->post();
                 $dataEdit['id'] = $id;
-                if ($dataEdit['validation'] == 'on') $dataEdit['validation'] = 1;
-                else $dataEdit['validation'] = 0;
                 $this->{$this->router->class . '_model'}->update($dataEdit);
                 redirect('/' . $this->router->class . '/detail/' . $id);
             } else {
                 $dataEdit = $this->input->post();
-                if ($dataEdit['validation'] == 'on') $dataEdit['validation'] = 1;
-                else $dataEdit['validation'] = 0;
                 unset($dataEdit['id']);
                 $dataId = '';
                 $this->{$this->router->class . '_model'}->insert($dataEdit, $dataId);

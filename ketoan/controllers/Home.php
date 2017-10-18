@@ -33,6 +33,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @property Blog_model blog_model
  * @property Page_model page_model
  * @property Blog_category_model blog_category_model
+ * @property Email_model email_model
  */
 class Home extends CI_Controller
 {
@@ -121,5 +122,32 @@ class Home extends CI_Controller
             );
             $this->load->view('page', $data);
         }
+    }
+
+    function save_email_subcribe()
+    {
+        $success = 0;
+        $message = '';
+        if ($email = $this->input->post('email_subcribe')) {
+            $sql = "SELECT COUNT(id) AS num FROM email WHERE email_address='{$email}'";
+            if ($row = $this->db->query($sql)->result_array()[0]) {
+                if ($row['num'] == 0) {
+                    $data = array(
+                        'email_address' => $email
+                    );
+                    if ($this->email_model->insert($data)) {
+                        $success=1;
+                        $message=lang('save_success');
+                    }
+                }else{
+                    $success = 0;
+                    $message=lang('email_existed_in_system');
+                }
+            }
+        }
+        echo json_encode(array(
+            'success'=>$success,
+            'message'=>$message
+        ));
     }
 }

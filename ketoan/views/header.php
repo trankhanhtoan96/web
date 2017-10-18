@@ -31,6 +31,13 @@
     <!--custom css-->
     <link href="<?= base_url('ketoan/views/style.css') ?>" rel="stylesheet" type="text/css"/>
 
+    <!--spinner load-->
+    <link rel="stylesheet" type="text/css" href="<?= base_url('vendors/Spinner/Spinner.css') ?>"/>
+    <script src="<?= base_url('vendors/Spinner/Spinner.js') ?>"></script>
+
+    <!--alertify-->
+    <link rel="stylesheet" type="text/css" href="<?= base_url('vendors/AlertifyJS/alertify.min.css') ?>"/>
+
     <!--custom script-->
     <script src="<?= base_url('ketoan/views/script.js') ?>"></script>
 </head>

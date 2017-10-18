@@ -16,10 +16,6 @@ $dataThead = array(
     3 => array(
         'label' => lang('user_modifiled'),
         'width' => '20'
-    ),
-    4 => array(
-        'label' => lang('validation'),
-        'width' => '7'
     )
 );
 $dataTbody = array();
@@ -29,8 +25,7 @@ foreach ($data as $item) {
         $item['name'],
         $item['email_address'],
         $item['date_modifiled'],
-        $item['user_modifiled']['first_name'] . ' ' . $item['user_modifiled']['last_name'],
-        $item['validation'] == 1 ? '<label class="label label-success">'.lang('yes').'</label>' : '<label class="label label-danger">'.lang('no').'</label>'
+        $item['user_modifiled']['first_name'] . ' ' . $item['user_modifiled']['last_name']
     );
     $dataIds[] = $item['id'];
 }

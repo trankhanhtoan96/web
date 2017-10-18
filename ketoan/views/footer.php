@@ -48,9 +48,9 @@
                 và những bản tin cập nhật mới nhất về ngành kế toán.
                 Vui lòng hãy để lại địa chỉ email của bạn ở ô bên dưới đây.</p>
             <div class="input-group">
-                <input placeholder="abc@example.com" style="background-color: #5D5F63;border:solid 1px #32353A" type="email" class="form-control"/>
+                <input id="input_email_subcride" placeholder="abc@example.com" style="background-color: #5D5F63;border:solid 1px #32353A;color:#FFF" type="email" class="form-control"/>
                 <div class="input-group-btn">
-                    <button style="background-color:#5D5F63;border:solid 1px #32353A" class="btn btn-default" type="submit">
+                    <button id="btn_subcribe" style="background-color:#5D5F63;border:solid 1px #32353A" class="btn btn-default" type="button">
                         <i style="color:#fff;" class="fa fa-send"></i>
                     </button>
                 </div>
@@ -67,5 +67,7 @@
 <div class="container-fluid" style="background: #00000B;color: #898B8B;padding:10px">
     <div class="container">Copyright &copy; 2015 - 2017 DichVukeToanTaiNha.Net - All rights reserved</div>
 </div>
+
+<script src="<?= base_url('vendors/AlertifyJS/alertify.min.js') ?>"></script>
 </body>
 </html>

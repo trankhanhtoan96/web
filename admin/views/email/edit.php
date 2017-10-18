@@ -12,17 +12,11 @@ $dataTemplates = array(
                     'name' => 'name'
                 ),
                 1 => array(
-                    'label'=>lang('validation'),
-                    'code'=>'<input type="checkbox" class="flat" name="validation" id="validation" '.(!empty($data['validation']) && $data['validation']=='1'?'checked':'').'/>'
-                )
-            ),
-            1=>array(
-                0=>array(
-                    'label'=>lang('email_address'),
-                    'type'=>'email',
+                    'label' => lang('email_address'),
+                    'type' => 'email',
                     'value' => !empty($data['email_address']) ? $data['email_address'] : '',
-                    'name'=>'email_address',
-                    'required'=>true
+                    'name' => 'email_address',
+                    'required' => true
                 )
             )
         )

@@ -8,10 +8,6 @@ $dataTemplates = array(
                 0 => array(
                     'label' => lang('name'),
                     'value' => !empty($data['name']) ? $data['name'] : ''
-                ),
-                1 => array(
-                    'label'=>lang('validation'),
-                    'value'=>!empty($data['validation']) && $data['validation']==1 ? lang('yes') : lang('no')
                 )
             ),
             1=>array(
