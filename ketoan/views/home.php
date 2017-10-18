@@ -198,7 +198,7 @@
                 </div>
             <?php endforeach; ?>
             <div class="col-xs-12 text-center">
-                <a href="#" class="btn btn-default">Xem tất cả</a><br/><br/>
+                <a href="<?= site_url('danh-muc/kinh-nghiem-ke-toan.html') ?>" class="btn btn-default">Xem tất cả</a><br/><br/>
             </div>
         </div>
     </div>

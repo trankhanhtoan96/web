@@ -22,8 +22,8 @@
                     </p>
                     <p style="color:#898B8B">
                         <?php
-                        if ($blog['excerpt'] != '') echo getExcerpt($blog['excerpt'], 0, 255);
-                        else echo getExcerpt($blog['content'], 0, 300);
+                        if ($blog['excerpt'] != '') echo getExcerpt($blog['excerpt'], 0, 500);
+                        else echo getExcerpt($blog['content'], 0, 500);
                         ?>
                     </p>
                     <p style="color:#898B8B">
