@@ -56,7 +56,7 @@
                 </div>
             </div>
             <div class="text-center" style="font-size: 40px;">
-                <a href="#" style="color:#898B8B"><i class="fa fa-facebook-square"></i></a>&nbsp;
+                <a href="http://fb.com/luckystarhang" style="color:#898B8B"><i class="fa fa-facebook-square"></i></a>&nbsp;
                 <a href="#" style="color:#898B8B"><i class="fa fa-google-plus-square"></i></a>&nbsp;
                 <a href="#" style="color:#898B8B"><i class="fa fa-youtube-square"></i></a>&nbsp;
                 <a href="#" style="color:#898B8B"><i class="fa fa-linkedin-square"></i></a>

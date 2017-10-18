@@ -189,6 +189,10 @@ class Blog extends CI_Controller
         $sql = "DELETE FROM router WHERE target_id='{$id}'";
         $this->db->query($sql);
 
+        //delete relation ship
+        $sql = "DELETE FROM blog_category_blog WHERE blog_id='{$id}'";
+        $this->db->query($sql);
+
         redirect('/' . $this->router->class . '/index');
     }
 
@@ -199,6 +203,10 @@ class Blog extends CI_Controller
             foreach ($recods as $id) {
                 //delete router
                 $sql = "DELETE FROM router WHERE target_id='{$id}'";
+                $this->db->query($sql);
+
+                //delete relation ship
+                $sql = "DELETE FROM blog_category_blog WHERE blog_id='{$id}'";
                 $this->db->query($sql);
 
                 $this->{$this->router->class . '_model'}->delete($id);

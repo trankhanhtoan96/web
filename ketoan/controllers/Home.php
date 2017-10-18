@@ -41,6 +41,11 @@ class Home extends CI_Controller
     {
         $dataView = array();
         $dataView['blog_news'] = $this->blog_model->get_list('*', array(), 'date_modifiled', 'DESC', 4);
+        foreach ($dataView['blog_news'] as $key => $item) {
+            $sql = "SELECT name FROM router WHERE target_id='{$item['id']}'";
+            $result = $this->db->query($sql)->result_array();
+            if (count($result) == 1) $dataView['blog_news'][$key]['routerName'] = $result[0]['name'];
+        }
         $data = array(
             'meta_title' => $this->setting_model->get('page_title'),
             'meta_description' => $this->setting_model->get('page_description'),
@@ -136,18 +141,65 @@ class Home extends CI_Controller
                         'email_address' => $email
                     );
                     if ($this->email_model->insert($data)) {
-                        $success=1;
-                        $message=lang('save_success');
+                        $success = 1;
+                        $message = lang('save_success');
                     }
-                }else{
+                } else {
                     $success = 0;
-                    $message=lang('email_existed_in_system');
+                    $message = lang('email_existed_in_system');
                 }
             }
         }
         echo json_encode(array(
-            'success'=>$success,
-            'message'=>$message
+            'success' => $success,
+            'message' => $message
         ));
+    }
+
+    function crawler()
+    {
+        $start = 0;
+        while ($start <= 180) {
+            $start += 10;
+            $html = file_get_contents('http://ketoanbanthoigian.com/kinh-nghiem-ke-toan.html?start=' . $start);
+            preg_match_all('/<h2 itemprop="name">\n<a href="(.*)" itemprop="url">/', $html, $matches);
+            foreach ($matches[1] as $item) {
+                $html = file_get_contents('http://ketoanbanthoigian.com' . $item);
+                $html = preg_replace("/\n/", '', $html);
+
+                preg_match("/<h2 itemprop=\"name\">(.*)<\/h2><\/div><div itemprop=\"articleBody\">/", $html, $title);
+                $title = trim($title[1]);
+
+                preg_match("/<div itemprop=\"articleBody\">(.*)<div class=\"extranews_separator\"><\/div>/", $html, $content);
+                $content = trim($content[1]);
+
+                $data = array(
+                    'name' => $title,
+                    'content' => $content,
+                    'seo_title' => $title,
+                    'seo_description' => $title,
+                    'image' => base_url('uploads/images/KeToanTaiNha.png')
+                );
+                $dataId = '';
+                $this->blog_model->insert($data, $dataId);
+
+                //relationship
+                $id = createId();
+                $date = date("Y-m-d H:i:s");
+                $sql = "INSERT INTO blog_category_blog(id,blog_category_id,blog_id,date_entered,date_modifiled) VALUES('{$id}','0fbfa626124db3cf3b3fb5750da0911cOxbU','{$dataId}','{$date}','{$date}')";
+                $this->db->query($sql);
+
+                //rewrite url
+                $routerName = rewrite($title);
+                if (checkExistRouter($routerName)) {
+                    $i = 0;
+                    while (checkExistRouter($routerName . $i)) $i++;
+                    $routerName .= $i;
+                }
+                $routerId = createId();
+                $sql = "INSERT INTO router(id,name,target_id) VALUES('{$routerId}','{$routerName}','{$dataId}')";
+                $this->db->query($sql);
+            }
+        }
     }
 }

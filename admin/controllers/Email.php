@@ -174,9 +174,6 @@ class Email extends CI_Controller
                     //lưu quan hệ
                     $this->saveEmailRelationship($idEmailSent, $address, 'sent_error');
                 }
-
-                //dừng lại mỗi lần gởi mail để tránh spam email
-                sleep(2);
             }
 
             //thông báo ra màn hình

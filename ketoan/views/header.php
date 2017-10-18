@@ -86,7 +86,7 @@
                 </li>
                 <li><a href="<?= site_url('danh-muc/kinh-nghiem-ke-toan.html') ?>">KINH NGHIỆM</a></li>
                 <li><a href="<?= site_url('danh-muc/tin-tuc-ke-toan.html') ?>">TIN TỨC KẾ TOÁN</a></li>
-                <li><a href="#">LIÊN HỆ</a></li>
+                <li><a href="<?= site_url('lien-he.html') ?>">LIÊN HỆ</a></li>
             </ul>
         </div>
     </div>

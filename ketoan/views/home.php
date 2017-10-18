@@ -192,7 +192,7 @@
                 <div class="col-sm-3">
                     <div class="thumbnail" style="height:300px">
                         <img style="height: 175px;" class="img-responsive" src="<?= $item['image'] ?>"/>
-                        <p style="font-size:17px;"><?= getExcerpt($item['name'],0,80) ?></p>
+                        <p style="font-size:17px;"><a class="link-dich-vu" href="<?= site_url($item['routerName'].'.html') ?>"><?= getExcerpt($item['name'],0,80) ?></a></p>
                         <p style="color: #898B8B"><i class="fa fa-clock-o"></i> <?= $item['date_modifiled'] ?></p>
                     </div>
                 </div>

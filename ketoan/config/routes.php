@@ -60,5 +60,6 @@ $route["dich-vu-quyet-toan-thue.html"] = 'home/page/dich-vu-quyet-toan-thue';
 $route["dich-vu-bao-cao-tai-chinh.html"] = 'home/page/dich-vu-bao-cao-tai-chinh';
 $route["dich-vu-lam-so-sach-ke-toan.html"] = 'home/page/dich-vu-lam-so-sach-ke-toan';
 $route["dich-vu-lam-bhxh-bhyt.html"] = 'home/page/dich-vu-lam-bhxh-bhyt';
+$route["lien-he.html"] = 'home/page/lien-he';
 
 $route["danh-muc/(:any).html"] = 'home/blog_category/$1';
