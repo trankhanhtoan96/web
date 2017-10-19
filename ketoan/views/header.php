@@ -53,6 +53,19 @@
             <a class="btn btn-danger" href="mailto:dvkthang@yahoo.com">
                 <i class="fa fa-envelope"></i> <b> dvktHang@yahoo.com</b>
             </a>
+            <div class="pull-right">
+                <form method="get" name="form_change_ci_language" id="form_change_ci_language">
+                    <select style="background-color: #898B8B;color:#FFF;border:#898B8B" class="form-control" name="ci_change_language_to" id="ci_change_language_to">
+                        <option value="vi" <?= $this->config->item('language') == 'vi' ? 'selected' : '' ?>>Tiếng việt</option>
+                        <option value="en" <?= $this->config->item('language') == 'en' ? 'selected' : '' ?>>English</option>
+                    </select>
+                </form>
+                <script type="text/javascript">
+                    $('#ci_change_language_to').on('change', function () {
+                        $('#form_change_ci_language').submit();
+                    });
+                </script>
+            </div>
         </div>
     </div>
     <div class="container">

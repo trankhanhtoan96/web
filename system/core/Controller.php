@@ -88,8 +88,7 @@ class CI_Controller
             set_cookie('language', $ci_change_language_to, 2592000);
             $this->config->set_item('language', $ci_change_language_to);
         } elseif (!get_cookie('language', true)) {
-            set_cookie('language', 'vn', 2592000);
-            $this->config->set_item('language', 'vn');
+            set_cookie('language', 'vi', 2592000);
         } else {
             $this->config->set_item('language', get_cookie('language', true));
         }

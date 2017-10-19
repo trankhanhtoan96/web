@@ -42,7 +42,7 @@
 <?php if (checkRole('setting_edit') && checkRole('setting_view') && checkRole('setting_delete')): ?>
 
     <li><a target="_blank"
-           href="<?= base_url('vendors/ckfinder/ckfinder.html?langCode=') . ($this->config->item('language') == 'vn' ? 'vi' : $this->config->item('language')) ?>"><i
+           href="<?= base_url('vendors/ckfinder/ckfinder.html?langCode=' . $this->config->item('language')) ?>"><i
                 class="fa fa-image"></i> <?= lang('file_browser') ?></a></li>
 
     <li><a href="<?= site_url('setting/index') ?>"><i class="fa fa-cogs"></i> <?= lang('setting') ?></a></li>
