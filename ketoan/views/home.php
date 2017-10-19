@@ -190,7 +190,7 @@
             <h2 class="text-center">Bài viết</h2>
             <?php foreach ($data['blog_news'] as $item): ?>
                 <div class="col-sm-3">
-                    <div class="thumbnail" style="height:300px">
+                    <div class="thumbnail" style="height:270px">
                         <img style="height: 175px;" class="img-responsive" src="<?= $item['image'] ?>"/>
                         <p style="font-size:17px;"><a class="link-dich-vu" href="<?= site_url($item['routerName'].'.html') ?>"><?= getExcerpt($item['name'],0,80) ?></a></p>
                         <p style="color: #898B8B"><i class="fa fa-clock-o"></i> <?= $item['date_modifiled'] ?></p>

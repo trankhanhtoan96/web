@@ -9,13 +9,14 @@
     </div>
     <div class="container">
         <h1 class="text-center"><?= $data['blog_category']['name'] ?></h1>
+        <div class="extranews_separator"></div>
         <?php foreach ($data['blogs'] as $blog): ?>
             <div class="row thumbnail">
                 <div class="col-sm-2">
                     <img class="img-responsive" src="<?= $blog['image'] ?>"/>
                 </div>
                 <div class="col-sm-10">
-                    <p style="font-size: 20px">
+                    <p style="font-size: 22px">
                         <a class="link-dich-vu" href="<?= site_url($blog['router_name'] . '.html') ?>">
                             <?= $blog['name'] ?>
                         </a>

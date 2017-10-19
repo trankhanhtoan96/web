@@ -63,3 +63,5 @@ $route["dich-vu-lam-bhxh-bhyt.html"] = 'home/page/dich-vu-lam-bhxh-bhyt';
 $route["lien-he.html"] = 'home/page/lien-he';
 
 $route["danh-muc/(:any).html"] = 'home/blog_category/$1';
+
+$route['(:any).html'] = 'home/blog/$1';

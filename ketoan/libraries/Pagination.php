@@ -41,7 +41,7 @@ class CI_Pagination
      *
      * @var    int
      */
-    protected $num_links = 2;
+    protected $num_links = 3;
 
     /**
      * Items per page

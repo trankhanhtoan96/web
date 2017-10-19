@@ -1,3 +1,7 @@
+body {
+    font-size: 15px;
+}
+
 .navbar {
     margin-bottom: 0;
     background-color: #F5F5F5;
@@ -9,10 +13,12 @@
     height: 70px;
     padding-top: 25px !important;
 }
-.navbar-default .navbar-nav>li>a{
-    color:#000;
+
+.navbar-default .navbar-nav > li > a {
+    color: #000;
 }
-.navbar-nav > li > a:hover{
+
+.navbar-nav > li > a:hover {
     color: #FFF !important;
 }
 
@@ -28,34 +34,47 @@
 .navbar-nav > li {
     border-right: 1px solid #dfdfdf;
 }
+
 .dropdown-menu li a:hover {
     color: #000 !important;
 }
 
-.dropdown-menu li a{
+.dropdown-menu li a {
     color: #000 !important;
 }
 
 .dropdown-menu li a:hover {
     background-color: #CB2134 !important;
-    color:#FFF !important;
+    color: #FFF !important;
 }
 
 .navbar-default .navbar-nav > .open > a,
 .navbar-default .navbar-nav > .open > a:focus,
 .navbar-default .navbar-nav > .open > a:hover {
     background-color: #CB2134;
-    color:#fff;
+    color: #fff;
 }
+
 a:hover {
     text-decoration: none;
 }
-.dichvu:hover{
-    color:#CB2134;
+
+.dichvu:hover {
+    color: #CB2134;
 }
-.link-dich-vu:hover{
-    color:#CB2134;
+
+.link-dich-vu:hover {
+    color: #CB2134;
 }
-.link-dich-vu{
-    color:#000;
+
+.link-dich-vu {
+    color: #000;
+}
+
+.extranews_separator {
+    clear: both;
+    background: transparent url(./images/separator.png) no-repeat 50%;
+    display: block;
+    height: 14px;
+    margin: 0
 }

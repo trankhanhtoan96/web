@@ -7,5 +7,6 @@ $lang = array(
     'invalid_email'=>'Email không hợp lệ!',
     'error_unsave'=>'Lỗi không lưu được',
     'save_success'=>'Đã lưu thành công',
-    'email_existed_in_system'=>'Email đã tồn tại trong hệ thống'
+    'email_existed_in_system'=>'Email đã tồn tại trong hệ thống',
+    'blog'=>'Bài viết'
 );
