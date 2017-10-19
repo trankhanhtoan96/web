@@ -30,7 +30,7 @@ function CheckAuthentication()
     // ... where $_SESSION['IsAuthorized'] is set to "true" as soon as the
     // user logs in your system. To be able to use session variables don't
     // forget to add session_start() at the top of this file.
-    if(!empty($_COOKIE['ciuserLogined']) && $_COOKIE['ciuserLogined']) return true;
+    if (!empty($_COOKIE['ciuserLogined']) && $_COOKIE['ciuserLogined']) return true;
     return false;
 }
 
@@ -210,6 +210,14 @@ $config['ResourceType'][] = Array(
     'directory' => $baseDir . 'images',
     'maxSize' => 0,
     'allowedExtensions' => 'bmp,gif,jpeg,jpg,png,ico',
+    'deniedExtensions' => '');
+
+$config['ResourceType'][] = Array(
+    'name' => 'Icons',
+    'url' => $baseUrl . 'icons',
+    'directory' => $baseDir . 'icons',
+    'maxSize' => 0,
+    'allowedExtensions' => 'bmp,jpeg,jpg,png,ico',
     'deniedExtensions' => '');
 
 /*

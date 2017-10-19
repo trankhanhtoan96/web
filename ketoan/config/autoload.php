@@ -112,8 +112,7 @@ $autoload['helper'] = array(
     'text',
     'url',
     'xml',
-    'app_helper',
-    'validate_helper'
+    'custom'
 );
 
 /*

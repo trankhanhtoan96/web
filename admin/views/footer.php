@@ -10,8 +10,8 @@
     <div class="pull-right">
         <form method="get" name="form_change_ci_language" id="form_change_ci_language">
             <select class="form-control" name="ci_change_language_to" id="ci_change_language_to">
-                <option value="vn" <?= CI_LANGUAGE_DISPLAY == 'vn' ? 'selected' : '' ?>>Tiếng việt</option>
-                <option value="en" <?= CI_LANGUAGE_DISPLAY == 'en' ? 'selected' : '' ?>>English</option>
+                <option value="vn" <?= $this->config->item('language') == 'vn' ? 'selected' : '' ?>>Tiếng việt</option>
+                <option value="en" <?= $this->config->item('language') == 'en' ? 'selected' : '' ?>>English</option>
             </select>
         </form>
         <script type="text/javascript">

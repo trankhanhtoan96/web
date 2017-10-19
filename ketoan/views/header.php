@@ -13,7 +13,7 @@
     <!--define language-->
     <script>
         var CI_language = <?= json_encode($this->lang->language) ?>;
-        CI_language.language = '<?= CI_LANGUAGE_DISPLAY ?>';
+        CI_language.language = '<?= $this->config->item('language') ?>';
         CI_language.base_url = '<?= base_url() ?>';
         CI_language.site_url = '<?= site_url() ?>';
     </script>

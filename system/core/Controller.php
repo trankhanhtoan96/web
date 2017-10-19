@@ -49,6 +49,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author        EllisLab Dev Team
  * @link        https://codeigniter.com/user_guide/general/controllers.html
  * @property CI_Lang lang
+ * @property CI_Config config
  */
 class CI_Controller
 {
@@ -82,22 +83,18 @@ class CI_Controller
 
         //load language to display
         //Tran Khanh Toan 10/9/2017
-        $ci_change_language_to=$this->input->get('ci_change_language_to',true);
-        if($ci_change_language_to){
-            define('CI_LANGUAGE_DISPLAY',$ci_change_language_to);
-            set_cookie('language',$ci_change_language_to,2592000);
-            $this->lang->load('language',$ci_change_language_to);
-        }elseif(!get_cookie('language', true)){
-            set_cookie('language','vn',2592000);
-            $this->lang->load('language', 'vn');
-            define('CI_LANGUAGE_DISPLAY','vn');
-        }else{
-            $this->lang->load('language',get_cookie('language',true));
-            define('CI_LANGUAGE_DISPLAY',get_cookie('language',true));
+        $ci_change_language_to = $this->input->get('ci_change_language_to', true);
+        if ($ci_change_language_to) {
+            set_cookie('language', $ci_change_language_to, 2592000);
+            $this->config->set_item('language', $ci_change_language_to);
+        } elseif (!get_cookie('language', true)) {
+            set_cookie('language', 'vn', 2592000);
+            $this->config->set_item('language', 'vn');
+        } else {
+            $this->config->set_item('language', get_cookie('language', true));
         }
         //end load language to display
     }
-
     // --------------------------------------------------------------------
 
     /**
