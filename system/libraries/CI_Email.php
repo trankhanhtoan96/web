@@ -48,7 +48,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @author		EllisLab Dev Team
  * @link		https://codeigniter.com/user_guide/libraries/email.html
  */
-class CI_Email {
+class CI_Email__ {
 
 	/**
 	 * Used as the User-Agent and X-Mailer headers' value.

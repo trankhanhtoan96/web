@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(document).ready(function () {
     autosize($('#script_header'));
     autosize($('#script_footer'));
     CKEDITOR.replace('mail_signature');
@@ -7,8 +7,8 @@ $(document).ready(function(){
 //upload logo
 $('#btn_choose_logo').on('click', function () {
     CKFinder.popup({
-        resourceType : 'Images',
-        language:CI_language.language=='vn'?'vi':'',
+        resourceType: 'Images',
+        language: CI_language.language,
         selectActionFunction: function (fileUrl, data, allFiles) {
             var ext = getExt(fileUrl);
             if (ext == 'jpg' || ext == 'png') {
@@ -28,8 +28,8 @@ $('#btn_delete_logo').on('click', function () {
 //upload icon
 $('#btn_choose_icon').on('click', function () {
     CKFinder.popup({
-        resourceType : 'Images',
-        language:CI_language.language=='vn'?'vi':'',
+        resourceType: 'Images',
+        language: CI_language.language,
         selectActionFunction: function (fileUrl, data, allFiles) {
             var ext = getExt(fileUrl);
             if (ext == 'jpg' || ext == 'png') {
