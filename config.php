@@ -1,11 +1,13 @@
 <?php
 $custom_config = array(
-    'base_url' => 'http://localhost/web/'
+    'base_url' => 'http://localhost/web/',
+    'timezone' => 'Asia/Ho_Chi_Minh',
+    'language' => 'vi',
 );
 
 //database
 $database_config = array(
-    'dsn'	=> '',
+    'dsn' => '',
     'hostname' => 'localhost',
     'username' => 'root',
     'password' => '',
