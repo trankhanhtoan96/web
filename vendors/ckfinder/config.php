@@ -62,7 +62,7 @@ Examples:
 ATTENTION: The trailing slash is required.
 */
 
-$baseUrl = $_COOKIE['cibaseurl'] . '/uploads/';
+$baseUrl = $_COOKIE['cibaseurl'] . 'uploads/';
 
 /*
 $baseDir : the path to the local directory (in the server) which points to the
