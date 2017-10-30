@@ -66,11 +66,10 @@
     <div class="main_container">
         <div class="col-md-3 left_col">
             <div class="left_col scroll-view">
-                <div class="navbar nav_title" style="border: 0;background-color: #FFF">
+                <div class="navbar nav_title" style="border: 0;background-color: #FFF;padding-right:5px;padding-top:5px">
                     <a href="<?= site_url() ?>" class="site_title">
                         <img class="img-responsive" src="<?= $this->setting_model->get('logo') ?>"/>
-                        <!--<img style="width:50px" src="<?= $this->setting_model->get('logo') ?>"/>-->
-                        <!--<span>Company Name</span>-->
+    <!--                        <span>Company Name</span>-->
                     </a>
                 </div>
                 <div class="clearfix"></div>

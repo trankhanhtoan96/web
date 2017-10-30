@@ -29,7 +29,8 @@ foreach ($data as $key => $item) {
 
     //custom in each module
     if ($this->router->class == 'email_sent' && !empty($module)) {
-        $dataTbody[count($dataTbody)-1][2] = lang('status_email')[$dataRelationship[$key]['status']].' '.$dataRelationship[$key]['date_modifiled'];
+        $statusEmail = lang('status_email');
+        $dataTbody[count($dataTbody) - 1][2] = $statusEmail[$dataRelationship[$key]['status']] . ' ' . $dataRelationship[$key]['date_modifiled'];
     }
 }
 include 'admin/views/core/list_subpanel.php';

@@ -64,7 +64,8 @@ $dataTemplates = array(
         )
     )
 );
-if ($this->session->userdata('userLogined')['admin'] == 1) {
+$userLogined = $this->session->userdata('userLogined');
+if ($userLogined['admin'] == 1) {
     $dataTemplates[0]['data_panel'][5] = array(
         0 => '',
         1 => array(

@@ -64,7 +64,8 @@ class User extends CI_Controller
 
     function edit($id = '')
     {
-        if ($id != $this->session->userdata('userLogined')['id']){
+        $user = $this->session->userdata('userLogined');
+        if ($id != $user['id']) {
             if (!checkRole($this->router->class . '_edit')) redirect('/', 'refresh');
         }
         if ($this->input->post('username')) {
@@ -81,7 +82,8 @@ class User extends CI_Controller
                 $this->user_model->update($dataEdit);
 
                 //update userLogined
-                $temp = $this->user_model->getByUsername($this->session->userdata('userLogined')['username']);
+                $user = $this->session->userdata('userLogined');
+                $temp = $this->user_model->getByUsername($user['username']);
                 $this->session->set_userdata('userLogined', $temp);
 
                 redirect('/' . $this->router->class . '/detail/' . $id);
@@ -128,7 +130,8 @@ class User extends CI_Controller
 
     function detail($id = '')
     {
-        if ($id != $this->session->userdata('userLogined')['id']){
+        $userLogined = $this->session->userdata('userLogined');
+        if ($id != $userLogined['id']) {
             if (!checkRole($this->router->class . '_view')) redirect('/', 'refresh');
         }
         if ($id == '') redirect('/' . $this->router->class . '/index');

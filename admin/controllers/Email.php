@@ -193,11 +193,13 @@ class Email extends CI_Controller
             'dataTbody' => array(),
             'dataIds' => array()
         );
+
         foreach ($users as $item) {
+            $role = $this->role_model->get($item['role_id'], 'name');
             $dataTableUserEmail['dataTbody'][] = array(
                 $item['first_name'] . ' ' . $item['last_name'],
                 $item['email'],
-                $item['admin'] == 1 ? 1 : $this->role_model->get($item['role_id'], 'name')['name']
+                $item['admin'] == 1 ? 1 : $role['name']
             );
             $dataTableUserEmail['dataIds'][] = $item['id'];
         }

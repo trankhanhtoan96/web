@@ -61,7 +61,8 @@ class Model extends CI_Model
         $data['id'] = $id;
         $data['date_entered'] = date("Y-m-d H:i:s");
         $data['date_modifiled'] = $data['date_entered'];
-        $data['user_created'] = $this->session->userdata('userLogined')['id'];
+        $userLogined = $this->session->userdata('userLogined');
+        $data['user_created'] = $userLogined['id'];
         $data['user_modifiled'] = $data['user_created'];
         $this->db->reset_query();
         if ($this->db->insert($this->tableName, $data)) return true;
@@ -76,7 +77,8 @@ class Model extends CI_Model
         unset($data['date_entered']);
         unset($data['user_created']);
         $data['date_modifiled'] = date("Y-m-d H:i:s");
-        $data['user_modifiled'] = $this->session->userdata('userLogined')['id'];
+        $userLogined = $this->session->userdata('userLogined');
+        $data['user_modifiled'] = $userLogined['id'];
         foreach ($data as $key => $value) {
             if (!in_array($key, $this->fields)) {
                 unset($data[$key]);

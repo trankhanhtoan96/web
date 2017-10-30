@@ -50,8 +50,9 @@ $moduleRelationship = $this->relationship_model->get_list('*', array('module_1' 
 $relationshipPanelCount = 0;
 $relationshipPanelName = '';
 $relationshipPanelHtml = '';
+$userLogined = $this->session->userdata('userLogined');
 foreach ($moduleRelationship as $item) {
-    if ($this->session->userdata('userLogined')['admin'] == 1 || checkRole($item['module_2'] . '_view')) {
+    if ($userLogined['admin'] == 1 || checkRole($item['module_2'] . '_view')) {
         $relationshipPanelCount++;
         if ($item['order_table'] == '12') {
             $tableRelationship = $item['module_1'] . '_' . $item['module_2'];

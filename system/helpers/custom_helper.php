@@ -54,11 +54,12 @@ function checkRole($roleName, $admin = false)
     //loại bỏ nhưng chức năng không sử dụng
     //bằng cách return false khi gọi role đến chức năng đó
     if ($roleName == 'email_sent_edit') return false;
+    $user = get_instance()->session->userdata('userLogined');
 
-    if (get_instance()->session->userdata('userLogined')['admin'] == 1) return true;
+    if ($user['admin'] == 1) return true;
     if ($admin) return false;
     if (empty($GLOBALS['role'])) {
-        $temp = get_instance()->role_model->get(get_instance()->session->userdata('userLogined')['role_id']);
+        $temp = get_instance()->role_model->get($user['role_id']);
         $temp = json_decode(html_entity_decode($temp['detail']), true);
         $GLOBALS['role'] = $temp;
         foreach ($temp as $item) {
